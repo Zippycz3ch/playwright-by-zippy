@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+allure-results
+playwright-report
+results
+test-results
+certs
+imgs
+.\readme.md
+.vscode

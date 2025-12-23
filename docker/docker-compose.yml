@@ -1,0 +1,6 @@
+services:
+  quickpizza:
+    image: ghcr.io/grafana/quickpizza-local:latest
+    container_name: quickpizza
+    ports:
+      - "3333:3333"
