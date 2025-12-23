@@ -1,9 +1,12 @@
 {
-  "name": "pwnew",
+  "name": "playwright-by-zippy",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "pretest": "tsc --incremental",
+    "test": "playwright test --config=playwright.config.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -12,3 +12,5 @@ node_modules/
 /results/data/
 /results/
 .allure/
+# TypeScript compiled output
+/tests/dist/
