@@ -2,37 +2,45 @@
 // seed: tests/api/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
+import { QuickPizzaHomepage } from '../../interface/ui/homepage';
 import { getBaseURL } from '../../config';
 
 const BASE_URL = getBaseURL();
 
 test.describe('Navigation and Footer', () => {
-    test('Verify Footer Links', async ({ page }) => {
+    let pizzaPage: QuickPizzaHomepage;
+
+    test.beforeEach(async ({ page }) => {
+        pizzaPage = new QuickPizzaHomepage(page);
+    });
+
+    test('Verify Footer Links', async () => {
         // 1. Navigate to QuickPizza homepage
-        await page.goto(BASE_URL);
+        await pizzaPage.navigate();
 
         // 2. Verify footer elements are present
 
         // Verify "Made with ❤️ by QuickPizza Labs" text
-        await expect(page.getByText(/Made with ❤️ by QuickPizza Labs/)).toBeVisible();
+        await expect(await pizzaPage.getFooterText()).toBeVisible();
 
         // Verify WebSocket visitor ID is displayed
-        await expect(page.getByText(/WebSocket visitor ID:/)).toBeVisible();
+        await expect(await pizzaPage.getVisitorIdText()).toBeVisible();
 
         // Verify "Click here" admin link
-        await expect(page.getByRole('link', { name: 'Click here' })).toBeVisible();
+        await expect(await pizzaPage.getAdminLink()).toBeVisible();
 
         // Verify GitHub link
-        await expect(page.getByRole('link', { name: 'GitHub' })).toBeVisible();
-        await expect(page.getByRole('link', { name: 'GitHub' })).toHaveAttribute('href', 'https://github.com/grafana/quickpizza');
+        const githubLink = await pizzaPage.getGitHubLink();
+        await expect(githubLink).toBeVisible();
+        await expect(githubLink).toHaveAttribute('href', 'https://github.com/grafana/quickpizza');
     });
 
     test('Navigate to Admin Page', async ({ page }) => {
         // 1. Navigate to QuickPizza homepage
-        await page.goto(BASE_URL);
+        await pizzaPage.navigate();
 
         // 2. Click on "Click here" admin link in footer
-        await page.getByRole('link', { name: 'Click here' }).click();
+        await (await pizzaPage.getAdminLink()).click();
 
         // 3. Verify navigation to admin page
         await expect(page).toHaveURL(/\/admin/);
@@ -43,7 +51,7 @@ test.describe('Navigation and Footer', () => {
 
     test('Verify Back to Main Page Navigation', async ({ page }) => {
         // Navigate to login page
-        await page.goto(`${BASE_URL}/login`);
+        await pizzaPage.navigateToLogin();
 
         // Click on "Back to main page" link
         await page.getByRole('link', { name: 'Back to main page' }).click();

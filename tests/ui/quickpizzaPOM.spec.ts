@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { QuickPizzaPage } from '../../interface/ui/homepage';
+import { QuickPizzaHomepage } from '../../interface/ui/homepage';
 
 test.describe('QuickPizza Homepage', () => {
-    let quickPizza: QuickPizzaPage;
+    let quickPizza: QuickPizzaHomepage;
 
     test.beforeEach(async ({ page }) => {
-        quickPizza = new QuickPizzaPage(page);
+        quickPizza = new QuickPizzaHomepage(page);
         await test.step('Navigate to homepage', async () => {
             await quickPizza.navigate();
         });

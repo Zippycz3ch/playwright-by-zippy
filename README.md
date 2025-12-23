@@ -7,7 +7,8 @@ A Playwright test automation framework for API and UI testing.
 - `tests/` - Test files (API and UI tests)
 - `api/` - API endpoint definitions and helpers
 - `interface/` - Page objects and API interfaces
-- `specs/` - Test specifications
+- `specs/` - Test specifications for agents
+- `tests/dist` - Compiled test files for agents
 
 ## Prerequisites
 
