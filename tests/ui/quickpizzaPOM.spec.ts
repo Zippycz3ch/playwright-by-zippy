@@ -17,7 +17,7 @@ test.describe('QuickPizza Homepage', () => {
         });
 
         await test.step('Verify page is fully loaded', async () => {
-            await quickPizza.verifyPageLoaded();
+            await quickPizza.verifyHomepageLoaded();
         });
     });
 
@@ -121,9 +121,18 @@ test.describe('QuickPizza Homepage', () => {
     });
 
     test('should display quote about pizza', async ({ page }) => {
+        await test.step('Navigate to homepage', async () => {
+            await quickPizza.navigate();
+            await page.waitForLoadState('networkidle');
+        });
+
         await test.step('Verify a quote is visible', async () => {
-            const quote = page.locator('text=/^".+"$/').first();
+            // Quote changes every time, so check for the pattern and that it has text
+            const quote = page.locator('text=/".+"/');
             await expect(quote).toBeVisible();
+            const quoteText = await quote.textContent();
+            expect(quoteText).toBeTruthy();
+            expect(quoteText).toContain('"');
         });
     });
 });

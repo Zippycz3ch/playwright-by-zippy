@@ -1,5 +1,5 @@
 // spec: specs/quickpizza-ui.plan.md
-// seed: tests/api/seed.spec.ts
+// seed: tests/ui/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
 import { QuickPizzaHomepage } from '../../interface/ui/homepage';
@@ -12,50 +12,59 @@ test.describe('Pizza Recommendation Generation', () => {
     });
 
     test('Generate Basic Pizza Recommendation', async ({ page }) => {
-        // 1. Navigate to QuickPizza homepage
-        await pizzaPage.navigate();
+        await test.step('Navigate to QuickPizza homepage', async () => {
+            await pizzaPage.navigate();
+        });
 
-        // 2. Click on the "Pizza, Please!" button
-        await pizzaPage.clickPizzaButton();
+        await test.step('Click on the Pizza, Please! button', async () => {
+            await pizzaPage.clickPizzaButton();
+        });
 
-        // 3. Verify pizza recommendation is displayed
-        await expect(await pizzaPage.getRecommendationHeading()).toBeVisible();
+        await test.step('Verify pizza recommendation is displayed', async () => {
+            await expect(await pizzaPage.getRecommendationHeading()).toBeVisible();
+        });
 
-        // Verify all required fields are present
-        await expect(page.getByText(/Name:/)).toBeVisible();
-        await expect(page.getByText(/Dough:/)).toBeVisible();
-        await expect(page.getByText(/Ingredients:/)).toBeVisible();
-        await expect(page.getByText(/Tool:/)).toBeVisible();
-        await expect(page.getByText(/Calories per slice:/)).toBeVisible();
+        await test.step('Verify all required fields are present', async () => {
+            await expect(page.getByText(/Name:/)).toBeVisible();
+            await expect(page.getByText(/Dough:/)).toBeVisible();
+            await expect(page.getByText(/Ingredients:/)).toBeVisible();
+            await expect(page.getByText(/Tool:/)).toBeVisible();
+            await expect(page.getByText(/Calories per slice:/)).toBeVisible();
+        });
 
-        // Verify action buttons are visible
-        await expect(await pizzaPage.getNoThanksButton()).toBeVisible();
-        await expect(await pizzaPage.getLoveItButton()).toBeVisible();
+        await test.step('Verify action buttons are visible', async () => {
+            await expect(await pizzaPage.getNoThanksButton()).toBeVisible();
+            await expect(await pizzaPage.getLoveItButton()).toBeVisible();
+        });
     });
 
     test('Generate Multiple Recommendations', async ({ page }) => {
-        // 1. Navigate to QuickPizza homepage
-        await pizzaPage.navigate();
+        await test.step('Navigate to QuickPizza homepage', async () => {
+            await pizzaPage.navigate();
+        });
 
-        // 2. Click "Pizza, Please!" button
-        await pizzaPage.clickPizzaButton();
+        await test.step('Click Pizza, Please! button', async () => {
+            await pizzaPage.clickPizzaButton();
+        });
 
-        // Get the first pizza name
-        const firstPizzaText = await page.getByText(/Name:/).textContent();
+        await test.step('Get the first pizza name', async () => {
+            const firstPizzaText = await page.getByText(/Name:/).textContent();
+        });
 
-        // 3. Click "No thanks" button
-        await pizzaPage.clickNoThanks();
+        await test.step('Click No thanks button', async () => {
+            await pizzaPage.clickNoThanks();
+            await page.waitForTimeout(500);
+        });
 
-        // Wait for new recommendation
-        await page.waitForTimeout(500);
+        await test.step('Generate a new recommendation', async () => {
+            await pizzaPage.clickPizzaButton();
+            const secondPizzaText = await page.getByText(/Name:/).textContent();
+        });
 
-        // 4. Verify a new recommendation appears
-        await pizzaPage.clickPizzaButton();
-        const secondPizzaText = await page.getByText(/Name:/).textContent();
-
-        // Verify pizza details are still present
-        await expect(await pizzaPage.getRecommendationHeading()).toBeVisible();
-        await expect(page.getByText(/Dough:/)).toBeVisible();
-        await expect(page.getByText(/Ingredients:/)).toBeVisible();
+        await test.step('Verify pizza details are still present', async () => {
+            await expect(await pizzaPage.getRecommendationHeading()).toBeVisible();
+            await expect(page.getByText(/Dough:/)).toBeVisible();
+            await expect(page.getByText(/Ingredients:/)).toBeVisible();
+        });
     });
 });

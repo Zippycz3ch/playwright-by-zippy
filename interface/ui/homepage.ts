@@ -8,10 +8,7 @@ export class QuickPizzaHomepage {
 
     async navigate() {
         await this.page.goto(BASE_URL);
-    }
-
-    async navigateToLogin() {
-        await this.page.goto(`${BASE_URL}/login`);
+        await this.page.waitForLoadState('networkidle');
     }
 
     async getLogo() {
@@ -104,33 +101,29 @@ export class QuickPizzaHomepage {
         return this.page.getByRole('link', { name: 'GitHub' });
     }
 
-    // Login page elements
-    async getUsernameInput() {
-        return this.page.getByRole('textbox', { name: /Username/ });
-    }
-
-    async getPasswordInput() {
-        return this.page.getByRole('textbox', { name: /Password/ });
-    }
-
-    async getSignInButton() {
-        return this.page.getByRole('button', { name: 'Sign in' });
-    }
-
-    async login(username: string, password: string) {
-        await (await this.getUsernameInput()).fill(username);
-        await (await this.getPasswordInput()).fill(password);
-        await (await this.getSignInButton()).click();
-        await this.page.waitForLoadState('networkidle');
-    }
-
     async verifyTitle() {
         await expect(this.page).toHaveTitle('QuickPizza');
     }
 
-    async verifyPageLoaded() {
+    async verifyHomepageLoaded() {
         await this.page.waitForLoadState('load');
         await expect(this.page.locator('body')).toBeVisible();
+
+        // Verify header elements
+        await expect(await this.getLogo()).toBeVisible();
+        await expect(this.page.getByRole('paragraph').filter({ hasText: /^QuickPizza$/ })).toBeVisible();
+        await expect(await this.getLoginLink()).toBeVisible();
+
+        // Verify main content
+        await expect(this.page.getByRole('heading', { name: 'Looking to break out of your pizza routine?' })).toBeVisible();
+        await expect(this.page.getByRole('heading', { name: 'QuickPizza has your back!' })).toBeVisible();
+        await expect(await this.getPizzaButton()).toBeVisible();
+
+        // Verify footer elements
+        await expect(await this.getFooterText()).toBeVisible();
+        await expect(await this.getVisitorIdText()).toBeVisible();
+        await expect(await this.getAdminLink()).toBeVisible();
+        await expect(await this.getGitHubLink()).toBeVisible();
     }
 
     async setMobileViewport() {

@@ -1,5 +1,5 @@
 // spec: specs/quickpizza-ui.plan.md
-// seed: tests/api/seed.spec.ts
+// seed: tests/ui/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
 import { QuickPizzaHomepage } from '../../interface/ui/homepage';
@@ -12,61 +12,74 @@ test.describe('Advanced Pizza Filtering', () => {
     });
 
     test('Enable Advanced Options', async () => {
-        // 1. Navigate to QuickPizza homepage
-        await pizzaPage.navigate();
+        await test.step('Navigate to QuickPizza homepage', async () => {
+            await pizzaPage.navigate();
+        });
 
-        // 2. Click on the Advanced toggle
-        await pizzaPage.enableAdvancedOptions();
+        await test.step('Click on the Advanced toggle', async () => {
+            await pizzaPage.enableAdvancedOptions();
+        });
 
-        // 3. Verify advanced options are displayed
-        await expect(await pizzaPage.getCaloriesInput()).toBeVisible();
+        await test.step('Verify advanced options are displayed', async () => {
+            await expect(await pizzaPage.getCaloriesInput()).toBeVisible();
+            await expect(await pizzaPage.getMinToppingsInput()).toBeVisible();
+            await expect(await pizzaPage.getMaxToppingsInput()).toBeVisible();
+        });
 
-        // Verify Min Number of Toppings input
-        await expect(await pizzaPage.getMinToppingsInput()).toBeVisible();
-        await expect(await pizzaPage.getMaxToppingsInput()).toBeVisible();
+        await test.step('Verify Excluded tools listbox', async () => {
+            await expect(await pizzaPage.getExcludedToolsListbox()).toBeVisible();
+        });
 
-        // Verify Excluded tools listbox
-        await expect(await pizzaPage.getExcludedToolsListbox()).toBeVisible();
+        await test.step('Verify Must be vegetarian checkbox', async () => {
+            await expect(await pizzaPage.getVegetarianCheckbox()).toBeVisible();
+        });
 
-        // Verify "Must be vegetarian" checkbox
-        await expect(await pizzaPage.getVegetarianCheckbox()).toBeVisible();
-
-        // Verify Custom Pizza Name textbox
-        await expect(await pizzaPage.getCustomPizzaNameInput()).toBeVisible();
+        await test.step('Verify Custom Pizza Name textbox', async () => {
+            await expect(await pizzaPage.getCustomPizzaNameInput()).toBeVisible();
+        });
     });
 
     test('Customize Pizza with Advanced Options', async ({ page }) => {
-        // 1. Navigate to QuickPizza homepage
-        await pizzaPage.navigate();
+        await test.step('Navigate to QuickPizza homepage', async () => {
+            await pizzaPage.navigate();
+        });
 
-        // 2. Enable Advanced toggle
-        await pizzaPage.enableAdvancedOptions();
+        await test.step('Enable Advanced toggle', async () => {
+            await pizzaPage.enableAdvancedOptions();
+        });
 
-        // 3. Set Max Calories to 300
-        const maxCaloriesInput = await pizzaPage.getCaloriesInput();
-        await maxCaloriesInput.clear();
-        await maxCaloriesInput.fill('300');
+        await test.step('Set Max Calories to 300', async () => {
+            const maxCaloriesInput = await pizzaPage.getCaloriesInput();
+            await maxCaloriesInput.clear();
+            await maxCaloriesInput.fill('300');
+        });
 
-        // 4. Set Min Toppings to 3
-        const minToppingsInput = await pizzaPage.getMinToppingsInput();
-        await minToppingsInput.clear();
-        await minToppingsInput.fill('3');
+        await test.step('Set Min Toppings to 3', async () => {
+            const minToppingsInput = await pizzaPage.getMinToppingsInput();
+            await minToppingsInput.clear();
+            await minToppingsInput.fill('3');
+        });
 
-        // 5. Set Max Toppings to 4
-        const maxToppingsInput = await pizzaPage.getMaxToppingsInput();
-        await maxToppingsInput.clear();
-        await maxToppingsInput.fill('4');
+        await test.step('Set Max Toppings to 4', async () => {
+            const maxToppingsInput = await pizzaPage.getMaxToppingsInput();
+            await maxToppingsInput.clear();
+            await maxToppingsInput.fill('4');
+        });
 
-        // 6. Check "Must be vegetarian" checkbox
-        await (await pizzaPage.getVegetarianCheckbox()).check();
+        await test.step('Check Must be vegetarian checkbox', async () => {
+            await (await pizzaPage.getVegetarianCheckbox()).check();
+        });
 
-        // 7. Enter "My Custom Pizza" in Custom Pizza Name field
-        await (await pizzaPage.getCustomPizzaNameInput()).fill('My Custom Pizza');
+        await test.step('Enter My Custom Pizza in Custom Pizza Name field', async () => {
+            await (await pizzaPage.getCustomPizzaNameInput()).fill('My Custom Pizza');
+        });
 
-        // 8. Click "Pizza, Please!" button
-        await pizzaPage.clickPizzaButton();
+        await test.step('Click Pizza, Please! button', async () => {
+            await pizzaPage.clickPizzaButton();
+        });
 
-        // Verify pizza recommendation is generated
-        await expect(await pizzaPage.getRecommendationHeading()).toBeVisible();
+        await test.step('Verify pizza recommendation is generated', async () => {
+            await expect(await pizzaPage.getRecommendationHeading()).toBeVisible();
+        });
     });
 });
