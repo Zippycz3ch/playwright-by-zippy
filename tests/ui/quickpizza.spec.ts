@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
+import { getBaseURL } from '../../config';
 
-const BASE_URL = process.env.ENV === 'LOCAL' ? 'http://localhost:3333' : 'https://quickpizza.grafana.com';
+const BASE_URL = getBaseURL();
 
 test.describe('QuickPizza Homepage', () => {
     test('should load homepage successfully', async ({ page }) => {
