@@ -1,82 +1,86 @@
 # Playwright by Zippy
 
-A Playwright test automation framework for API and UI testing.
+Playwright test automation framework for [QuickPizza](https://quickpizza.grafana.com) API and UI testing. Integrates [Playwright Test Agents](https://playwright.dev/docs/test-agents) for AI test generation and [Playwright MCP Server](https://github.com/microsoft/playwright-mcp) for browser automation via Model Context Protocol.
 
-## Project Structure
-
-- `tests/` - Test files (API and UI tests)
-- `api/` - API endpoint definitions and helpers
-- `interface/` - Page objects and API interfaces
-- `specs/` - Test specifications for agents
-- `tests/dist` - Compiled test files for agents
+**New to Playwright?** Start with this [official introduction video](https://www.youtube.com/watch?v=WvsLGZnHmzw).
 
 ## Prerequisites
 
-- Node.js
-- npm
+- Node.js & npm
+- Java (for Allure reports)
+- VS Code
+- [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
+- [GitHub Copilot](https://github.com/features/copilot/plans) (free plan sufficient, required only for AI Agents and MCP - not for running tests)
 
 ## Installation
 
 ```bash
 npm install
+npx playwright install
 ```
+
+## Project Structure
+
+- `tests/` - API and UI test files
+- `interface/` - Page objects and API interfaces
+- `specs/` - Test specifications for AI agents
+- `tests/dist` - Agent-generated compiled tests
+- `api/` - API endpoint definitions
 
 ## Running Tests
 
-Run all tests:
-
 ```bash
+# All tests
 npm run test
-```
 
-Run specific project tests:
-
-```bash
+# Specific project
 npm run test -- --project=UI
 npm run test -- --project=API
 ```
 
-The `pretest` script automatically compiles TypeScript files before running tests.
+TypeScript files are automatically compiled via `pretest` script.
+
+## Test Reports
+
+```bash
+allure serve
+```
 
 ## Environment Configuration
 
-The project uses a `.env` file to switch between environments. Edit the `.env` file to change the target environment:
+Switch environments via `.env` file:
 
 ```bash
-# For production (default)
-ENV=PROD
-
-# For local development
-ENV=LOCAL
+ENV=PROD   # https://quickpizza.grafana.com (default)
+ENV=LOCAL  # http://localhost:3333 (requires Docker)
 ```
 
-**Available Environments:**
-
-- `PROD` - https://quickpizza.grafana.com
-- `LOCAL` - http://localhost:3333 (requires Docker container)
-
-All URLs are centrally managed in [config.ts](config.ts).
+URLs managed in [config.ts](config.ts).
 
 ## Technologies
 
-- Playwright - Browser automation and testing
-- TypeScript - Type-safe test development
-- Allure - Test reporting
-- AJV - JSON schema validation
+- **Playwright** - Browser automation and testing
+- **TypeScript** - Type-safe test development
+- **Allure** - Test reporting
+- **AJV** - JSON schema validation
 
-## Test Types
+## AI Integration
 
-- **API Tests** - Located in `tests/api/`
-  - Dough API tests
-  - Quotes API tests
-- **UI Tests** - Located in `tests/ui/`
-  - Pizza recommendation generation
-  - Advanced filtering options
-  - User authentication flows
-  - Navigation and footer links
-  - QuickPizza homepage functionality
+**Playwright Test Agents** - AI agents generate, plan, and execute tests based on specifications in `specs/`. Generated tests compile to `tests/dist/`.
 
-## Configuration
+**Playwright MCP Server** - Exposes browser automation through Model Context Protocol, enabling AI assistants to control browsers directly. Configuration: [.vscode/mcp.json](.vscode/mcp.json)
 
-- `playwright.config.ts` - Playwright configuration
-- `tsconfig.json` - TypeScript compiler settings
+## Test Coverage
+
+**API Tests** (`tests/api/`)
+
+- Dough API validation
+- Quotes API testing
+
+**UI Tests** (`tests/ui/`)
+
+- Pizza recommendation generation
+- Advanced filtering
+- User authentication
+- Navigation and footer
+- Homepage functionality
