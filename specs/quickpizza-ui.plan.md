@@ -8,7 +8,7 @@ Test suite for QuickPizza web application covering pizza recommendation generati
 
 ### 1. Pizza Recommendation Generation
 
-**Seed:** `tests/api/seed.spec.ts`
+**Seed:** `tests/ui/seed.spec.ts`
 
 #### 1.1 Generate Basic Pizza Recommendation
 
