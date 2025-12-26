@@ -1,5 +1,6 @@
 // api/helpers/sendRequestAsync.ts
 import * as allure from "allure-js-commons";
+import { getBaseURL } from "../../../config";
 
 export interface ApiResponse {
     response: Response;
@@ -17,16 +18,13 @@ export async function sendRequestAsync(
     return await allure.step(`${method.toUpperCase()} -> ${endpoint}`, async () => {
 
 
-        // You can use local quickpizza docker image for testing
-        // cd docker
-        // docker compose up -d
-        // http://localhost:3333
-        // or use deployed version https://quickpizza.grafana.com
+        const baseUrl = getBaseURL();
         let url: string;
         if (endpoint.startsWith("http") || endpoint.startsWith("https")) {
             url = endpoint;
         } else {
-            url = "https://quickpizza.grafana.com" + (endpoint.startsWith("/") ? endpoint : "/" + endpoint);
+            const path = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+            url = `${baseUrl}${path}`;
         }
 
         await allure.step("Request", async (step) => {
