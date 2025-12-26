@@ -15,6 +15,7 @@ Playwright test automation framework for [QuickPizza](https://quickpizza.grafana
 - [VS Code](https://code.visualstudio.com/)
 - [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
 - [GitHub Copilot](https://github.com/features/copilot/plans) (free plan sufficient, required only for AI Agents and MCP - not for running tests)
+  github.com/microsoft/playwright-mcp
 
 ## Installation
 
@@ -68,14 +69,15 @@ URLs managed in [config.ts](config.ts).
 
 ## AI Integration
 
-**Playwright Test Agents** - AI agents generate, plan, and execute tests based on specifications in `specs/`. Generated tests compile to `tests/dist/`.
+**[Playwright Test Agents](https://playwright.dev/docs/test-agents)** - AI agents generate, plan, and execute tests based on specifications in `specs/`. Generated tests compile to `tests/dist/`.
 
-**Playwright MCP Server** - Exposes browser automation through Model Context Protocol, enabling AI assistants to control browsers directly. Configuration: [.vscode/mcp.json](.vscode/mcp.json)
+**[Playwright MCP Server](https://github.com/microsoft/playwright-mcp)** - Exposes browser automation through Model Context Protocol, enabling AI assistants to control browsers directly. Configuration: [.vscode/mcp.json](.vscode/mcp.json)
 
 ## Test Coverage
 
 **API Tests** (`tests/api/`)
 
+- POST /api/pizza - Pizza generation with restrictions (standard & data-driven)
 - Dough API validation
 - Quotes API testing
 
