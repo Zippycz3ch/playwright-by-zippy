@@ -23,6 +23,19 @@ npm install
 npx playwright install
 ```
 
+## Technologies
+
+- **Playwright** - Browser automation and testing
+- **TypeScript** - Type-safe test development
+- **Allure** - Test reporting
+- **AJV** - JSON schema validation
+
+## AI Integration
+
+**[Playwright Test Agents](https://playwright.dev/docs/test-agents)** - AI agents generate, plan, and execute tests based on specifications in `specs/`. Generated tests compile to `tests/dist/`.
+
+**[Playwright MCP Server](https://github.com/microsoft/playwright-mcp)** - Exposes browser automation through Model Context Protocol, enabling AI assistants to control browsers directly. Configuration: [.vscode/mcp.json](.vscode/mcp.json)
+
 ## Project Structure
 
 - `tests/` - API and UI test files
@@ -58,19 +71,6 @@ ENV=LOCAL  # http://localhost:3333 (requires Docker)
 ```
 
 URLs managed in [config.ts](config.ts).
-
-## Technologies
-
-- **Playwright** - Browser automation and testing
-- **TypeScript** - Type-safe test development
-- **Allure** - Test reporting
-- **AJV** - JSON schema validation
-
-## AI Integration
-
-**[Playwright Test Agents](https://playwright.dev/docs/test-agents)** - AI agents generate, plan, and execute tests based on specifications in `specs/`. Generated tests compile to `tests/dist/`.
-
-**[Playwright MCP Server](https://github.com/microsoft/playwright-mcp)** - Exposes browser automation through Model Context Protocol, enabling AI assistants to control browsers directly. Configuration: [.vscode/mcp.json](.vscode/mcp.json)
 
 ## Test Coverage
 
