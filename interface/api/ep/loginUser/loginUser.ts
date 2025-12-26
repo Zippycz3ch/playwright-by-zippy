@@ -1,15 +1,8 @@
 import { sendRequestAsync } from "../../common/sendRequestAsync";
 import { check200, check401, Duration } from "../../common/checks";
-
-export interface LoginRequest {
-    username: string;
-    password: string;
-    csrf?: string;
-}
-
-export interface LoginResponse {
-    token: string;
-}
+import { LoginRequest } from "../../models/UserData";
+import { schema } from "../../schemas/login";
+import { getPublicHeader } from "../../common/headers";
 
 export async function loginUser(
     credentials: LoginRequest,
@@ -17,9 +10,7 @@ export async function loginUser(
 ) {
     const endpoint = '/api/users/token/login';
     const method = 'POST';
-    const headers = {
-        'Content-Type': 'application/json'
-    };
+    const headers = getPublicHeader();
     const body = credentials;
 
     const result = await sendRequestAsync(
@@ -31,7 +22,7 @@ export async function loginUser(
 
     switch (context) {
         case '200':
-            check200(result, undefined, Duration.medium);
+            check200(result, schema, Duration.medium);
             break;
         case '401':
             check401(result);

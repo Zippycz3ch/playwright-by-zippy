@@ -6,3 +6,9 @@ export const getRequestHeader = (userData: UserData) => {
         'Authorization': `token ${userData.access_token}`,
     }
 }
+
+export const getPublicHeader = () => {
+    return {
+        'Content-Type': 'application/json'
+    }
+}

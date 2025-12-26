@@ -1,4 +1,5 @@
-import { createUser, CreateUserResponse } from '../ep/createUser/createUser';
+import { createUser } from '../ep/createUser/createUser';
+import { CreateUserResponse } from '../models/UserData';
 import { ApiTestResult } from '../common/checks';
 import { test } from '@playwright/test';
 
