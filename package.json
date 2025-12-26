@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pretest": "tsc --incremental",
     "test": "playwright test --config=playwright.config.ts"
   },
   "keywords": [],

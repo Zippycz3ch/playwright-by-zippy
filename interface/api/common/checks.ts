@@ -42,14 +42,14 @@ export function check200(result: ApiTestResult, schema: object, expectedDuration
             }
         });
 
-        allure.step(`Verify response time is less than ${expectedDuration}ms`, () => {
+        allure.step(`Verify response time: actual ${result.duration}ms is less than expected ${expectedDuration}ms`, () => {
             const timeCheck = checkResponseTime(result, expectedDuration);
             if (!timeCheck.passed) {
                 errors.push(...timeCheck.errors);
             }
         });
 
-        allure.step('Validate response schema', () => {
+        allure.step('Validate JSON data schema', () => {
             const validationResult = validateJsonSchemaWithErrors(result.data, schema);
             if (!validationResult.isValid) {
                 errors.push(validationResult.errorMessage);
@@ -70,14 +70,14 @@ export function check401(result: ApiTestResult): CheckResult {
             }
         });
 
-        allure.step(`Verify response time is less than ${Duration.short}ms`, () => {
+        allure.step(`Verify response time: actual ${result.duration}ms is less than expected ${Duration.short}ms`, () => {
             const timeCheck = checkResponseTime(result, Duration.short);
             if (!timeCheck.passed) {
                 errors.push(...timeCheck.errors);
             }
         });
 
-        allure.step('Validate response schema', () => {
+        allure.step('Validate JSON data schema', () => {
             const validationResult = validateJsonSchemaWithErrors(result.data, schema401);
             if (!validationResult.isValid) {
                 errors.push(validationResult.errorMessage);
@@ -98,14 +98,14 @@ export function check403(result: ApiTestResult): CheckResult {
             }
         });
 
-        allure.step(`Verify response time is less than ${Duration.short}ms`, () => {
+        allure.step(`Verify response time: actual ${result.duration}ms is less than expected ${Duration.short}ms`, () => {
             const timeCheck = checkResponseTime(result, Duration.short);
             if (!timeCheck.passed) {
                 errors.push(...timeCheck.errors);
             }
         });
 
-        allure.step('Validate response schema', () => {
+        allure.step('Validate JSON data schema', () => {
             const validationResult = validateJsonSchemaWithErrors(result.data, schema403);
             if (!validationResult.isValid) {
                 errors.push(validationResult.errorMessage);

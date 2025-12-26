@@ -38,8 +38,6 @@ npm run test -- --project=UI
 npm run test -- --project=API
 ```
 
-TypeScript files are automatically compiled via `pretest` script.
-
 ## Test Reports
 
 ```bash
