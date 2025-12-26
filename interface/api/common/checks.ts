@@ -1,6 +1,7 @@
 
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
+import * as allure from 'allure-js-commons';
 
 export enum Duration {
     shortest = 200,
@@ -34,19 +35,27 @@ export interface CheckResult {
 export function check200(result: ApiTestResult, schema: object, expectedDuration: Duration): CheckResult {
     const errors: string[] = [];
 
-    if (result.response.status !== 200) {
-        errors.push(`Expected status code to be 200, got ${result.response.status}`);
-    }
+    allure.step('Verify 200 response', () => {
+        allure.step('Verify response status is 200', () => {
+            if (result.response.status !== 200) {
+                errors.push(`Expected status code to be 200, got ${result.response.status}`);
+            }
+        });
 
-    const timeCheck = checkResponseTime(result, expectedDuration);
-    if (!timeCheck.passed) {
-        errors.push(...timeCheck.errors);
-    }
+        allure.step(`Verify response time is less than ${expectedDuration}ms`, () => {
+            const timeCheck = checkResponseTime(result, expectedDuration);
+            if (!timeCheck.passed) {
+                errors.push(...timeCheck.errors);
+            }
+        });
 
-    const validationResult = validateJsonSchemaWithErrors(result.data, schema);
-    if (!validationResult.isValid) {
-        errors.push(validationResult.errorMessage);
-    }
+        allure.step('Validate response schema', () => {
+            const validationResult = validateJsonSchemaWithErrors(result.data, schema);
+            if (!validationResult.isValid) {
+                errors.push(validationResult.errorMessage);
+            }
+        });
+    });
 
     return { passed: errors.length === 0, errors };
 }
@@ -54,19 +63,27 @@ export function check200(result: ApiTestResult, schema: object, expectedDuration
 export function check401(result: ApiTestResult): CheckResult {
     const errors: string[] = [];
 
-    if (result.response.status !== 401) {
-        errors.push(`Expected status code to be 401, got ${result.response.status}`);
-    }
+    allure.step('Verify 401 response', () => {
+        allure.step('Verify response status is 401', () => {
+            if (result.response.status !== 401) {
+                errors.push(`Expected status code to be 401, got ${result.response.status}`);
+            }
+        });
 
-    const timeCheck = checkResponseTime(result, Duration.short);
-    if (!timeCheck.passed) {
-        errors.push(...timeCheck.errors);
-    }
+        allure.step(`Verify response time is less than ${Duration.short}ms`, () => {
+            const timeCheck = checkResponseTime(result, Duration.short);
+            if (!timeCheck.passed) {
+                errors.push(...timeCheck.errors);
+            }
+        });
 
-    const validationResult = validateJsonSchemaWithErrors(result.data, schema401);
-    if (!validationResult.isValid) {
-        errors.push(validationResult.errorMessage);
-    }
+        allure.step('Validate response schema', () => {
+            const validationResult = validateJsonSchemaWithErrors(result.data, schema401);
+            if (!validationResult.isValid) {
+                errors.push(validationResult.errorMessage);
+            }
+        });
+    });
 
     return { passed: errors.length === 0, errors };
 }
@@ -74,19 +91,27 @@ export function check401(result: ApiTestResult): CheckResult {
 export function check403(result: ApiTestResult): CheckResult {
     const errors: string[] = [];
 
-    if (result.response.status !== 403) {
-        errors.push(`Expected status code to be 403, got ${result.response.status}`);
-    }
+    allure.step('Verify 403 response', () => {
+        allure.step('Verify response status is 403', () => {
+            if (result.response.status !== 403) {
+                errors.push(`Expected status code to be 403, got ${result.response.status}`);
+            }
+        });
 
-    const timeCheck = checkResponseTime(result, Duration.short);
-    if (!timeCheck.passed) {
-        errors.push(...timeCheck.errors);
-    }
+        allure.step(`Verify response time is less than ${Duration.short}ms`, () => {
+            const timeCheck = checkResponseTime(result, Duration.short);
+            if (!timeCheck.passed) {
+                errors.push(...timeCheck.errors);
+            }
+        });
 
-    const validationResult = validateJsonSchemaWithErrors(result.data, schema403);
-    if (!validationResult.isValid) {
-        errors.push(validationResult.errorMessage);
-    }
+        allure.step('Validate response schema', () => {
+            const validationResult = validateJsonSchemaWithErrors(result.data, schema403);
+            if (!validationResult.isValid) {
+                errors.push(validationResult.errorMessage);
+            }
+        });
+    });
 
     return { passed: errors.length === 0, errors };
 }
