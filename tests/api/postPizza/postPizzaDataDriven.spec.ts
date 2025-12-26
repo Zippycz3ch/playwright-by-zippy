@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 import { adminAccount } from '../../../interface/api/common/accounts';
-import { postPizza } from '../../../interface/api/ep/postPizza/postPizza';
+import { postPizza } from '../../../interface/api/ep/pizza/postPizza';
 import { pizzaExpectations } from './pizzaExpectations';
 
 test.describe("POST /api/pizza - Data Driven", { tag: ["@api"] }, () => {

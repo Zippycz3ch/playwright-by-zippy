@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 import { setupNewUser, DEFAULT_USERNAME, DEFAULT_PASSWORD } from '../../interface/api/actions/userHelpers';
-import { loginUser } from '../../interface/api/ep/loginUser/loginUser';
+import { postUsersTokenLogin } from '../../interface/api/ep/users/postUsersTokenLogin';
 import { QuickPizzaLoginPage } from '../../interface/ui/loginpage';
 
 test.describe("User Registration and Login Scenario", { tag: ["@scenario"] }, () => {
 
     test("Login with default user via API", async () => {
         await test.step('Login via API with default user', async () => {
-            await loginUser({ username: DEFAULT_USERNAME, password: DEFAULT_PASSWORD });
+            await postUsersTokenLogin({ username: DEFAULT_USERNAME, password: DEFAULT_PASSWORD });
         });
     });
 
@@ -23,7 +23,7 @@ test.describe("User Registration and Login Scenario", { tag: ["@scenario"] }, ()
         const { username, password } = await setupNewUser();
 
         await test.step('Login via API with new user', async () => {
-            await loginUser({ username, password });
+            await postUsersTokenLogin({ username, password });
         });
     });
 
@@ -39,7 +39,7 @@ test.describe("User Registration and Login Scenario", { tag: ["@scenario"] }, ()
 
     test("Failed login with invalid credentials via API", async () => {
         await test.step('Attempt login via API with invalid credentials', async () => {
-            await loginUser({ username: 'nonexistent_user', password: 'wrong_password' }, '401');
+            await postUsersTokenLogin({ username: 'nonexistent_user', password: 'wrong_password' }, '401');
         });
     });
 

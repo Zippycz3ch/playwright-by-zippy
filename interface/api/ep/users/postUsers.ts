@@ -4,7 +4,7 @@ import { schema } from "../../schemas/user";
 import { CreateUserRequest, CreateUserResponse } from "../../models/UserData";
 import { getPublicHeader } from "../../common/headers";
 
-export async function createUser(userData: CreateUserRequest, context: '201' | '400' | '401' | '403' | '500' = '201') {
+export async function postUsers(userData: CreateUserRequest, context: '201' | '400' | '401' | '403' | '500' = '201') {
     const endpoint = '/api/users';
     const method = 'POST';
     const headers = getPublicHeader();

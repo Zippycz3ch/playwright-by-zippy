@@ -1,4 +1,4 @@
-import { createUser } from '../ep/createUser/createUser';
+import { postUsers } from '../ep/users/postUsers';
 import { CreateUserResponse } from '../models/UserData';
 import { ApiTestResult } from '../common/checks';
 import { test } from '@playwright/test';
@@ -15,7 +15,7 @@ export async function createRandomUser(): Promise<{ username: string; password: 
     const username = `user${timestamp}`;
     const password = DEFAULT_PASSWORD;
 
-    const result = await createUser({ username, password });
+    const result = await postUsers({ username, password });
 
     return {
         username,

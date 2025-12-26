@@ -4,7 +4,7 @@ import { LoginRequest } from "../../models/UserData";
 import { schema } from "../../schemas/login";
 import { getPublicHeader } from "../../common/headers";
 
-export async function loginUser(
+export async function postUsersTokenLogin(
     credentials: LoginRequest,
     context: '200' | '401' = '200'
 ) {
