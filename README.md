@@ -15,7 +15,6 @@ Playwright test automation framework for [QuickPizza](https://quickpizza.grafana
 - [VS Code](https://code.visualstudio.com/)
 - [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
 - [GitHub Copilot](https://github.com/features/copilot/plans) (free plan sufficient, required only for AI Agents and MCP - not for running tests)
-  github.com/microsoft/playwright-mcp
 
 ## Installation
 
