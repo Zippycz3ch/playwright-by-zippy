@@ -1,4 +1,4 @@
-import { PizzaRestrictions } from '../../interface/api/models/PizzaRestrictions';
+import { PizzaRestrictions } from '../../../interface/api/models/PizzaRestrictions';
 
 export interface PizzaTestCase {
     name: string;

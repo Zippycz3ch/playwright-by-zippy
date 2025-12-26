@@ -32,7 +32,7 @@ export interface CheckResult {
     errors: string[];
 }
 
-export function check200(result: ApiTestResult, schema: object, expectedDuration: Duration): CheckResult {
+export function check200(result: ApiTestResult, schema: object | undefined, expectedDuration: Duration): CheckResult {
     const errors: string[] = [];
 
     allure.step('Verify 200 response', () => {
@@ -49,12 +49,44 @@ export function check200(result: ApiTestResult, schema: object, expectedDuration
             }
         });
 
-        allure.step('Validate JSON data schema', () => {
-            const validationResult = validateJsonSchemaWithErrors(result.data, schema);
-            if (!validationResult.isValid) {
-                errors.push(validationResult.errorMessage);
+        if (schema) {
+            allure.step('Validate JSON data schema', () => {
+                const validationResult = validateJsonSchemaWithErrors(result.data, schema);
+                if (!validationResult.isValid) {
+                    errors.push(validationResult.errorMessage);
+                }
+            });
+        }
+    });
+
+    return { passed: errors.length === 0, errors };
+}
+
+export function check201(result: ApiTestResult, schema: object | undefined, expectedDuration: Duration): CheckResult {
+    const errors: string[] = [];
+
+    allure.step('Verify 201 response', () => {
+        allure.step('Verify response status is 201', () => {
+            if (result.response.status !== 201) {
+                errors.push(`Expected status code to be 201, got ${result.response.status}`);
             }
         });
+
+        allure.step(`Verify response time: actual ${result.duration}ms is less than expected ${expectedDuration}ms`, () => {
+            const timeCheck = checkResponseTime(result, expectedDuration);
+            if (!timeCheck.passed) {
+                errors.push(...timeCheck.errors);
+            }
+        });
+
+        if (schema) {
+            allure.step('Validate JSON data schema', () => {
+                const validationResult = validateJsonSchemaWithErrors(result.data, schema);
+                if (!validationResult.isValid) {
+                    errors.push(validationResult.errorMessage);
+                }
+            });
+        }
     });
 
     return { passed: errors.length === 0, errors };
@@ -81,6 +113,13 @@ export function check401(result: ApiTestResult): CheckResult {
             const validationResult = validateJsonSchemaWithErrors(result.data, schema401);
             if (!validationResult.isValid) {
                 errors.push(validationResult.errorMessage);
+            }
+        });
+
+        allure.step('Verify error message is "authentication failed"', () => {
+            const errorData = result.data as { error?: string };
+            if (errorData.error !== 'authentication failed') {
+                errors.push(`Expected error message to be "authentication failed", got "${errorData.error}"`);
             }
         });
     });

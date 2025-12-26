@@ -1,14 +1,15 @@
 import { Page, expect, Locator } from '@playwright/test';
 import { getBaseURL } from '../../config';
-
-const BASE_URL = getBaseURL();
+import * as allure from 'allure-js-commons';
 
 export class QuickPizzaHomepage {
     constructor(private page: Page) { }
 
     async navigate() {
-        await this.page.goto(BASE_URL);
-        await this.page.waitForLoadState('networkidle');
+        await allure.step('Navigate to homepage', async () => {
+            await this.page.goto(getBaseURL());
+            await this.page.waitForLoadState('networkidle');
+        });
     }
 
     async getLogo() {
@@ -24,7 +25,9 @@ export class QuickPizzaHomepage {
     }
 
     async clickPizzaButton() {
-        await (await this.getPizzaButton()).click();
+        await allure.step('Click "Pizza, Please!" button', async () => {
+            await (await this.getPizzaButton()).click();
+        });
     }
 
     async getRecommendationHeading() {
@@ -40,11 +43,15 @@ export class QuickPizzaHomepage {
     }
 
     async clickNoThanks() {
-        await (await this.getNoThanksButton()).click();
+        await allure.step('Click "No thanks" button', async () => {
+            await (await this.getNoThanksButton()).click();
+        });
     }
 
     async clickLoveIt() {
-        await (await this.getLoveItButton()).click();
+        await allure.step('Click "Love it!" button', async () => {
+            await (await this.getLoveItButton()).click();
+        });
     }
 
     // Advanced options
@@ -53,7 +60,9 @@ export class QuickPizzaHomepage {
     }
 
     async enableAdvancedOptions() {
-        await (await this.getAdvancedToggle()).click();
+        await allure.step('Enable advanced options', async () => {
+            await (await this.getAdvancedToggle()).click();
+        });
     }
 
     async getAdvancedCheckbox() {
