@@ -125,7 +125,7 @@ Test suite for QuickPizza web application covering pizza recommendation generati
 
 ### 4. Navigation and Footer
 
-**Seed:** `tests/api/seed.spec.ts`
+**Seed:** `tests/ui/seed.spec.ts`
 
 #### 4.1 Verify Footer Links
 

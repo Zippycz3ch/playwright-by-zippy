@@ -2,13 +2,17 @@
 
 Playwright test automation framework for [QuickPizza](https://quickpizza.grafana.com) API and UI testing. Integrates [Playwright Test Agents](https://playwright.dev/docs/test-agents) for AI test generation and [Playwright MCP Server](https://github.com/microsoft/playwright-mcp) for browser automation via Model Context Protocol.
 
-**New to Playwright?** Start with this [official introduction video](https://www.youtube.com/watch?v=WvsLGZnHmzw).
+**New to Playwright?** Start with this official introduction video:
+
+<a href="https://www.youtube.com/watch?v=WvsLGZnHmzw">
+  <img src="https://img.youtube.com/vi/WvsLGZnHmzw/maxresdefault.jpg" width="400" alt="Playwright Introduction">
+</a>
 
 ## Prerequisites
 
-- Node.js & npm
-- Java (for Allure reports)
-- VS Code
+- [Node.js & npm](https://nodejs.org/)
+- [Java](https://ninite.com/adoptjavax17/) (for Allure reports)
+- [VS Code](https://code.visualstudio.com/)
 - [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
 - [GitHub Copilot](https://github.com/features/copilot/plans) (free plan sufficient, required only for AI Agents and MCP - not for running tests)
 
