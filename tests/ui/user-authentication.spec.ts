@@ -24,7 +24,7 @@ test.describe('User Authentication', () => {
         });
 
         await test.step('Verify login page is displayed', async () => {
-            await loginPage.verifyLoginPageDisplayed();
+            await loginPage.verifyLoginPageLoaded();
         });
     });
 

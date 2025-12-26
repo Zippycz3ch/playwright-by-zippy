@@ -72,6 +72,17 @@ ENV=LOCAL  # http://localhost:3333 (requires Docker)
 
 URLs managed in [config.ts](config.ts).
 
+### Running Local QuickPizza
+
+To run QuickPizza locally:
+
+```bash
+cd docker
+docker compose up -d
+```
+
+This starts QuickPizza on `http://localhost:3333`.
+
 ## Test Coverage
 
 **API Tests** (`tests/api/`)
