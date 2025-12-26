@@ -1,6 +1,5 @@
 // api/helpers/sendRequestAsync.ts
 import * as allure from "allure-js-commons";
-import { getBaseURL } from "../../../config";
 
 export interface ApiResponse {
     response: Response;
@@ -15,9 +14,8 @@ export async function sendRequestAsync(
     body?: unknown
 ): Promise<ApiResponse> {
 
-    return await allure.step(`${method.toUpperCase()} ${endpoint}`, async (step) => {
+    return await allure.step(`${method.toUpperCase()} -> ${endpoint}`, async () => {
 
-        const baseUrl = getBaseURL();
 
         // You can use local quickpizza docker image for testing
         // cd docker
@@ -28,14 +26,17 @@ export async function sendRequestAsync(
         if (endpoint.startsWith("http") || endpoint.startsWith("https")) {
             url = endpoint;
         } else {
-            url = baseUrl + (endpoint.startsWith("/") ? endpoint : "/" + endpoint);
+            url = "https://quickpizza.grafana.com" + (endpoint.startsWith("/") ? endpoint : "/" + endpoint);
         }
 
-        step.parameter("URL", url);
-        step.parameter("Method", method);
-        if (body) {
-            step.parameter("Body", JSON.stringify(body, null, 2));
-        }
+        await allure.step("Request", async (step) => {
+
+            step.parameter("Url", url);
+            step.parameter("Headers", JSON.stringify(headers, null, 10));
+            step.parameter("Method", method);
+            step.parameter("Body", JSON.stringify(body, null, 10));
+
+        })
 
         const start = Date.now();
         const response = await fetch(url, {
@@ -53,11 +54,12 @@ export async function sendRequestAsync(
             parsedData = rawText;
         }
 
-        step.parameter("Status", response.status.toString());
-        step.parameter("Duration", `${duration}ms`);
-        if (parsedData && typeof parsedData === 'object') {
-            step.parameter("Response", JSON.stringify(parsedData, null, 2));
-        }
+        await allure.step("Response", async (step) => {
+            step.parameter("Status", response.status.toString());
+            step.parameter("Headers", JSON.stringify(Object.fromEntries(response.headers), null, 10));
+            step.parameter("Duration", `${duration} ms`);
+            step.parameter("Body", JSON.stringify(parsedData));
+        })
 
         return {
             response,
