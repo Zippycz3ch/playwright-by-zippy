@@ -1,5 +1,5 @@
-import { sendRequestAsync } from "../../../common/sendRequestAsync";
-import { check200, check401, Duration } from "../../../common/checks";
+import { sendRequestAsync } from "../../common/sendRequestAsync";
+import { check200, check401, Duration } from "../../common/checks";
 
 export interface LoginRequest {
     username: string;

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { setupNewUser, DEFAULT_USERNAME, DEFAULT_PASSWORD } from '../../interface/api/actions/userHelpers';
-import { loginUser } from '../../interface/api/ep/quickpizza/loginUser/loginUser';
+import { loginUser } from '../../interface/api/ep/loginUser/loginUser';
 import { QuickPizzaLoginPage } from '../../interface/ui/loginpage';
 
 test.describe("User Registration and Login Scenario", { tag: ["@scenario"] }, () => {

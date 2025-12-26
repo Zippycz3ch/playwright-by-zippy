@@ -1,9 +1,9 @@
-import { schema } from "../../../schemas/pizza";
-import { sendRequestAsync } from "../../../common/sendRequestAsync";
-import { getRequestHeader } from "../../../common/headers";
-import { UserData } from "../../../models/UserData";
-import { PizzaRestrictions } from "../../../models/PizzaRestrictions";
-import { check200, check401, Duration } from "../../../common/checks";
+import { schema } from "../../schemas/pizza";
+import { sendRequestAsync } from "../../common/sendRequestAsync";
+import { getRequestHeader } from "../../common/headers";
+import { UserData } from "../../models/UserData";
+import { PizzaRestrictions } from "../../models/PizzaRestrictions";
+import { check200, check401, Duration } from "../../common/checks";
 
 export async function postPizza(
     userData: UserData,

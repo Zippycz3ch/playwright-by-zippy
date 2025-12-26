@@ -1,8 +1,8 @@
 // tests/API/quotesRefactor.spec.ts
 import { test } from '@playwright/test';
-import { getQuotes } from "../../interface/api/ep/quickpizza/getQuotes/getQuotesBasic"
+import { getQuotes } from "../../interface/api/ep/getQuotes/getQuotesBasic"
 import { adminAccount } from '../../interface/api/common/accounts';
-import { getQuotesContext } from '../../interface/api/ep/quickpizza/getQuotes/getQuotesContext';
+import { getQuotesContext } from '../../interface/api/ep/getQuotes/getQuotesContext';
 
 test.describe("GET /api/quotes", { tag: ["@api"] }, () => {
     test('Basic - GET /api/quotes returns quotes', async ({ }) => {

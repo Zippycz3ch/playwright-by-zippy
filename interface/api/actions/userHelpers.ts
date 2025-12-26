@@ -1,4 +1,4 @@
-import { createUser, CreateUserResponse } from '../ep/quickpizza/createUser/createUser';
+import { createUser, CreateUserResponse } from '../ep/createUser/createUser';
 import { ApiTestResult } from '../common/checks';
 import { test } from '@playwright/test';
 

@@ -1,8 +1,8 @@
-import { schema } from "../../../schemas/quotes";
-import { sendRequestAsync } from "../../../common/sendRequestAsync";
-import { getRequestHeader } from "../../../common/headers";
-import { UserData } from "../../../models/UserData";
-import { check200, Duration } from "../../../common/checks";
+import { schema } from "../../schemas/quotes";
+import { sendRequestAsync } from "../../common/sendRequestAsync";
+import { getRequestHeader } from "../../common/headers";
+import { UserData } from "../../models/UserData";
+import { check200, Duration } from "../../common/checks";
 
 export async function getQuotes(userData: UserData) {
     const endpoint = 'api/quotes';

@@ -1,5 +1,5 @@
-import { sendRequestAsync } from "../../../common/sendRequestAsync";
-import { check201, Duration } from "../../../common/checks";
+import { sendRequestAsync } from "../../common/sendRequestAsync";
+import { check201, Duration } from "../../common/checks";
 
 export interface CreateUserRequest {
     username: string;

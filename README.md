@@ -98,7 +98,7 @@ This starts QuickPizza on `http://localhost:3333`.
 - User authentication
 - Navigation and footer
 - Homepage functionality
-**Scenario Tests** (`tests/scenarios/`)
+  **Scenario Tests** (`tests/scenarios/`)
 
 - User registration and login (API + UI combined)
 - Successful login with default and new users

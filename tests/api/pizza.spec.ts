@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { adminAccount } from '../../interface/api/common/accounts';
-import { postPizza } from '../../interface/api/ep/quickpizza/postPizza/postPizza';
+import { postPizza } from '../../interface/api/ep/postPizza/postPizza';
 import { PizzaResponse } from '../../interface/api/models/PizzaResponse';
 import * as allure from 'allure-js-commons';
 
