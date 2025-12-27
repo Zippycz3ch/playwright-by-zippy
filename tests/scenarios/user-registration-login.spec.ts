@@ -44,10 +44,18 @@ test.describe("User Registration and Login Scenario", { tag: ["@scenario"] }, ()
     });
 
     test("Failed login with invalid credentials via UI", async ({ page }) => {
-        await test.step('Attempt login via UI with invalid credentials', async () => {
-            const loginPage = new QuickPizzaLoginPage(page);
+        const loginPage = new QuickPizzaLoginPage(page);
+
+        await test.step('Navigate to login page', async () => {
             await loginPage.navigate();
+        });
+
+        await test.step('Attempt login with invalid credentials', async () => {
             await loginPage.loginWithInvalidCredentials('nonexistent_user', 'wrong_password');
+        });
+
+        await test.step('Close page', async () => {
+            await page.close();
         });
     });
 });

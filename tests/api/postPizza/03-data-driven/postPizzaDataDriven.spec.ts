@@ -1,8 +1,8 @@
 import { test } from '@playwright/test';
-import { adminAccount } from '../../../interface/api/common/accounts';
-import { postPizza } from '../../../interface/api/ep/pizza/postPizza';
+import { adminAccount } from '../../../../interface/api/common/accounts';
+import { postPizza } from '../../../../interface/api/ep/pizza/postPizza';
 import { pizzaExpectations } from './pizzaExpectations';
-import { PizzaResponse } from '../../../interface/api/models/PizzaResponse';
+import { PizzaResponse } from '../../../../interface/api/models/PizzaResponse';
 import * as allure from 'allure-js-commons';
 
 test.describe("POST /api/pizza - Data Driven", { tag: ["@api"] }, () => {

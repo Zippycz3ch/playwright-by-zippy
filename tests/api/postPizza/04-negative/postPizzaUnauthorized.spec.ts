@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
-import { postPizza } from '../../../interface/api/ep/pizza/postPizza';
-import { UserData } from '../../../interface/api/models/UserData';
-import { PizzaRestrictions } from '../../../interface/api/models/PizzaRestrictions';
+import { postPizza } from '../../../../interface/api/ep/pizza/postPizza';
+import { UserData } from '../../../../interface/api/models/UserData';
+import { PizzaRestrictions } from '../../../../interface/api/models/PizzaRestrictions';
 
 interface UnauthorizedTestCase {
     name: string;

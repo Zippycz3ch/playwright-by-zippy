@@ -1,5 +1,5 @@
-import { PizzaRestrictions } from '../../../interface/api/models/PizzaRestrictions';
-import { PizzaResponse } from '../../../interface/api/models/PizzaResponse';
+import { PizzaRestrictions } from '../../../../interface/api/models/PizzaRestrictions';
+import { PizzaResponse } from '../../../../interface/api/models/PizzaResponse';
 import { expect } from '@playwright/test';
 
 export interface PizzaTestCase {
