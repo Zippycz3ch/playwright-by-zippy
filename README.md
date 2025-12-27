@@ -1,6 +1,6 @@
 # Playwright by Zippy
 
-Playwright test automation framework for [QuickPizza](https://quickpizza.grafana.com) API and UI testing. Integrates [Playwright Test Agents](https://playwright.dev/docs/test-agents) for AI test generation and [Playwright MCP Server](https://github.com/microsoft/playwright-mcp) for browser automation via Model Context Protocol.
+Comprehensive Playwright test automation framework showcasing progressive implementation patterns from basic to advanced. Demonstrates testing the [QuickPizza](https://quickpizza.grafana.com) application with API testing, UI automation, data-driven patterns, and AI-powered test generation using [Playwright Test Agents](https://playwright.dev/docs/test-agents) and [Playwright MCP Server](https://github.com/microsoft/playwright-mcp).
 
 **New to Playwright?** Start with this official introduction video:
 
@@ -12,6 +12,7 @@ Playwright test automation framework for [QuickPizza](https://quickpizza.grafana
 
 - [Node.js & npm](https://nodejs.org/)
 - [Java](https://ninite.com/adoptjavax17/) (for Allure reports)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (optional, for running QuickPizza locally)
 - [VS Code](https://code.visualstudio.com/)
 - [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
 - [GitHub Copilot](https://github.com/features/copilot/plans) (free plan sufficient, required only for AI Agents and MCP - not for running tests)
@@ -38,13 +39,35 @@ npx playwright install
 
 ## Project Structure
 
-- `tests/` - API and UI test files
-- `interface/` - Page objects and API interfaces
+- `tests/` - Test files organized by type and complexity
+  - `api/postPizza/` - Progressive API test examples (5 levels)
+  - `api/user/` - User management tests
+  - `api/quotes/` - Quotes API tests
+  - `api/doughs/` - Dough API tests
+  - `ui/` - UI automation tests
+  - `scenarios/` - End-to-end workflow tests
+- `interface/` - Page objects and API helper functions
+  - `api/` - API endpoints, models, schemas, and helpers
+  - `ui/` - Page Object Models for UI testing
 - `specs/` - Test specifications for AI agents
-- `tests/dist` - Agent-generated compiled tests
-- `api/` - API endpoint definitions
+- `config.ts` - Environment configuration
 
 ## Running Tests
+
+**Using Playwright VS Code Extension** (Recommended)
+
+<a href="https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright">
+  <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/13063165/330097103-400a3f11-a1e8-4fe7-8ae6-b0460142de35.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251227%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251227T153158Z&X-Amz-Expires=300&X-Amz-Signature=b4ffdd078546daad51569f33ac3dd502316a99710eb152de1b9872d0ca701078&X-Amz-SignedHeaders=host" width="300" alt="Playwright VS Code Extension">
+</a>
+
+Use the [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) extension to run, debug, and manage tests directly from the editor with features like:
+
+- Run tests with a single click from the sidebar or code
+- Debug tests with breakpoints
+- View test results inline
+- Record new tests with Codegen
+
+**Using Command Line**
 
 ```bash
 # All tests
@@ -87,7 +110,17 @@ This starts QuickPizza on `http://localhost:3333`.
 
 **API Tests** (`tests/api/`)
 
-- POST /api/pizza - Pizza generation with restrictions (standard & data-driven)
+**POST /api/pizza** - Progressive test implementation levels:
+
+- `00-standalone/` - Raw Playwright without abstractions
+- `01-basic/` - Helper function usage
+- `02-basic-extended/` - Explicit validation patterns
+- `03-data-driven/` - Parameterized testing
+- `04-negative/` - Error handling & security
+
+**Other API Tests:**
+
+- User creation and authentication
 - Dough API validation
 - Quotes API testing
 
@@ -98,7 +131,8 @@ This starts QuickPizza on `http://localhost:3333`.
 - User authentication
 - Navigation and footer
 - Homepage functionality
-  **Scenario Tests** (`tests/scenarios/`)
+
+**Scenario Tests** (`tests/scenarios/`)
 
 - User registration and login (API + UI combined)
 - Successful login with default and new users
