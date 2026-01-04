@@ -1,6 +1,6 @@
 # Playwright by Zippy
 
-Comprehensive Playwright test automation framework showcasing progressive implementation patterns from basic to advanced. Demonstrates testing the [QuickPizza](https://quickpizza.grafana.com) application with API testing, UI automation, data-driven patterns, and AI-powered test generation using [Playwright Test Agents](https://playwright.dev/docs/test-agents) and [Playwright MCP Server](https://github.com/microsoft/playwright-mcp).
+Playwright framework with progressive test patterns (basic to advanced). Tests [QuickPizza](https://quickpizza.grafana.com) using API, UI, data-driven patterns, and AI-powered generation with [Playwright Test Agents](https://playwright.dev/docs/test-agents) and [Playwright MCP Server](https://github.com/microsoft/playwright-mcp).
 
 **New to Playwright?** Start with this official introduction video:
 
@@ -12,10 +12,10 @@ Comprehensive Playwright test automation framework showcasing progressive implem
 
 - [Node.js & npm](https://nodejs.org/)
 - [Java](https://ninite.com/adoptjavax17/) (for Allure reports)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (optional, for running QuickPizza locally)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (optional, for local QuickPizza)
 - [VS Code](https://code.visualstudio.com/)
 - [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
-- [GitHub Copilot](https://github.com/features/copilot/plans) (free plan sufficient, required only for AI Agents and MCP - not for running tests)
+- [GitHub Copilot](https://github.com/features/copilot/plans) (free plan sufficient, required for AI Agents and MCP only)
 
 ## Installation
 
@@ -31,11 +31,22 @@ npx playwright install
 - **Allure** - Test reporting
 - **AJV** - JSON schema validation
 
-## AI Integration
+## AI Integration (Optional)
 
-**[Playwright Test Agents](https://playwright.dev/docs/test-agents)** - AI agents generate, plan, and execute tests based on specifications in `specs/`. Generated tests compile to `tests/dist/`.
+**[Playwright Test Agents](https://playwright.dev/docs/test-agents)** - Generate, plan, and execute tests from specifications in `specs/`.
 
-**[Playwright MCP Server](https://github.com/microsoft/playwright-mcp)** - Exposes browser automation through Model Context Protocol, enabling AI assistants to control browsers directly. Configuration: [.vscode/mcp.json](.vscode/mcp.json)
+```bash
+npm install -D @playwright/test-agents
+```
+
+**[Playwright MCP Server](https://github.com/microsoft/playwright-mcp)** - Browser automation via Model Context Protocol for AI assistants.
+
+Configuration in [.vscode/mcp.json](.vscode/mcp.json) - enables GitHub Copilot Chat to control browsers directly.
+
+**Learn More:**
+
+- [Playwright Test Agents Demo](https://www.youtube.com/watch?v=_AifxZGxwuk)
+- [Playwright MCP Server Guide](https://www.youtube.com/watch?v=IixdI2bTR1g)
 
 ## Project Structure
 
@@ -49,7 +60,7 @@ npx playwright install
 - `interface/` - Page objects and API helper functions
   - `api/` - API endpoints, models, schemas, and helpers
   - `ui/` - Page Object Models for UI testing
-- `specs/` - Test specifications for AI agents
+- `specs/` - Test specifications for AI agentsP
 - `config.ts` - Environment configuration
 
 ## Running Tests
@@ -60,12 +71,12 @@ npx playwright install
   <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/13063165/330097103-400a3f11-a1e8-4fe7-8ae6-b0460142de35.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251227%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251227T153158Z&X-Amz-Expires=300&X-Amz-Signature=b4ffdd078546daad51569f33ac3dd502316a99710eb152de1b9872d0ca701078&X-Amz-SignedHeaders=host" width="300" alt="Playwright VS Code Extension">
 </a>
 
-Use the [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) extension to run, debug, and manage tests directly from the editor with features like:
+[Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright) features:
 
-- Run tests with a single click from the sidebar or code
-- Debug tests with breakpoints
-- View test results inline
-- Record new tests with Codegen
+- Run tests with one click
+- Debug with breakpoints
+- Inline test results
+- Record tests with Codegen
 
 **Using Command Line**
 
@@ -97,14 +108,12 @@ URLs managed in [config.ts](config.ts).
 
 ### Running Local QuickPizza
 
-To run QuickPizza locally:
-
 ```bash
 cd docker
 docker compose up -d
 ```
 
-This starts QuickPizza on `http://localhost:3333`.
+Starts QuickPizza on `http://localhost:3333`.
 
 ## Test Coverage
 
@@ -134,6 +143,6 @@ This starts QuickPizza on `http://localhost:3333`.
 
 **Scenario Tests** (`tests/scenarios/`)
 
-- User registration and login (API + UI combined)
-- Successful login with default and new users
+- User registration and login (API + UI)
+- Login with default and new users
 - Failed login with invalid credentials
