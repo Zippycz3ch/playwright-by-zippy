@@ -38,7 +38,7 @@ test.describe("POST /api/pizza", { tag: ["@api"] }, () => {
 
         await allure.step('Verify calorie restriction is respected', async () => {
             const data = result.data as PizzaResponse;
-            expect(data.calories, `Calories per slice (${data.calories}) should be <= 300`)
+            expect(data.pizza.dough.caloriesPerSlice, `Calories per slice (${data.pizza.dough.caloriesPerSlice}) should be <= 300`)
                 .toBeLessThanOrEqual(300);
         });
     });
@@ -50,6 +50,8 @@ test.describe("POST /api/pizza", { tag: ["@api"] }, () => {
                 maxNumberOfToppings: 4
             });
         });
+
+        // Bug on APP side
 
         await allure.step('Verify topping count is within range', async () => {
             const data = result.data as PizzaResponse;
@@ -75,6 +77,8 @@ test.describe("POST /api/pizza", { tag: ["@api"] }, () => {
             const data = result.data as PizzaResponse;
             const ingredientNames = data.pizza.ingredients.map((ing) => ing.name.toLowerCase());
 
+
+            // Flaky with bacon
             excluded.forEach(excludedItem => {
                 expect(ingredientNames,
                     `Ingredient "${excludedItem}" should NOT be present. Actual ingredients: [${ingredientNames.join(', ')}]`
@@ -129,6 +133,7 @@ test.describe("POST /api/pizza", { tag: ["@api"] }, () => {
                 `Topping count (${toppingCount}) should be >= 2 (combined restrictions). Toppings: [${toppingNames}]`
             ).toBeGreaterThanOrEqual(2);
 
+            // Same bug as the topping count test
             expect(toppingCount,
                 `Topping count (${toppingCount}) should be <= 4 (combined restrictions). Toppings: [${toppingNames}]`
             ).toBeLessThanOrEqual(4);

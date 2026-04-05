@@ -33,12 +33,14 @@ export const pizzaExpectations: PizzaTestCase[] = [
         body: { maxCaloriesPerSlice: 300 },
         expectedStatus: '200',
         validate: (data) => {
-            expect(data.calories,
-                `Calories per slice (${data.calories}) should be <= 300`
+            expect(data.pizza.dough.caloriesPerSlice,
+                `Calories per slice (${data.pizza.dough.caloriesPerSlice}) should be <= 300`
             ).toBeLessThanOrEqual(300);
         }
     },
     {
+
+        // Bug in quickpizza side
         name: 'Topping count parameters',
         body: { minNumberOfToppings: 3, maxNumberOfToppings: 4 },
         expectedStatus: '200',

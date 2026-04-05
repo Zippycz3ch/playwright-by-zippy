@@ -84,12 +84,12 @@ test.describe('QuickPizza Homepage', () => {
         });
 
         await test.step('Verify Login link exists', async () => {
-            const loginLink = page.getByRole('link', { name: 'Login/Profile' });
+            const loginLink = page.getByRole('link', { name: 'Login' });
             await expect(loginLink).toBeVisible();
         });
 
         await test.step('Verify Login link navigates to login page', async () => {
-            await page.getByRole('link', { name: 'Login/Profile' }).click();
+            await page.getByRole('link', { name: 'Login' }).click();
             await expect(page).toHaveURL(/.*\/login/);
             await expect(page.getByRole('heading', { name: 'QuickPizza User Login' })).toBeVisible();
         });
@@ -134,7 +134,7 @@ test.describe('QuickPizza Homepage', () => {
         });
 
         await test.step('Verify mobile navigation', async () => {
-            await expect(page.getByRole('link', { name: 'Login/Profile' })).toBeVisible();
+            await expect(page.getByRole('link', { name: 'Login' })).toBeVisible();
         });
     });
 

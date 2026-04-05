@@ -17,7 +17,7 @@ export class QuickPizzaHomepage {
     }
 
     async getLoginLink() {
-        return this.page.getByRole('link', { name: 'Login/Profile' });
+        return this.page.getByRole('link', { name: 'Login' });
     }
 
     async getPizzaButton() {
