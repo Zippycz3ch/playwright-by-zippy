@@ -120,7 +120,7 @@ export class DashboardPage {
     }
 
     async verifyPageLoaded() {
-        await allure.step('Verify URL and page title', async () => {
+        await allure.step('Verify URL and page title loaded', async () => {
             await allure.step('Verify URL contains /dashboard', async () => {
                 await expect(this.page).toHaveURL(/.*\/dashboard/);
             });
@@ -131,7 +131,7 @@ export class DashboardPage {
     }
 
     async verifyNavigationSidebar() {
-        await allure.step('Verify navigation sidebar', async () => {
+        await allure.step('Verify navigation sidebar loaded', async () => {
             await allure.step('Verify Home navigation is visible', async () => {
                 await expect(this.homeNav).toBeVisible();
             });
@@ -157,7 +157,7 @@ export class DashboardPage {
     }
 
     async verifyMainContent() {
-        await allure.step('Verify main content area', async () => {
+        await allure.step('Verify main content area loaded', async () => {
             await allure.step('Verify Dashboard heading is visible', async () => {
                 await expect(this.dashboardHeading).toBeVisible();
             });
@@ -171,7 +171,7 @@ export class DashboardPage {
     }
 
     async verifyConnectionCards() {
-        await allure.step('Verify connection cards', async () => {
+        await allure.step('Verify connection cards loaded', async () => {
             await allure.step('Verify Connect Email card is visible', async () => {
                 await expect(this.connectEmailCard).toBeVisible();
             });
