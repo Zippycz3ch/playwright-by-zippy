@@ -1,20 +1,9 @@
-// Common configuration for the entire project
-// Reads from .env file to determine which environment to use
+// Common configuration for Smartsupp API integration
 
 export const CONFIG = {
-    URLS: {
-        LOCAL: "http://localhost:3333",
-        PROD: "https://quickpizza.grafana.com"
-    }
+    DOMAIN: process.env.SMARTSUPP_DOMAIN || "smartsupp.com",
+    AUTH_SUBDOMAIN: process.env.SMARTSUPP_AUTH_SUBDOMAIN || "openid",
+    APP_SUBDOMAIN: process.env.SMARTSUPP_APP_SUBDOMAIN || "app"
 };
 
-// Get the current environment from .env file (defaults to PROD)
-export const getCurrentEnvironment = (): 'LOCAL' | 'PROD' => {
-    return (process.env.ENV as 'LOCAL' | 'PROD') || 'PROD';
-};
-
-// Get the base URL for the current environment
-export const getBaseURL = (): string => {
-    const env = getCurrentEnvironment();
-    return CONFIG.URLS[env];
-};
+export const getAppBaseURL = (): string => `https://${CONFIG.APP_SUBDOMAIN}.${CONFIG.DOMAIN}`;
