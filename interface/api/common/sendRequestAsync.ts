@@ -1,6 +1,6 @@
 // api/helpers/sendRequestAsync.ts
 import * as allure from "allure-js-commons";
-import { getBaseURL } from "../../../config";
+import { getAppBaseURL } from "../../../config";
 
 export interface ApiResponse {
     response: Response;
@@ -18,7 +18,7 @@ export async function sendRequestAsync(
     return await allure.step(`${method.toUpperCase()} -> ${endpoint}`, async () => {
 
 
-        const baseUrl = getBaseURL();
+        const baseUrl = getAppBaseURL();
         let url: string;
         if (endpoint.startsWith("http") || endpoint.startsWith("https")) {
             url = endpoint;
@@ -32,7 +32,7 @@ export async function sendRequestAsync(
             step.parameter("Url", url);
             step.parameter("Headers", JSON.stringify(headers, null, 10));
             step.parameter("Method", method);
-            step.parameter("Body", JSON.stringify(body, null, 10));
+            step.parameter("Body", typeof body === 'string' ? body : JSON.stringify(body, null, 10));
 
         })
 
@@ -40,7 +40,7 @@ export async function sendRequestAsync(
         const response = await fetch(url, {
             method: method,
             headers: headers,
-            body: body ? JSON.stringify(body) : undefined
+            body: body ? (typeof body === 'string' ? body : JSON.stringify(body)) : undefined
         });
         const duration = Date.now() - start;
 
