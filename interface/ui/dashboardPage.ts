@@ -119,6 +119,12 @@ export class DashboardPage {
         });
     }
 
+    async verifyNavigatedToSection(section: 'inbox' | 'customers' | 'statistics' | 'settings' | 'automations' | 'ai-automations') {
+        await allure.step(`Verify URL redirected to ${section} page`, async () => {
+            await expect(this.page).toHaveURL(new RegExp(`.*\\/${section}`));
+        });
+    }
+
     async verifyPageLoaded() {
         await allure.step('Verify URL and page title loaded', async () => {
             await allure.step('Verify URL contains /dashboard', async () => {
