@@ -69,6 +69,24 @@ test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
                 await expect(dashboardPage.connectChannelsHeading).toBeVisible();
             });
         });
+
+        await allure.step('Verify connection cards', async () => {
+            await allure.step('Verify Connect Email card is visible', async () => {
+                await expect(dashboardPage.connectEmailCard).toBeVisible();
+            });
+
+            await allure.step('Verify Connect Live Chat card is visible', async () => {
+                await expect(dashboardPage.connectLiveChatCard).toBeVisible();
+            });
+
+            await allure.step('Verify Connect Messenger card is visible', async () => {
+                await expect(dashboardPage.connectMessengerCard).toBeVisible();
+            });
+
+            await allure.step('Verify Connect WhatsApp card is visible', async () => {
+                await expect(dashboardPage.connectWhatsAppCard).toBeVisible();
+            });
+        });
     });
 
     test('navigate to settings @UI', async ({ page }) => {

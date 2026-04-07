@@ -60,6 +60,23 @@ export class DashboardPage {
         return this.page.locator('text=Get started with Smartsupp');
     }
 
+    // Connection Cards
+    get connectEmailCard() {
+        return this.page.locator('text=Connect Email');
+    }
+
+    get connectLiveChatCard() {
+        return this.page.locator('text=Connect Live Chat');
+    }
+
+    get connectMessengerCard() {
+        return this.page.locator('text=Connect Messenger');
+    }
+
+    get connectWhatsAppCard() {
+        return this.page.locator('text=Connect WhatsApp');
+    }
+
     // User Menu
     get profileLink() {
         return this.page.locator('a[href*="/settings/profile"]');
