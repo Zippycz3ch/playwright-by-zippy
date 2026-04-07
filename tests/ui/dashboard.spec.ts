@@ -16,76 +16,32 @@ test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
     });
 
     test('dashboard loads after login @UI', async ({ page }) => {
-        await allure.step('Verify URL redirected to dashboard', async () => {
-            await allure.step('Verify URL contains /dashboard', async () => {
-                await expect(page).toHaveURL(/.*\/dashboard/);
-            });
-
-            await allure.step('Verify page title is "Smartsupp"', async () => {
-                await expect(page).toHaveTitle('Smartsupp');
-            });
+        await allure.step('Verify URL and page loaded correctly', async () => {
+            await expect(page).toHaveURL(/.*\/dashboard/);
+            await expect(page).toHaveTitle('Smartsupp');
         });
 
-        await allure.step('Verify navigation sidebar is visible', async () => {
-            await allure.step('Verify Home navigation is visible', async () => {
-                await expect(dashboardPage.homeNav).toBeVisible();
-            });
-
-            await allure.step('Verify Inbox navigation is visible', async () => {
-                await expect(dashboardPage.inboxNav).toBeVisible();
-            });
-
-            await allure.step('Verify AI Automations navigation is visible', async () => {
-                await expect(dashboardPage.aiAutomationsNav).toBeVisible();
-            });
-
-            await allure.step('Verify Automations navigation is visible', async () => {
-                await expect(dashboardPage.automationsNav).toBeVisible();
-            });
-
-            await allure.step('Verify Customers navigation is visible', async () => {
-                await expect(dashboardPage.customersNav).toBeVisible();
-            });
-
-            await allure.step('Verify Statistics navigation is visible', async () => {
-                await expect(dashboardPage.statisticsNav).toBeVisible();
-            });
-
-            await allure.step('Verify Settings navigation is visible', async () => {
-                await expect(dashboardPage.settingsNav).toBeVisible();
-            });
+        await allure.step('Verify navigation sidebar', async () => {
+            await expect(dashboardPage.homeNav).toBeVisible();
+            await expect(dashboardPage.inboxNav).toBeVisible();
+            await expect(dashboardPage.aiAutomationsNav).toBeVisible();
+            await expect(dashboardPage.automationsNav).toBeVisible();
+            await expect(dashboardPage.customersNav).toBeVisible();
+            await expect(dashboardPage.statisticsNav).toBeVisible();
+            await expect(dashboardPage.settingsNav).toBeVisible();
         });
 
         await allure.step('Verify main content area', async () => {
-            await allure.step('Verify Dashboard heading is visible', async () => {
-                await expect(dashboardPage.dashboardHeading).toBeVisible();
-            });
-
-            await allure.step('Verify Product news button is visible', async () => {
-                await expect(dashboardPage.productNewsButton).toBeVisible();
-            });
-
-            await allure.step('Verify "Connect additional channels" section is visible', async () => {
-                await expect(dashboardPage.connectChannelsHeading).toBeVisible();
-            });
+            await expect(dashboardPage.dashboardHeading).toBeVisible();
+            await expect(dashboardPage.productNewsButton).toBeVisible();
+            await expect(dashboardPage.connectChannelsHeading).toBeVisible();
         });
 
         await allure.step('Verify connection cards', async () => {
-            await allure.step('Verify Connect Email card is visible', async () => {
-                await expect(dashboardPage.connectEmailCard).toBeVisible();
-            });
-
-            await allure.step('Verify Connect Live Chat card is visible', async () => {
-                await expect(dashboardPage.connectLiveChatCard).toBeVisible();
-            });
-
-            await allure.step('Verify Connect Messenger card is visible', async () => {
-                await expect(dashboardPage.connectMessengerCard).toBeVisible();
-            });
-
-            await allure.step('Verify Connect WhatsApp card is visible', async () => {
-                await expect(dashboardPage.connectWhatsAppCard).toBeVisible();
-            });
+            await expect(dashboardPage.connectEmailCard).toBeVisible();
+            await expect(dashboardPage.connectLiveChatCard).toBeVisible();
+            await expect(dashboardPage.connectMessengerCard).toBeVisible();
+            await expect(dashboardPage.connectWhatsAppCard).toBeVisible();
         });
     });
 
