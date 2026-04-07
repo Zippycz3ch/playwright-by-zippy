@@ -120,7 +120,7 @@ export class DashboardPage {
     }
 
     async verifyPageLoaded() {
-        await allure.step('Verify URL and page loaded correctly', async () => {
+        await allure.step('Verify URL and page title', async () => {
             await allure.step('Verify URL contains /dashboard', async () => {
                 await expect(this.page).toHaveURL(/.*\/dashboard/);
             });
