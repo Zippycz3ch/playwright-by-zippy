@@ -48,6 +48,10 @@ export class DashboardPage {
         return this.page.locator('h1:has-text("Dashboard")');
     }
 
+    get productNewsButton() {
+        return this.page.locator('button[aria-label="Product news"]');
+    }
+
     get connectChannelsHeading() {
         return this.page.locator('h2:has-text("Connect additional channels")');
     }
