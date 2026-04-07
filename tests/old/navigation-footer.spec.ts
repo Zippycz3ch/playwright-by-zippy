@@ -2,8 +2,8 @@
 // seed: tests/ui/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
-import { QuickPizzaHomepage } from '../../interface/ui/homepage';
-import { QuickPizzaLoginPage } from '../../interface/ui/loginpage';
+import { QuickPizzaHomepage } from '../../interface/ui/homepageOld';
+import { QuickPizzaLoginPage } from '../../interface/ui/loginpageOld';
 import { getBaseURL } from '../../config';
 
 const BASE_URL = getBaseURL();

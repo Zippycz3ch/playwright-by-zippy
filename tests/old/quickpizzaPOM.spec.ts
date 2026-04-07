@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { QuickPizzaHomepage } from '../../interface/ui/homepage';
+import { QuickPizzaHomepage } from '../../interface/ui/homepageOld';
 
 test.describe('QuickPizza Homepage', () => {
     let quickPizza: QuickPizzaHomepage;

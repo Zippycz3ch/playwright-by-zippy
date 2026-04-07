@@ -2,7 +2,7 @@
 // seed: tests/ui/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
-import { QuickPizzaHomepage } from '../../interface/ui/homepage';
+import { QuickPizzaHomepage } from '../../interface/ui/homepageOld';
 
 test.describe('Advanced Pizza Filtering', () => {
     let pizzaPage: QuickPizzaHomepage;

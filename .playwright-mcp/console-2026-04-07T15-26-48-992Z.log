@@ -1,0 +1,17 @@
+[     460ms] [LOG] %cWondering how Smartsupp is written? We use React and TypeScript. 
+Do you want to be part of our team? Visit https://smartsupp.recruitee.com/ or send an email to lucia.balazova@abugo.com. color: #408fec @ https://dash-v2.smartsuppcdn.com/static/js/main.96348be1.js:0
+[     468ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://www.googletagmanager.com/gtm.js?id=GTM-PT7FQF:0
+[     517ms] [WARNING] Manifest: property 'start_url' ignored, should be same origin as document. @ https://dash-v2.smartsuppcdn.com/manifest.json:0
+[    1132ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://app.smartsupp.com/rest/billing/subscription:0
+[    2667ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://googleads.g.doubleclick.net/pagead/id:0
+[    2677ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://static.doubleclick.net/instream/ad_status.js:0
+[    2678ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://googleads.g.doubleclick.net/pagead/id:0
+[    2707ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://static.doubleclick.net/instream/ad_status.js:0
+[    2709ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://googleads.g.doubleclick.net/pagead/id:0
+[    2735ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://static.doubleclick.net/instream/ad_status.js:0
+[    2737ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://googleads.g.doubleclick.net/pagead/id:0
+[    2764ms] [ERROR] WebSocket connection to 'wss://nexus-websocket-a.intercom.io/pubsub/5-_i170-w2wgblfX1479lcvQi6UnRsqjfBdcC7vBiO55U2rzZ9dCiy0Lz-8_RakFah1V9Lu1MNwp-Nq-6te5OI4fQjXZP7swE5cixt?X-Nexus-New-Client=true&X-Nexus-Version=0.18.7&user_role=user' failed: Error in connection establishment: net::ERR_ADDRESS_INVALID @ https://js.intercomcdn.com/vendor-modern.df860bed.js:1
+[    2765ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://static.doubleclick.net/instream/ad_status.js:0
+[    5481ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://api-js.mixpanel.com/engage/?verbose=1&ip=1&_=1775575614471:0
+[    5795ms] [ERROR] WebSocket connection to 'wss://nexus-websocket-a.intercom.io/pubsub/5-_i170-w2wgblfX1479lcvQi6UnRsqjfBdcC7vBiO55U2rzZ9dCiy0Lz-8_RakFah1V9Lu1MNwp-Nq-6te5OI4fQjXZP7swE5cixt?X-Nexus-New-Client=true&X-Nexus-Version=0.18.7&user_role=user' failed: Error in connection establishment: net::ERR_ADDRESS_INVALID @ https://js.intercomcdn.com/vendor-modern.df860bed.js:1
+[   13195ms] [ERROR] WebSocket connection to 'wss://nexus-websocket-a.intercom.io/pubsub/5-_i170-w2wgblfX1479lcvQi6UnRsqjfBdcC7vBiO55U2rzZ9dCiy0Lz-8_RakFah1V9Lu1MNwp-Nq-6te5OI4fQjXZP7swE5cixt?X-Nexus-New-Client=true&X-Nexus-Version=0.18.7&user_role=user' failed: Error in connection establishment: net::ERR_ADDRESS_INVALID @ https://js.intercomcdn.com/vendor-modern.df860bed.js:1
