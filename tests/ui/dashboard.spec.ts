@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../interface/ui/loginPage';
 import { DashboardPage } from '../../interface/ui/dashboardPage';
+import * as allure from 'allure-js-commons';
 
 test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
     let loginPage: LoginPage;
@@ -23,11 +24,17 @@ test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
 
     test('navigate to settings @UI', async ({ page }) => {
         await dashboardPage.navigateToSection('settings');
-        await expect(page).toHaveURL(/.*\/settings/);
+        
+        await allure.step('Verify URL redirected to settings page', async () => {
+            await expect(page).toHaveURL(/.*\/settings/);
+        });
     });
 
     test('navigate to customers @UI', async ({ page }) => {
         await dashboardPage.navigateToSection('customers');
-        await expect(page).toHaveURL(/.*\/customers/);
+        
+        await allure.step('Verify URL redirected to customers page', async () => {
+            await expect(page).toHaveURL(/.*\/customers/);
+        });
     });
 });
