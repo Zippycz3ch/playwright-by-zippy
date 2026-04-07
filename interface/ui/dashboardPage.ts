@@ -90,17 +90,6 @@ export class DashboardPage {
         await allure.step('Navigate to Smartsupp dashboard', async () => {
             await this.page.goto(`${getAppBaseURL()}/app/dashboard/home`);
             await this.page.waitForLoadState('networkidle');
-
-            // Verify URL
-            await expect(this.page).toHaveURL(/\/app\/dashboard/);
-
-            // Verify main navigation is visible
-            await expect(this.homeNav).toBeVisible();
-            await expect(this.inboxNav).toBeVisible();
-            await expect(this.customersNav).toBeVisible();
-            await expect(this.statisticsNav).toBeVisible();
-            await expect(this.settingsNav).toBeVisible();
-
         });
     }
 
@@ -119,77 +108,74 @@ export class DashboardPage {
         });
     }
 
-    async verifyNavigatedToSection(section: 'inbox' | 'customers' | 'statistics' | 'settings' | 'automations' | 'ai-automations') {
+    async verifySectionPageLoaded(section: 'inbox' | 'customers' | 'statistics' | 'settings' | 'automations' | 'ai-automations') {
         await allure.step(`Verify URL redirected to ${section} page`, async () => {
             await expect(this.page).toHaveURL(new RegExp(`.*\\/${section}`));
         });
     }
 
-    async verifyPageLoaded() {
-        await allure.step('Verify URL and page title loaded', async () => {
+    async verifyNavigationSidebarLoaded() {
+        await allure.step('Verify Home navigation is visible', async () => {
+            await expect(this.homeNav).toBeVisible();
+        });
+        await allure.step('Verify Inbox navigation is visible', async () => {
+            await expect(this.inboxNav).toBeVisible();
+        });
+        await allure.step('Verify AI Automations navigation is visible', async () => {
+            await expect(this.aiAutomationsNav).toBeVisible();
+        });
+        await allure.step('Verify Automations navigation is visible', async () => {
+            await expect(this.automationsNav).toBeVisible();
+        });
+        await allure.step('Verify Customers navigation is visible', async () => {
+            await expect(this.customersNav).toBeVisible();
+        });
+        await allure.step('Verify Statistics navigation is visible', async () => {
+            await expect(this.statisticsNav).toBeVisible();
+        });
+        await allure.step('Verify Settings navigation is visible', async () => {
+            await expect(this.settingsNav).toBeVisible();
+        });
+    }
+
+    async verifyMainContentLoaded() {
+        await allure.step('Verify Dashboard heading is visible', async () => {
+            await expect(this.dashboardHeading).toBeVisible();
+        });
+        await allure.step('Verify Product news button is visible', async () => {
+            await expect(this.productNewsButton).toBeVisible();
+        });
+        await allure.step('Verify "Connect additional channels" heading is visible', async () => {
+            await expect(this.connectChannelsHeading).toBeVisible();
+        });
+    }
+
+    async verifyConnectionCardsLoaded() {
+        await allure.step('Verify Connect Email card is visible', async () => {
+            await expect(this.connectEmailCard).toBeVisible();
+        });
+        await allure.step('Verify Connect Live Chat card is visible', async () => {
+            await expect(this.connectLiveChatCard).toBeVisible();
+        });
+        await allure.step('Verify Connect Messenger card is visible', async () => {
+            await expect(this.connectMessengerCard).toBeVisible();
+        });
+        await allure.step('Verify Connect WhatsApp card is visible', async () => {
+            await expect(this.connectWhatsAppCard).toBeVisible();
+        });
+    }
+
+    async verifyDashboardPageLoaded() {
+        await allure.step('Verify dashboard loaded', async () => {
             await allure.step('Verify URL contains /dashboard', async () => {
                 await expect(this.page).toHaveURL(/.*\/dashboard/);
             });
             await allure.step('Verify page title is "Smartsupp"', async () => {
                 await expect(this.page).toHaveTitle('Smartsupp');
             });
-        });
-    }
-
-    async verifyNavigationSidebar() {
-        await allure.step('Verify navigation sidebar loaded', async () => {
-            await allure.step('Verify Home navigation is visible', async () => {
-                await expect(this.homeNav).toBeVisible();
-            });
-            await allure.step('Verify Inbox navigation is visible', async () => {
-                await expect(this.inboxNav).toBeVisible();
-            });
-            await allure.step('Verify AI Automations navigation is visible', async () => {
-                await expect(this.aiAutomationsNav).toBeVisible();
-            });
-            await allure.step('Verify Automations navigation is visible', async () => {
-                await expect(this.automationsNav).toBeVisible();
-            });
-            await allure.step('Verify Customers navigation is visible', async () => {
-                await expect(this.customersNav).toBeVisible();
-            });
-            await allure.step('Verify Statistics navigation is visible', async () => {
-                await expect(this.statisticsNav).toBeVisible();
-            });
-            await allure.step('Verify Settings navigation is visible', async () => {
-                await expect(this.settingsNav).toBeVisible();
-            });
-        });
-    }
-
-    async verifyMainContent() {
-        await allure.step('Verify main content area loaded', async () => {
-            await allure.step('Verify Dashboard heading is visible', async () => {
-                await expect(this.dashboardHeading).toBeVisible();
-            });
-            await allure.step('Verify Product news button is visible', async () => {
-                await expect(this.productNewsButton).toBeVisible();
-            });
-            await allure.step('Verify "Connect additional channels" heading is visible', async () => {
-                await expect(this.connectChannelsHeading).toBeVisible();
-            });
-        });
-    }
-
-    async verifyConnectionCards() {
-        await allure.step('Verify connection cards loaded', async () => {
-            await allure.step('Verify Connect Email card is visible', async () => {
-                await expect(this.connectEmailCard).toBeVisible();
-            });
-            await allure.step('Verify Connect Live Chat card is visible', async () => {
-                await expect(this.connectLiveChatCard).toBeVisible();
-            });
-            await allure.step('Verify Connect Messenger card is visible', async () => {
-                await expect(this.connectMessengerCard).toBeVisible();
-            });
-            await allure.step('Verify Connect WhatsApp card is visible', async () => {
-                await expect(this.connectWhatsAppCard).toBeVisible();
-            });
+            await this.verifyNavigationSidebarLoaded();
+            await this.verifyMainContentLoaded();
+            await this.verifyConnectionCardsLoaded();
         });
     }
 }

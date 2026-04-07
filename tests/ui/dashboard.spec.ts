@@ -15,19 +15,16 @@ test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
     });
 
     test('dashboard loads after login @UI', async ({ page }) => {
-        await dashboardPage.verifyPageLoaded();
-        await dashboardPage.verifyNavigationSidebar();
-        await dashboardPage.verifyMainContent();
-        await dashboardPage.verifyConnectionCards();
+        await dashboardPage.verifyDashboardPageLoaded();
     });
 
     test('navigate to settings @UI', async ({ page }) => {
         await dashboardPage.navigateToSection('settings');
-        await dashboardPage.verifyNavigatedToSection('settings');
+        await dashboardPage.verifySectionPageLoaded('settings');
     });
 
     test('navigate to customers @UI', async ({ page }) => {
         await dashboardPage.navigateToSection('customers');
-        await dashboardPage.verifyNavigatedToSection('customers');
+        await dashboardPage.verifySectionPageLoaded('customers');
     });
 });

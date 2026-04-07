@@ -36,45 +36,29 @@ export class LoginPage {
         });
     }
 
-    async login(username: string, password: string) {
+    async login(username: string, password: string, waitForDashboard: boolean = true) {
         await allure.step(`Login as ${username}`, async () => {
             await this.usernameInput.fill(username);
             await this.passwordInput.fill(password);
             await this.signInButton.click();
-            await this.page.waitForURL('**/app/dashboard**', { timeout: 10000 });
+
+            if (waitForDashboard) {
+                await this.page.waitForURL('**/app/dashboard**', { timeout: 10000 });
+                await allure.step('Verify URL redirected to dashboard after login', async () => {
+                    await expect(this.page).toHaveURL(/.*app\.smartsupp\.com\/app\/dashboard/);
+                });
+            }
         });
     }
 
-    async verifyNavigatedToDashboard() {
-        await allure.step('Verify URL redirected to dashboard after login', async () => {
-            await expect(this.page).toHaveURL(/.*app\.smartsupp\.com\/app\/dashboard/);
-        });
-    }
-
-    async attemptLoginWithInvalidCredentials(username: string, password: string) {
-        await allure.step('Attempt login with invalid credentials', async () => {
-            await allure.step('Fill username field with invalid email', async () => {
-                await this.usernameInput.fill(username);
-            });
-
-            await allure.step('Fill password field with wrong password', async () => {
-                await this.passwordInput.fill(password);
-            });
-
-            await allure.step('Click sign in button', async () => {
-                await this.signInButton.click();
-            });
-        });
-    }
-
-    async verifyErrorMessageDisplayed() {
+    async verifyErrorMessageDisplayed(expectedMessage: string) {
         await allure.step('Verify error message is displayed', async () => {
             await allure.step('Verify error message is visible', async () => {
                 await expect(this.errorMessage).toBeVisible();
             });
 
-            await allure.step('Verify error message text is "Invalid email or password"', async () => {
-                await expect(this.errorMessage).toHaveText('Invalid email or password');
+            await allure.step(`Verify error message text is "${expectedMessage}"`, async () => {
+                await expect(this.errorMessage).toHaveText(expectedMessage);
             });
         });
     }
