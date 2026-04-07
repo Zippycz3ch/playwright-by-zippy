@@ -44,8 +44,8 @@ export class DashboardPage {
     }
 
     // Main Content
-    get pageHeading() {
-        return this.page.locator('h1, h2').first();
+    get dashboardHeading() {
+        return this.page.locator('h1:has-text("Dashboard")');
     }
 
     get getStartedSection() {

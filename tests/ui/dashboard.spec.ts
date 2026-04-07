@@ -55,6 +55,12 @@ test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
                 await expect(dashboardPage.settingsNav).toBeVisible();
             });
         });
+
+        await allure.step('Verify main content area', async () => {
+            await allure.step('Verify Dashboard heading is visible', async () => {
+                await expect(dashboardPage.dashboardHeading).toBeVisible();
+            });
+        });
     });
 
     test('navigate to settings @UI', async ({ page }) => {
