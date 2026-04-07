@@ -1,8 +1,0 @@
-export const schema = {
-    type: "object",
-    properties: {
-        error: { type: "string" }
-    },
-    required: ["error"],
-    additionalProperties: false
-};

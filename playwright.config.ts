@@ -40,10 +40,19 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    // Setup project for API authentication
+    {
+      name: "auth-setup",
+      testMatch: /.*\.auth\.setup\.ts/,
+    },
     {
       name: "API",
       testDir: "./tests/api",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: ".auth/smartsupp-api.json",
+      },
+      dependencies: ["auth-setup"],
     },
     {
       name: "UI",
