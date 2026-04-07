@@ -60,6 +60,10 @@ test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
             await allure.step('Verify Dashboard heading is visible', async () => {
                 await expect(dashboardPage.dashboardHeading).toBeVisible();
             });
+
+            await allure.step('Verify "Connect additional channels" section is visible', async () => {
+                await expect(dashboardPage.connectChannelsHeading).toBeVisible();
+            });
         });
     });
 

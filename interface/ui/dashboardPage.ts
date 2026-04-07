@@ -48,6 +48,10 @@ export class DashboardPage {
         return this.page.locator('h1:has-text("Dashboard")');
     }
 
+    get connectChannelsHeading() {
+        return this.page.locator('h2:has-text("Connect additional channels")');
+    }
+
     get getStartedSection() {
         return this.page.locator('text=Get started with Smartsupp');
     }
