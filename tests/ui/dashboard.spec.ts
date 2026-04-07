@@ -19,11 +19,13 @@ test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
     });
 
     test('navigate to settings @UI', async ({ page }) => {
+        await dashboardPage.verifyDashboardPageLoaded();
         await dashboardPage.navigateToSection('settings');
         await dashboardPage.verifySectionPageLoaded('settings');
     });
 
     test('navigate to customers @UI', async ({ page }) => {
+        await dashboardPage.verifyDashboardPageLoaded();
         await dashboardPage.navigateToSection('customers');
         await dashboardPage.verifySectionPageLoaded('customers');
     });

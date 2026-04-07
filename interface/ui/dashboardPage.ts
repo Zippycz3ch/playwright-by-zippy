@@ -2,6 +2,8 @@ import { Page, expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 import { getAppBaseURL } from '../../config';
 
+type DashboardSection = 'inbox' | 'customers' | 'statistics' | 'settings' | 'automations' | 'ai-automations';
+
 export class DashboardPage {
     constructor(private page: Page) { }
 
@@ -45,7 +47,7 @@ export class DashboardPage {
 
     // Main Content
     get dashboardHeading() {
-        return this.page.locator('h1:has-text("Dashboard")');
+        return this.page.locator('h1.chakra-heading:has-text("Dashboard")');
     }
 
     get productNewsButton() {
@@ -93,22 +95,26 @@ export class DashboardPage {
         });
     }
 
-    async navigateToSection(section: 'inbox' | 'customers' | 'statistics' | 'settings' | 'automations' | 'ai-automations') {
+    private getSectionNav(section: DashboardSection) {
+        const navMap = {
+            'inbox': this.inboxNav,
+            'customers': this.customersNav,
+            'statistics': this.statisticsNav,
+            'settings': this.settingsNav,
+            'automations': this.automationsNav,
+            'ai-automations': this.aiAutomationsNav
+        };
+        return navMap[section];
+    }
+
+    async navigateToSection(section: DashboardSection) {
         await allure.step(`Navigate to ${section}`, async () => {
-            const navMap = {
-                'inbox': this.inboxNav,
-                'customers': this.customersNav,
-                'statistics': this.statisticsNav,
-                'settings': this.settingsNav,
-                'automations': this.automationsNav,
-                'ai-automations': this.aiAutomationsNav
-            };
-            await navMap[section].click();
+            await this.getSectionNav(section).click();
             await this.page.waitForLoadState('networkidle');
         });
     }
 
-    async verifySectionPageLoaded(section: 'inbox' | 'customers' | 'statistics' | 'settings' | 'automations' | 'ai-automations') {
+    async verifySectionPageLoaded(section: DashboardSection) {
         await allure.step(`Verify URL redirected to ${section} page`, async () => {
             await expect(this.page).toHaveURL(new RegExp(`.*\\/${section}`));
         });
