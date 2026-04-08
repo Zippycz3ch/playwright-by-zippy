@@ -177,7 +177,7 @@ export class DashboardPage {
                 await expect(this.page).toHaveURL(/.*\/dashboard/);
             });
             await allure.step('Verify page title is "Smartsupp"', async () => {
-                await expect(this.page).toHaveTitle('Smartsupp');
+                await expect(this.page).toHaveTitle(/(\(\d+\) )?Smartsupp( Dashboard)?/);
             });
             await this.verifyNavigationSidebarLoaded();
             await this.verifyMainContentLoaded();

@@ -64,6 +64,11 @@ export default defineConfig({
       testDir: "./tests/scenarios",
       use: { ...devices["Desktop Chrome"] },
     },
+    {
+      name: "Chat-Communication",
+      testDir: "./tests/chat-communication",
+      use: { ...devices["Desktop Chrome"] },
+    },
 
     /* Test against mobile viewports. */
     // {
