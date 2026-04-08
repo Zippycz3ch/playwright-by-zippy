@@ -46,27 +46,18 @@ export default defineConfig({
       testMatch: /.*\.auth\.setup\.ts/,
     },
     {
-      name: "API",
-      testDir: "./tests/api",
-      use: {
-        ...devices["Desktop Chrome"],
-        storageState: ".auth/smartsupp-api.json",
-      },
-      dependencies: ["auth-setup"],
-    },
-    {
       name: "UI",
       testDir: "./tests/ui",
       use: { ...devices["Desktop Chrome"] },
     },
     {
-      name: "Scenarios",
-      testDir: "./tests/scenarios",
+      name: "Task 01",
+      testDir: "./tests/task01",
       use: { ...devices["Desktop Chrome"] },
     },
     {
-      name: "Chat-Communication",
-      testDir: "./tests/chat-communication",
+      name: "Task 02",
+      testDir: "./tests/task02",
       use: { ...devices["Desktop Chrome"] },
     },
 

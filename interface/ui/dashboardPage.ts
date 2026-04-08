@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page, BrowserContext, expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 import { getAppBaseURL } from '../../config';
 
@@ -183,5 +183,42 @@ export class DashboardPage {
             await this.verifyMainContentLoaded();
             await this.verifyConnectionCardsLoaded();
         });
+    }
+
+    async openInbox() {
+        await allure.step('Open Inbox', async () => {
+            await this.inboxNav.click();
+            await this.page.waitForLoadState('networkidle');
+            await this.page.waitForTimeout(2000);
+        });
+    }
+
+    get agentsFilterButton() {
+        return this.page.getByText('Agents').first();
+    }
+
+    get discoverLiveChatArticle() {
+        return this.page.locator('text=Discover how the live chat works');
+    }
+
+    async openDiscoverLiveChatArticle() {
+        await allure.step('Open Discover how the live chat works article', async () => {
+            await this.agentsFilterButton.click();
+            await this.page.waitForTimeout(1000);
+            await this.discoverLiveChatArticle.click();
+            await this.page.waitForTimeout(1000);
+        });
+    }
+
+    async startTestConversation(context: BrowserContext): Promise<Page> {
+        let visitorPage!: Page;
+        await allure.step('Start test conversation', async () => {
+            const pagePromise = context.waitForEvent('page');
+            await this.page.getByRole('button', { name: 'Try a Test Conversation' }).click();
+            visitorPage = await pagePromise;
+            await visitorPage.waitForLoadState('networkidle');
+            await visitorPage.waitForTimeout(2000);
+        });
+        return visitorPage;
     }
 }

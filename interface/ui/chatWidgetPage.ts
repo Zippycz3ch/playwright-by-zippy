@@ -1,5 +1,6 @@
 import { Page, expect, Locator } from '@playwright/test';
 import * as allure from 'allure-js-commons';
+import path from 'path';
 
 /**
  * Page Object for Smartsupp Chat Widget (Visitor side)
@@ -9,8 +10,13 @@ export class ChatWidgetPage {
     constructor(private page: Page) { }
 
     // Chat Widget Elements
+    get messengerFrame() {
+        return this.page.frameLocator('iframe[title="Smartsupp widget messenger"]');
+    }
+
+    /** @deprecated use messengerFrame */
     get chatWidget() {
-        return this.page.frameLocator('#smartsupp-widget-container iframe, iframe[id*="smartsupp"]').first();
+        return this.messengerFrame;
     }
 
     get chatButton() {
@@ -23,11 +29,19 @@ export class ChatWidgetPage {
 
     // Message Elements (within iframe)
     get messageInput() {
-        return this.chatWidget.locator('textarea[placeholder*="zpráv"], textarea[placeholder*="message"], input[type="text"][placeholder*="message"]').first();
+        return this.messengerFrame.getByTestId('textarea');
+    }
+
+    get attachmentButton() {
+        return this.messengerFrame.getByTestId('buttonAttachment');
+    }
+
+    get filePreview() {
+        return this.messengerFrame.getByTestId('textareaPreviewFile');
     }
 
     get sendButton() {
-        return this.chatWidget.locator('[data-testid="send-button"], button[aria-label*="Send"], button[type="submit"]').first();
+        return this.messengerFrame.locator('[data-testid="send-button"], button[aria-label*="Send"], button[type="submit"]').first();
     }
 
     get messageList() {
@@ -39,7 +53,7 @@ export class ChatWidgetPage {
     }
 
     getOperatorMessage(messageText: string) {
-        return this.chatWidget.locator(`[data-testid="operator-message"]:has-text("${messageText}"), .operator-message:has-text("${messageText}"), [class*="agent"]:has-text("${messageText}"), [class*="bot"]:has-text("${messageText}")`).first();
+        return this.messengerFrame.getByText(new RegExp(messageText)).first();
     }
 
     getAllMessages() {
@@ -87,26 +101,38 @@ export class ChatWidgetPage {
         });
     }
 
-    async sendMessage(messageText: string, useEnter: boolean = false) {
-        await allure.step(`Send message: "${messageText}"`, async () => {
-            try {
-                // Try iframe version first
-                await this.messageInput.fill(messageText, { timeout: 3000 });
-                if (useEnter) {
-                    await this.messageInput.press('Enter');
-                } else {
-                    await this.sendButton.click();
-                }
-            } catch (error) {
-                // Fallback to direct selectors
-                await this.directChatInput.fill(messageText);
-                if (useEnter) {
-                    await this.directChatInput.press('Enter');
-                } else {
-                    await this.directSendButton.click();
-                }
-            }
-            await this.page.waitForTimeout(500); // Wait for message to be sent
+    async sendMessage(messageText: string) {
+        await allure.step(`Visitor sends message: "${messageText}"`, async () => {
+            await this.messageInput.waitFor({ timeout: 10000 });
+            await this.messageInput.fill(messageText);
+            await this.messageInput.press('Enter');
+            await this.page.waitForTimeout(500);
+        });
+    }
+
+    async uploadFile(filePath: string) {
+        await allure.step(`Visitor uploads file: ${path.basename(filePath)}`, async () => {
+            await this.attachmentButton.waitFor({ timeout: 10000 });
+            const fileChooserPromise = this.page.waitForEvent('filechooser');
+            await this.attachmentButton.click();
+            const fileChooser = await fileChooserPromise;
+            await fileChooser.setFiles(filePath);
+            await this.page.waitForTimeout(2000);
+        });
+    }
+
+    async expectFilePreviewVisible() {
+        await allure.step('Verify file preview is visible', async () => {
+            await expect(this.filePreview).toBeVisible({ timeout: 10000 });
+        });
+    }
+
+    async sendPendingAttachment() {
+        await allure.step('Send pending attachment', async () => {
+            await this.messageInput.click();
+            await this.page.waitForTimeout(500);
+            await this.page.keyboard.press('Enter');
+            await this.page.waitForTimeout(3000);
         });
     }
 

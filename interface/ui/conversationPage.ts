@@ -167,4 +167,45 @@ export class ConversationPage {
             await this.page.waitForTimeout(timeout);
         });
     }
+
+    // --- Real inbox interaction methods ---
+
+    get inboxNewFilter() {
+        return this.page.getByRole('button', { name: /📬 New/i });
+    }
+
+    get operatorInput() {
+        return this.page.locator('.tiptap');
+    }
+
+    async switchToNewConversations() {
+        await allure.step('Switch to New conversations filter', async () => {
+            await this.page.keyboard.press('Escape');
+            await this.page.waitForTimeout(500);
+            await this.inboxNewFilter.click();
+            await this.page.waitForTimeout(2000);
+        });
+    }
+
+    async expectMessageInList(messageText: string) {
+        await allure.step(`Expect message in conversation list: "${messageText}"`, async () => {
+            await expect(this.page.getByText(messageText)).toBeVisible({ timeout: 10000 });
+        });
+    }
+
+    async openConversationByText(messageText: string) {
+        await allure.step(`Open conversation containing: "${messageText}"`, async () => {
+            await this.page.getByText(messageText).click();
+            await this.page.waitForTimeout(2000);
+        });
+    }
+
+    async sendOperatorMessage(messageText: string) {
+        await allure.step(`Operator sends response: "${messageText}"`, async () => {
+            await this.operatorInput.waitFor({ timeout: 10000 });
+            await this.operatorInput.fill(messageText);
+            await this.operatorInput.press('Enter');
+            await this.page.waitForTimeout(2000);
+        });
+    }
 }
