@@ -209,6 +209,65 @@ export class ChatWidgetPage {
         });
     }
 
+    // Rating Elements
+    get rateButton() {
+        return this.messengerFrame.getByRole('button', { name: /rate/i });
+    }
+
+    get ratingPrompt() {
+        return this.messengerFrame.locator('text=/rate|rating|feedback/i');
+    }
+
+    get positiveRatingButton() {
+        return this.messengerFrame.getByRole('button', { name: /positive|good|yes|👍|like/i });
+    }
+
+    get negativeRatingButton() {
+        return this.messengerFrame.getByRole('button', { name: /negative|bad|no|👎|dislike/i });
+    }
+
+    get ratingThankYouMessage() {
+        return this.messengerFrame.locator('text=/thank|thanks|rated/i');
+    }
+
+    // Rating Actions
+    async clickRateButton() {
+        await allure.step('Click Rate button to open rating options', async () => {
+            await this.rateButton.waitFor({ timeout: 15000 });
+            await this.rateButton.click();
+            await this.page.waitForTimeout(1000);
+        });
+    }
+
+    async waitForRatingPrompt() {
+        await allure.step('Wait for rating prompt to appear', async () => {
+            await this.ratingPrompt.waitFor({ timeout: 15000 });
+            await this.page.waitForTimeout(1000);
+        });
+    }
+
+    async rateConversationPositive() {
+        await allure.step('Rate conversation as positive', async () => {
+            await this.positiveRatingButton.waitFor({ timeout: 10000 });
+            await this.positiveRatingButton.click();
+            await this.page.waitForTimeout(2000);
+        });
+    }
+
+    async rateConversationNegative() {
+        await allure.step('Rate conversation as negative', async () => {
+            await this.negativeRatingButton.waitFor({ timeout: 10000 });
+            await this.negativeRatingButton.click();
+            await this.page.waitForTimeout(2000);
+        });
+    }
+
+    async verifyRatingSubmitted() {
+        await allure.step('Verify rating was submitted', async () => {
+            await expect(this.ratingThankYouMessage).toBeVisible({ timeout: 10000 });
+        });
+    }
+
     // Navigation
     async navigateToPageWithChat(url: string) {
         await allure.step(`Navigate to ${url} with chat widget`, async () => {

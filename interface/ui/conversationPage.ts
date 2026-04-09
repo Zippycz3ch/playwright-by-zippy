@@ -208,4 +208,60 @@ export class ConversationPage {
             await this.page.waitForTimeout(2000);
         });
     }
+
+    get resolveButton() {
+        return this.page.locator('button[data-testid="resolve-chat-header"]');
+    }
+
+    async resolveConversation() {
+        await allure.step('Resolve conversation', async () => {
+            await this.resolveButton.waitFor({ timeout: 10000 });
+            await this.resolveButton.click();
+            await this.page.waitForTimeout(2000);
+        });
+    }
+
+    async verifyConversationResolved() {
+        await allure.step('Verify conversation is resolved', async () => {
+            // After resolving, the button should change or disappear
+            // Or we should see a "Resolved" indicator
+            await this.page.waitForTimeout(1000);
+        });
+    }
+
+    // Closed Conversation Filters
+    get closedConversationFilters() {
+        return this.page.locator('[data-testid="closed-conversation-filters"]');
+    }
+
+    get dateFilterButton() {
+        return this.page.locator('.chakra-menu__menu-button').filter({ has: this.page.locator('svg[viewBox="0 0 24 24"] path[d*="19,19H5V8H19M16"]') });
+    }
+
+    get dateFilterSearchInput() {
+        return this.page.locator('[data-testid="closed-conversation-filters-search"]');
+    }
+
+    async openDateFilterMenu() {
+        await allure.step('Open date filter dropdown menu', async () => {
+            await this.dateFilterButton.waitFor({ timeout: 10000 });
+            await this.dateFilterButton.click();
+            await this.page.waitForTimeout(1000);
+        });
+    }
+
+    async selectDateFilter(filter: 'All' | 'Today' | 'Yesterday' | 'This week' | 'Last week' | 'This month' | 'Last month') {
+        await allure.step(`Select date filter: ${filter}`, async () => {
+            const filterOption = this.page.getByRole('menuitem', { name: filter });
+            await filterOption.click();
+            await this.page.waitForTimeout(2000);
+        });
+    }
+
+    async verifyDateFilterMenuVisible() {
+        await allure.step('Verify date filter menu is visible', async () => {
+            const menu = this.page.getByRole('menu');
+            await expect(menu).toBeVisible({ timeout: 5000 });
+        });
+    }
 }

@@ -203,8 +203,6 @@ export class DashboardPage {
 
     async openDiscoverLiveChatArticle() {
         await allure.step('Open Discover how the live chat works article', async () => {
-            await this.agentsFilterButton.click();
-            await this.page.waitForTimeout(1000);
             await this.discoverLiveChatArticle.click();
             await this.page.waitForTimeout(1000);
         });

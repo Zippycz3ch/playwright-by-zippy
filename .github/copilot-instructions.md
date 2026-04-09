@@ -5,3 +5,4 @@
 - never run `git push` or `git commit`without asking first
 - create only small commits messages
 - always run text will allure reporter and line reported
+- never run test headless when running UI test locally

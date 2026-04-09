@@ -6,12 +6,16 @@ export class AIAutomationsPage {
     constructor(private page: Page) { }
 
     // Onboarding elements
-    get serviceBusinessCategoryButton() {
-        return this.page.locator('button', { hasText: 'Nabízím služby' }).first();
+    get onboardingPrimaryButton() {
+        return this.page.locator('[data-testid="ai-onboarding-primary-button"]').first();
+    }
+
+    get serviceWebsiteOption() {
+        return this.page.locator('[data-testid="ai-onboarding-survey-option-web"]').first();
     }
 
     get websiteUrlInput() {
-        return this.page.locator('input[name="websiteUrl"], input[placeholder*="URL"], input[type="url"]').first();
+        return this.page.locator('[data-testid="ai-onboarding-input-web-url"]');
     }
 
     get continueButton() {
@@ -71,16 +75,34 @@ export class AIAutomationsPage {
         });
     }
 
-    async navigateToAIAutomations() {
-        await allure.step('Navigate to AI Automations', async () => {
-            await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations`);
+    async waitForOnboardingPage() {
+        await allure.step('Wait for automatic onboarding redirect', async () => {
+            // Wait for onboarding to load after bot deletion
             await this.page.waitForLoadState('networkidle');
+            await this.page.waitForTimeout(1000);
+            // Wait for the onboarding primary button to appear (sign of onboarding page)
+            await this.onboardingPrimaryButton.waitFor({ state: 'visible', timeout: 10000 });
         });
     }
 
-    async selectBusinessCategory() {
-        await allure.step('Select "Nabízím služby" business category', async () => {
-            await this.serviceBusinessCategoryButton.click();
+    async navigateToAIAutomations() {
+        await allure.step('Navigate to AI Automations', async () => {
+            await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations`);
+            await this.page.waitForLoadState('load');
+            await this.page.waitForTimeout(2000);
+        });
+    }
+
+    async clickPrimaryButton() {
+        await allure.step('Click onboarding primary button', async () => {
+            await this.onboardingPrimaryButton.click();
+            await this.page.waitForTimeout(500);
+        });
+    }
+
+    async selectServiceWebsiteOption() {
+        await allure.step('Select "I have a service website" option', async () => {
+            await this.serviceWebsiteOption.click();
             await this.page.waitForTimeout(500);
         });
     }
@@ -88,6 +110,7 @@ export class AIAutomationsPage {
     async enterWebsiteUrl(url: string) {
         await allure.step(`Enter website URL: ${url}`, async () => {
             await this.websiteUrlInput.fill(url);
+            await this.page.waitForTimeout(300);
         });
     }
 
@@ -107,12 +130,31 @@ export class AIAutomationsPage {
 
     async completeOnboarding(websiteUrl: string = 'example.com') {
         await allure.step('Complete AI Bot onboarding', async () => {
-            await this.selectBusinessCategory();
-            await this.clickContinue();
-            await this.enterWebsiteUrl(websiteUrl);
-            await this.clickContinue();
-            // Additional steps may be needed depending on the onboarding flow
-            await this.clickFinish();
+            // Click start button
+            await this.page.locator('[data-testid="ai-onboarding-primary-button"]').click();
+            await this.page.waitForTimeout(500);
+
+            // Click service website option
+            await this.page.locator('[data-testid="ai-onboarding-survey-option-web"]').click();
+            await this.page.waitForTimeout(500);
+
+            // Click continue
+            await this.page.locator('[data-testid="ai-onboarding-primary-button"]').click();
+            await this.page.waitForTimeout(500);
+
+            // Fill URL
+            await this.page.locator('[data-testid="ai-onboarding-input-web-url"]').fill(websiteUrl);
+            await this.page.waitForTimeout(500);
+
+            // Click "Retrieve pages" button
+            await this.page.locator('button:has-text("Retrieve pages")').click();
+            await this.page.waitForTimeout(3000);
+
+            // Click continue
+            await this.page.locator('[data-testid="ai-onboarding-primary-button"]').click({ force: true });
+            await this.page.waitForLoadState('networkidle').catch(() => { });
+
+
         });
     }
 
@@ -140,9 +182,21 @@ export class AIAutomationsPage {
 
     async deleteBot() {
         await allure.step('Delete AI Bot', async () => {
-            await this.deleteButton.click();
-            await this.page.waitForTimeout(300);
-            await this.confirmDeleteButton.click();
+            // First, select the bot using checkbox
+            const checkbox = this.page.locator('.chakra-checkbox__input[type="checkbox"]').first();
+            await checkbox.check({ force: true });
+            await this.page.waitForTimeout(1000);
+
+            // Click delete button with aria-label="Delete"
+            const deleteButton = this.page.getByRole('button', { name: 'Delete' });
+            await deleteButton.click();
+            await this.page.waitForTimeout(1000);
+
+            // Confirm deletion in modal popup
+            const confirmButton = this.page.locator('[data-testid="delete-modal-confirm"]');
+            await confirmButton.waitFor({ state: 'visible', timeout: 10000 });
+            await confirmButton.click();
+            await this.page.waitForTimeout(2000);
             await this.page.waitForLoadState('networkidle');
         });
     }
