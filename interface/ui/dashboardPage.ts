@@ -9,31 +9,31 @@ export class DashboardPage {
 
     // Navigation - Left Sidebar
     get homeNav() {
-        return this.page.locator('a[href*="/dashboard/home"]').first();
+        return this.page.getByTestId('sidebar-smarthub');
     }
 
     get inboxNav() {
-        return this.page.locator('a[href*="/dashboard/inbox"]');
+        return this.page.getByTestId('sidebar-conversations');
     }
 
     get aiAutomationsNav() {
-        return this.page.locator('a[href*="/dashboard/ai-automations"]');
+        return this.page.getByTestId('sidebar-ai-automations');
     }
 
     get automationsNav() {
-        return this.page.locator('a[href*="/dashboard/automations"]');
+        return this.page.getByTestId('sidebar-automations');
     }
 
     get customersNav() {
-        return this.page.locator('a[href*="/dashboard/customers"]');
+        return this.page.getByTestId('sidebar-customers');
     }
 
     get statisticsNav() {
-        return this.page.locator('a[href*="/dashboard/statistics"]');
+        return this.page.getByTestId('sidebar-statistics');
     }
 
     get settingsNav() {
-        return this.page.locator('a[href*="/dashboard/settings"]').and(this.page.locator('[aria-label="Settings"]'));
+        return this.page.getByTestId('sidebar-settings');
     }
 
     // Trial Banner & Upgrade
@@ -42,7 +42,7 @@ export class DashboardPage {
     }
 
     get choosePlanButton() {
-        return this.page.locator('button:has-text("Choose your plan")').first();
+        return this.page.getByTestId('notification-bar-upsell-button');
     }
 
     // Main Content
@@ -51,7 +51,7 @@ export class DashboardPage {
     }
 
     get productNewsButton() {
-        return this.page.locator('button[aria-label="Product news"]');
+        return this.page.getByTestId('news-open');
     }
 
     get connectChannelsHeading() {
@@ -81,11 +81,11 @@ export class DashboardPage {
 
     // User Menu
     get profileLink() {
-        return this.page.locator('a[href*="/settings/profile"]');
+        return this.page.getByTestId('profile');
     }
 
     get logoutLink() {
-        return this.page.locator('a:has-text("Logout")');
+        return this.page.getByTestId('logout');
     }
 
     async navigate() {

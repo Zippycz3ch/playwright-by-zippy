@@ -14,6 +14,10 @@ test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
         await loginPage.login(process.env.SMARTSUPP_USERNAME!, process.env.SMARTSUPP_PASSWORD!);
     });
 
+    test.afterEach(async ({ page }) => {
+        await page.close();
+    });
+
     test('dashboard loads after login @UI', async ({ page }) => {
         await dashboardPage.verifyDashboardPageLoaded();
     });
