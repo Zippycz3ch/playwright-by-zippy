@@ -7,7 +7,7 @@ export class AIAutomationsPage {
 
     // Onboarding elements
     get serviceBusinessCategoryButton() {
-        return this.page.locator('button', { hasText: 'Nabízím služby' }).first();
+        return this.page.locator('[data-testid="ai-onboarding-survey-option-web"]').first();
     }
 
     get websiteUrlInput() {
@@ -20,6 +20,10 @@ export class AIAutomationsPage {
 
     get finishButton() {
         return this.page.locator('button:has-text("Dokončit"), button:has-text("Finish")').first();
+    }
+
+    get getStartedButton() {
+        return this.page.locator('[data-testid="ai-onboarding-primary-button"]').first();
     }
 
     // AI Bot List
@@ -74,14 +78,14 @@ export class AIAutomationsPage {
     async navigateToAIAutomations() {
         await allure.step('Navigate to AI Automations', async () => {
             await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations`);
-            await this.page.waitForLoadState('networkidle');
+            // await this.page.waitForLoadState('networkidle');
         });
     }
 
     async selectBusinessCategory() {
         await allure.step('Select "Nabízím služby" business category', async () => {
             await this.serviceBusinessCategoryButton.click();
-            await this.page.waitForTimeout(500);
+            await this.page.waitForTimeout(5000);
         });
     }
 
@@ -107,6 +111,8 @@ export class AIAutomationsPage {
 
     async completeOnboarding(websiteUrl: string = 'example.com') {
         await allure.step('Complete AI Bot onboarding', async () => {
+            await this.getStartedButton.click();
+
             await this.selectBusinessCategory();
             await this.clickContinue();
             await this.enterWebsiteUrl(websiteUrl);

@@ -6,19 +6,19 @@ export class LoginPage {
     constructor(private page: Page) { }
 
     get usernameInput() {
-        return this.page.locator('#username');
+        return this.page.getByTestId('signin-email');
     }
 
     get passwordInput() {
-        return this.page.locator('#password');
+        return this.page.getByTestId('signin-password');
     }
 
     get signInButton() {
-        return this.page.locator('#kc-login');
+        return this.page.getByTestId('signin-submit');
     }
 
     get smartsuppLogo() {
-        return this.page.locator('.header__logo');
+        return this.page.getByTestId('smartsupp-logo');
     }
 
     get errorMessage() {

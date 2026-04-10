@@ -174,4 +174,20 @@ export class AiChatbotsPage {
             await this.collapseTasksButton.click();
         });
     }
+
+    async deleteAllBots() {
+        await allure.step('Delete all existing AI bots', async () => {
+            await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations/ai-chatbots`);
+            await this.page.waitForLoadState('networkidle');
+
+            const deleteBtn = this.page.locator('button:has-text("Delete")').first();
+            while (await deleteBtn.isVisible()) {
+                await deleteBtn.click();
+                const confirmBtn = this.page.locator('button:has-text("Confirm"), button:has-text("Potvrdit"), button:has-text("Ano"), button:has-text("Yes")').first();
+                await confirmBtn.waitFor({ state: 'visible', timeout: 5000 });
+                await confirmBtn.click();
+                await this.page.waitForLoadState('networkidle');
+            }
+        });
+    }
 }
