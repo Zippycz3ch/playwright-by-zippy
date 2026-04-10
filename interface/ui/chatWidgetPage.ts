@@ -20,11 +20,11 @@ export class ChatWidgetPage {
     }
 
     get chatButton() {
-        return this.page.locator('#chat-application, .smartsupp-chat-button, [id*="smartsupp"][class*="button"]').first();
+        return this.page.frameLocator('iframe[title="Smartsupp widget button"]').getByTestId('widgetButton');
     }
 
     get chatWindow() {
-        return this.chatWidget.locator('[data-testid="chat-window"], .chat-window, [class*="ChatWindow"]');
+        return this.messengerFrame.getByTestId('widgetMessenger');
     }
 
     // Message Elements (within iframe)
@@ -41,15 +41,15 @@ export class ChatWidgetPage {
     }
 
     get sendButton() {
-        return this.messengerFrame.locator('[data-testid="send-button"], button[aria-label*="Send"], button[type="submit"]').first();
+        return this.messengerFrame.getByTestId('buttonSend');
     }
 
     get messageList() {
-        return this.chatWidget.locator('[data-testid="message-list"], .message-list, [class*="MessageList"]');
+        return this.messengerFrame.getByTestId('messageGroup').first();
     }
 
     getVisitorMessage(messageText: string) {
-        return this.chatWidget.locator(`[data-testid="visitor-message"]:has-text("${messageText}"), .visitor-message:has-text("${messageText}"), [class*="own"]:has-text("${messageText}")`).first();
+        return this.messengerFrame.getByTestId('messageVisitor').filter({ hasText: messageText }).first();
     }
 
     getOperatorMessage(messageText: string) {
@@ -62,20 +62,20 @@ export class ChatWidgetPage {
 
     // Typing Indicators
     get typingIndicator() {
-        return this.chatWidget.locator('[data-testid="typing-indicator"], .typing-indicator, [class*="TypingIndicator"], [class*="typing"]');
+        return this.messengerFrame.getByTestId('typingIndicator');
     }
 
     // Widget State Elements
     get minimizeButton() {
-        return this.chatWidget.locator('[data-testid="minimize-button"], button[aria-label*="Minimize"], .minimize-button');
+        return this.messengerFrame.getByTestId('buttonMinimizeChat');
     }
 
     get closeButton() {
-        return this.chatWidget.locator('[data-testid="close-button"], button[aria-label*="Close"], .close-button');
+        return this.messengerFrame.getByTestId('buttonOptions');
     }
 
     get chatHeader() {
-        return this.chatWidget.locator('[data-testid="chat-header"], .chat-header, header');
+        return this.messengerFrame.getByTestId('widgetHeader');
     }
 
     // Fallback selectors for when widget is not in iframe

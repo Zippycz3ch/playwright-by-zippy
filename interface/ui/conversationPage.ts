@@ -19,54 +19,54 @@ export class ConversationPage {
 
     // Conversation List Elements
     get conversationList() {
-        return this.page.locator('[data-testid="conversation-list"], .conversation-list, [class*="ConversationList"]');
+        return this.page.getByTestId('open-conversation-item').first();
     }
 
     getConversationItem(visitorName: string) {
-        return this.page.locator(`[data-testid="conversation-item"]:has-text("${visitorName}"), .conversation-item:has-text("${visitorName}")`).first();
+        return this.page.getByTestId('open-conversation-item').filter({ hasText: visitorName }).first();
     }
 
     get firstConversation() {
-        return this.page.locator('[data-testid="conversation-item"], .conversation-item').first();
+        return this.page.getByTestId('open-conversation-item').first();
     }
 
     get unreadConversationBadge() {
-        return this.page.locator('[data-testid="unread-badge"], .unread-badge, [class*="unread"]');
+        return this.page.getByTestId('badge-count');
     }
 
     // Message Display Area
     get messageContainer() {
-        return this.page.locator('[data-testid="message-container"], .message-container, [class*="MessageContainer"], [class*="ChatWindow"]');
+        return this.page.getByTestId('messages-list');
     }
 
     get messageList() {
-        return this.page.locator('[data-testid="message-list"], .message-list, [class*="MessageList"]');
+        return this.page.getByTestId('messages-list');
     }
 
     getVisitorMessage(messageText: string) {
-        return this.page.locator(`[data-testid="visitor-message"]:has-text("${messageText}"), .visitor-message:has-text("${messageText}"), [class*="VisitorMessage"]:has-text("${messageText}")`).first();
+        return this.page.getByTestId('user-message-contact').filter({ hasText: messageText }).first();
     }
 
     getOperatorMessage(messageText: string) {
-        return this.page.locator(`[data-testid="operator-message"]:has-text("${messageText}"), .operator-message:has-text("${messageText}"), [class*="OperatorMessage"]:has-text("${messageText}")`).first();
+        return this.page.getByTestId('user-message-agent').filter({ hasText: messageText }).first();
     }
 
     getAllMessages() {
-        return this.page.locator('[data-testid*="message"], .message, [class*="Message"][class*="Content"]');
+        return this.page.getByTestId('user-message');
     }
 
     // Message Input Area
     get messageInput() {
-        return this.page.locator('[data-testid="message-input"], textarea[placeholder*="zpráv"], textarea[placeholder*="message"], [contenteditable="true"]').first();
+        return this.page.getByTestId('chat-detail-textarea');
     }
 
     get sendButton() {
-        return this.page.locator('[data-testid="send-button"], button[aria-label*="Send"], button[type="submit"]:near(textarea)').first();
+        return this.page.getByTestId('reply-send-button');
     }
 
     // Typing Indicators
     get typingIndicator() {
-        return this.page.locator('[data-testid="typing-indicator"], .typing-indicator, [class*="TypingIndicator"]');
+        return this.page.locator('[data-testid="typing-indicator"]');
     }
 
     // Conversation Actions
@@ -171,11 +171,11 @@ export class ConversationPage {
     // --- Real inbox interaction methods ---
 
     get inboxNewFilter() {
-        return this.page.getByRole('button', { name: /📬 New/i });
+        return this.page.getByTestId('chats-open-filters-unserved');
     }
 
     get operatorInput() {
-        return this.page.locator('.tiptap');
+        return this.page.getByTestId('chat-detail-textarea');
     }
 
     async switchToNewConversations() {

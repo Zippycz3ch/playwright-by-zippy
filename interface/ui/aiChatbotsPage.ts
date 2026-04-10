@@ -11,7 +11,7 @@ export class AiChatbotsPage {
     }
 
     get addNewButton() {
-        return this.page.locator('button:has-text("Add new")');
+        return this.page.getByTestId('chatbot-garage-new-bot');
     }
 
     get searchBox() {
