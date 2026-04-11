@@ -11,11 +11,19 @@ export class AIAutomationsPage {
     }
 
     get websiteUrlInput() {
-        return this.page.locator('input[name="websiteUrl"], input[placeholder*="URL"], input[type="url"]').first();
+        return this.page.getByTestId('ai-onboarding-input-web-url');
+    }
+
+    get retrievePagesButton() {
+        return this.page.locator('button:has-text("Retrieve pages")');
+    }
+
+    get botCreationNameInput() {
+        return this.page.getByTestId('chatbot-identity-modal-name-input');
     }
 
     get continueButton() {
-        return this.page.locator('button:has-text("Pokračovat"), button:has-text("Continue")').first();
+        return this.page.getByTestId('ai-onboarding-primary-button');
     }
 
     get finishButton() {
@@ -68,6 +76,26 @@ export class AIAutomationsPage {
         return this.page.locator('button:has-text("Potvrdit"), button:has-text("Confirm"), button:has-text("Ano")').first();
     }
 
+    async navigate() {
+        await allure.step('Navigate to AI Automations page and verify page loaded', async () => {
+            await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations`);
+            await this.page.waitForLoadState('networkidle');
+
+            // Verify URL
+            await expect(this.page).toHaveURL(/ai-automations/);
+
+            // Verify main page elements are visible
+            await expect(this.getStartedButton).toBeVisible();
+        });
+    }
+
+    async verifyPageLoaded() {
+        await allure.step('Verify AI Automations page is loaded', async () => {
+            await expect(this.page).toHaveURL(/ai-automations/);
+            await expect(this.getStartedButton).toBeVisible();
+        });
+    }
+
     async navigateToOnboarding() {
         await allure.step('Navigate to AI Automations onboarding', async () => {
             await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations/onboarding`);
@@ -78,7 +106,7 @@ export class AIAutomationsPage {
     async navigateToAIAutomations() {
         await allure.step('Navigate to AI Automations', async () => {
             await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations`);
-            // await this.page.waitForLoadState('networkidle');
+            await this.page.waitForLoadState('networkidle');
         });
     }
 
@@ -109,17 +137,25 @@ export class AIAutomationsPage {
         });
     }
 
-    async completeOnboarding(websiteUrl: string = 'example.com') {
+    async completeOnboarding(websiteUrl: string = 'example.com'): Promise<string> {
+        let botName = '';
         await allure.step('Complete AI Bot onboarding', async () => {
             await this.getStartedButton.click();
 
             await this.selectBusinessCategory();
             await this.clickContinue();
             await this.enterWebsiteUrl(websiteUrl);
+            await this.retrievePagesButton.click();
             await this.clickContinue();
-            // Additional steps may be needed depending on the onboarding flow
-            await this.clickFinish();
+            const suffix = Math.random().toString(36).substring(2, 7);
+            botName = `My AI Assistant ${suffix}`;
+            await this.botCreationNameInput.fill(botName);
+            // Read back actual value in case the app modifies/overrides it
+            botName = await this.botCreationNameInput.inputValue();
+            await this.clickContinue();
+            await this.clickContinue();
         });
+        return botName;
     }
 
     async editBotParameter(parameterName: string, value: string) {

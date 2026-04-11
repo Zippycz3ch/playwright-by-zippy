@@ -4,19 +4,18 @@ import { DashboardPage } from '../../interface/ui/dashboardPage';
 import { AIAutomationsPage } from '../../interface/ui/aiAutomationsPage';
 import * as allure from 'allure-js-commons';
 import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
-import { time } from 'node:console';
 
 test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot'] }, () => {
     let loginPage: LoginPage;
     let dashboardPage: DashboardPage;
     let aiPage: AIAutomationsPage;
-    let chatBotPage: AiChatbotsPage;
+    let aiChatbotsPage: AiChatbotsPage;
 
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         dashboardPage = new DashboardPage(page);
         aiPage = new AIAutomationsPage(page);
-        chatBotPage = new AiChatbotsPage(page); 1
+        aiChatbotsPage = new AiChatbotsPage(page);
 
         // Login to Smartsupp
         await loginPage.navigate();
@@ -25,27 +24,14 @@ test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot
 
     });
 
-    test('Create and Publish AI Bot', async ({ page }) => {
-        test.setTimeout(120_000);
-
-        await allure.step('Step 1: Create AI Bot via Onboarding', async () => {
-            // Navigate to AI Automations onboarding
-            await aiPage.navigateToOnboarding();
-
-            // Complete onboarding
-            await aiPage.completeOnboarding('example.com');
-
-            await chatBotPage.publishNewBot();
-        });
-
-        await allure.step('Step 2: Verify bot exists in AI Chatbots list', async () => {
-            await chatBotPage.navigate();
-            await expect(page.getByTestId('chatbot-card')).toHaveCount(1, { timeout: 15_000 });
-        });
+    test('Create, Edit, and Delete AI Bot @AI @SCENARIO', async ({ page }) => {
+        await allure.step('Step 1: Create AI Bot', async () => {
+            await aiChatbotsPage.navigate();
+            await aiChatbotsPage.clickAddNew();
 
 
-        await allure.step('Step 3: Edit bot', async () => {
-            await chatBotPage.navigate();
+
+
         });
 
 

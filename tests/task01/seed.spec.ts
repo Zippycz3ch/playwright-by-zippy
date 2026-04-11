@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
-import { LoginPage } from '../interface/ui/loginPage';
-import { DashboardPage } from '../interface/ui/dashboardPage';
-import { AiChatbotsPage } from '../interface/ui/aiChatbotsPage';
+import { LoginPage } from '../../interface/ui/loginPage';
+import { DashboardPage } from '../../interface/ui/dashboardPage';
+import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
 
 test.describe('Seed - AI Chatbots Create New Bot', () => {
   test('seed', async ({ page }) => {
