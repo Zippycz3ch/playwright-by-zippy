@@ -9,13 +9,13 @@ test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot
     let loginPage: LoginPage;
     let dashboardPage: DashboardPage;
     let aiPage: AIAutomationsPage;
-    let aiChatbotsPage: AiChatbotsPage;
+    let chatBotPage: AiChatbotsPage;
 
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         dashboardPage = new DashboardPage(page);
         aiPage = new AIAutomationsPage(page);
-        aiChatbotsPage = new AiChatbotsPage(page);
+        chatBotPage = new AiChatbotsPage(page);
 
         // Login to Smartsupp
         await loginPage.navigate();
@@ -24,17 +24,20 @@ test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot
 
     });
 
-    test('Create, Edit, and Delete AI Bot @AI @SCENARIO', async ({ page }) => {
-        await allure.step('Step 1: Create AI Bot', async () => {
-            await aiChatbotsPage.navigate();
-            await aiChatbotsPage.clickAddNew();
+    test('Create and Publish AI Bot', async ({ page }) => {
+        test.setTimeout(120_000);
 
 
+        await allure.step('Step 3: Edit bot', async () => {
+            await chatBotPage.navigate();
+            await chatBotPage.openBotEditor();
+            await chatBotPage.behaviorTab.click();
+            await chatBotPage.editBehaviorSlider('tone', 2);
+            await chatBotPage.editBehaviorSlider('talkativeness', 1);
+            await chatBotPage.editBehaviorSlider('confidence', 0);
+            await chatBotPage.editBehaviorSlider('emoji', 1);
 
-
+            await chatBotPage.saveAndPublish();
         });
-
-
-
     });
 });

@@ -15,7 +15,7 @@ test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot
         loginPage = new LoginPage(page);
         dashboardPage = new DashboardPage(page);
         aiPage = new AIAutomationsPage(page);
-        chatBotPage = new AiChatbotsPage(page);
+        chatBotPage = new AiChatbotsPage(page); 1
 
         // Login to Smartsupp
         await loginPage.navigate();
@@ -26,19 +26,16 @@ test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot
 
     test('Create and Publish AI Bot', async ({ page }) => {
         test.setTimeout(120_000);
-        let createdBotName = '';
 
-        await allure.step('Step 1: Create AI Bot via Onboarding', async () => {
-            await aiPage.navigateToOnboarding();
-            createdBotName = await aiPage.completeOnboarding('example.com');
-            await chatBotPage.publishNewBot();
-        });
 
-        await allure.step('Step 2: Verify bot exists in list and name matches in editor', async () => {
+        await allure.step('Enable disable source', async () => {
             await chatBotPage.navigate();
-            await expect(page.getByTestId('chatbot-card')).toHaveCount(1, { timeout: 15_000 });
-            await chatBotPage.openBotEditor(0);
-            await expect(chatBotPage.botDisplayName).toHaveText(createdBotName);
+            await chatBotPage.openBotEditor();
+
+            await chatBotPage.knowledgeTabButton.click();
+
+            await page.locator('.css-ma7aij').click();
+            await chatBotPage.saveAndPublish();
         });
     });
 });

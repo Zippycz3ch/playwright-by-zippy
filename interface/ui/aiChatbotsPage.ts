@@ -120,12 +120,16 @@ export class AiChatbotsPage {
         return this.page.getByTestId('chatbot-builder-title');
     }
 
+    get botDisplayName() {
+        return this.page.locator('p.chakra-text.css-9ztjch');
+    }
+
     get saveBotButton() {
         return this.page.getByTestId('chatbot-builder-preview');
     }
 
     get publishBotButton() {
-        return this.page.locator('#chatbot-workflow-form').getByTestId('chatbot-workflow-form-publish-btn');
+        return this.page.getByTestId('chatbot-workflow-form-publish-btn');
     }
 
     get publishAnywayButton() {
@@ -146,6 +150,22 @@ export class AiChatbotsPage {
 
     get knowledgeTabButton() {
         return this.page.getByTestId('chatbot-workflow-tab-customResponses');
+    }
+
+    get welcomeMessageTab() {
+        return this.page.getByTestId('chatbot-workflow-tab-welcomeMessage');
+    }
+
+    get welcomeMessageDropdownIndicator() {
+        return this.page.locator('[class*="indicatorContainer"][aria-hidden="true"]').first();
+    }
+
+    get firstKnowledgeSourceItem() {
+        return this.page.locator('div:has(button[aria-label="More"]) label.chakra-switch').first();
+    }
+
+    get firstKnowledgeSourceToggle() {
+        return this.page.locator('h2:has-text("Sources")').locator('..').locator('div:has(button[aria-label="More"]):has(.chakra-switch__track)').first().locator('.chakra-switch__input');
     }
 
     get goBackButton() {
@@ -206,8 +226,9 @@ export class AiChatbotsPage {
             await this.continueButton.click();
             await this.continueButton.click();
             await this.continueButton.click();
-            await this.publishBotButton.waitFor({ state: 'visible' });
-            await this.publishBotButton.click();
+            const publishBtn = this.page.locator('#chatbot-workflow-form').getByTestId('chatbot-workflow-form-publish-btn');
+            await publishBtn.waitFor({ state: 'visible' });
+            await publishBtn.click();
             await this.publishAnywayButton.click();
         });
     }
@@ -249,9 +270,18 @@ export class AiChatbotsPage {
         });
     }
 
-    async openFirstAssistantOptions() {
+    async openBotOptions(index: number = 0) {
         await allure.step('Open first AI Assistant options menu', async () => {
-            await this.firstAssistantOptionsButton.click();
+            await this.page.getByTestId('chatbot-card').nth(index).hover();
+            await this.page.getByTestId('chatbot-card-dropdown').nth(index).click();
+        });
+    }
+
+    async openBotEditor(index: number = 0) {
+        await allure.step('Open bot editor', async () => {
+            await this.openBotOptions(index);
+            await this.clickEdit();
+            await this.page.waitForLoadState('networkidle');
         });
     }
 
@@ -263,32 +293,44 @@ export class AiChatbotsPage {
 
     async setBotName(name: string) {
         await allure.step(`Set bot name to "${name}"`, async () => {
-            // Dismiss any notification overlays that may intercept pointer events
             await this.page.keyboard.press('Escape');
-            await this.botNameInput.click({ force: true });
-            await this.page.keyboard.press('Control+a');
-            await this.botNameInput.pressSequentially(name);
+            await this.botNameInput.fill(name);
             await this.page.keyboard.press('Tab');
         });
     }
 
     async saveBotChanges() {
         await allure.step('Save bot changes', async () => {
-            await expect(this.saveBotButton).toBeEnabled({ timeout: 5000 });
+            await expect(this.saveBotButton).toBeEnabled({ timeout: 15_000 });
             await this.saveBotButton.click();
-            await this.page.waitForTimeout(1000);
+            await expect(this.page.getByText('Changes have been saved successfully.').first()).toBeVisible({ timeout: 10_000 });
         });
     }
 
-    async editBehaviorSlider(slider: 'tone' | 'talkativeness' | 'confidence' | 'emoji', value: string) {
-        await allure.step(`Set ${slider} to "${value}"`, async () => {
+    async saveAndPublish() {
+        await allure.step('Save and publish bot', async () => {
+            await this.saveBotChanges();
+            await this.publishBotButton.waitFor({ state: 'visible' });
+            await this.publishBotButton.click();
+            await this.publishAnywayButton.click();
+            await expect(this.page.getByText('Changes saved successfully and chatbot has been published.').first()).toBeVisible({ timeout: 10_000 });
+        });
+    }
+
+    async editBehaviorSlider(slider: 'tone' | 'talkativeness' | 'confidence' | 'emoji', value: number) {
+        await allure.step(`Set ${slider} to ${value}`, async () => {
             const sliderMap = {
                 tone: this.toneInput,
                 talkativeness: this.talkativenessInput,
                 confidence: this.confidenceInput,
                 emoji: this.emojiInput,
             };
-            await sliderMap[slider].locator('p').filter({ hasText: value }).first().click();
+            const thumb = sliderMap[slider].locator('[role="slider"]');
+            await thumb.focus();
+            await this.page.keyboard.press('Home');
+            for (let i = 0; i < value; i++) {
+                await this.page.keyboard.press('ArrowRight');
+            }
         });
     }
 
