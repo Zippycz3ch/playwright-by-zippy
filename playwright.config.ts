@@ -45,22 +45,34 @@ export default defineConfig({
     {
       name: "Smartsupp UI",
       testDir: "./tests/01_smoke",
-      use: { ...devices["Desktop Chrome"] },
+      use: { 
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1920, height: 1080 }
+      },
     },
     {
       name: "Smartsupp Onboarding",
       testDir: "./tests/00_onboarding",
-      use: { ...devices["Desktop Chrome"] },
+      use: { 
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1920, height: 1080 }
+      },
     },
     {
       name: "Smartsupp Mira AI",
       testDir: "./tests/02_task01",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1920, height: 1080 }
+      },
     },
     {
       name: "Smartsupp Live Chat",
       testDir: "./tests/03_task02",
-      use: { ...devices["Desktop Chrome"] },
+      use: { 
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1920, height: 1080 }
+      },
     },
 
     /* Test against mobile viewports. */
