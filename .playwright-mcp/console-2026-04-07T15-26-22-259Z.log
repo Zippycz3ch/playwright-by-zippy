@@ -1,8 +1,0 @@
-[     212ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://openid.smartsupp.com/favicon.ico:0
-[     375ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://www.googletagmanager.com/gtm.js?id=GTM-PT7FQF:0
-[    9145ms] [ERROR] Failed to load resource: net::ERR_ADDRESS_INVALID @ https://www.googletagmanager.com/gtm.js?id=GTM-PT7FQF:0
-[    9252ms] [LOG] %cWondering how Smartsupp is written? We use React and TypeScript. 
-Do you want to be part of our team? Visit https://smartsupp.recruitee.com/ or send an email to lucia.balazova@abugo.com. color: #408fec @ https://dash-v2.smartsuppcdn.com/static/js/main.96348be1.js:0
-[    9274ms] [WARNING] Manifest: property 'start_url' ignored, should be same origin as document. @ https://dash-v2.smartsuppcdn.com/manifest.json:0
-[    9982ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://app.smartsupp.com/rest/billing/subscription:0
-[   11412ms] [ERROR] WebSocket connection to 'wss://nexus-websocket-a.intercom.io/pubsub/5-NPgZ0fuhI9Fsw7WmMP9G09jyTkXLVuFzFBPCaGT7mSjMev_Li3jUDRL8pVaYvcDNbMCOyWXCo4CCEK57VIlhBPAgxy55Xjg5RkkV?X-Nexus-New-Client=true&X-Nexus-Version=0.18.7&user_role=user' failed: Error in connection establishment: net::ERR_ADDRESS_INVALID @ https://js.intercomcdn.com/vendor-modern.df860bed.js:1
