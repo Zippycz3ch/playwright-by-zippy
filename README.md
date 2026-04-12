@@ -1,18 +1,10 @@
-# Playwright by Zippy
-
-Playwright test automation framework with TypeScript, featuring Smartsupp application testing with clean Page Object Model architecture.
-
-**New to Playwright?** Start with this official introduction video:
-
-<a href="https://www.youtube.com/watch?v=WvsLGZnHmzw">
-  <img src="https://img.youtube.com/vi/WvsLGZnHmzw/maxresdefault.jpg" width="400" alt="Playwright Introduction">
-</a>
+# Playwright
 
 ## Prerequisites
 
 - [Node.js & npm](https://nodejs.org/)
 - [Java](https://ninite.com/adoptjavax17/) (for Allure reports)
-- [VS Code](https://code.visualstudio.com/)
+- [VS Code](https://code.visualstudio.com/) (for Playwright Test for VS Code, optional but recommended)
 - [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
 
 ## Installation
@@ -32,20 +24,11 @@ npx playwright install
 
 ## Project Structure
 
-- `tests/` - Test files organized by type
-  - `ui/` - UI automation tests with Page Object Model
-    - `login.spec.ts` - Login functionality tests
-    - `dashboard.spec.ts` - Dashboard navigation tests
-  - `api/` - API integration tests
-    - `user/` - User management and authentication
-  - `scenarios/` - End-to-end workflow tests
+- `tests/` - Test suites organized by task
+  - `02_task01/` - Mira AI agent tests
+  - `03_task02/` - Live Chat operator ↔ visitor tests
 - `interface/` - Page objects and API abstractions
-  - `ui/` - Page Object Models
-    - `loginPage.ts` - Login page POM
-    - `dashboardPage.ts` - Dashboard page POM
-    - `aiChatbotsPage.ts` - AI Chatbots management POM
-    - `aiOnboardingPage.ts` - AI Onboarding/tutorials POM
-  - `api/` - API endpoints, models, schemas, and helpers
+  - `ui/` - Page Object Models (LoginPage, DashboardPage, AiChatbotsPage, AiOnboardingPage, ChatWidgetPage)
 - `config.ts` - Centralized configuration with domain/subdomain structure
 - `.env` - Environment variables (credentials, URLs)
 
@@ -67,6 +50,7 @@ SMARTSUPP_PASSWORD=your-password
 ### Config Structure
 
 The `config.ts` file provides clean URL building:
+
 - **Domain**: `smartsupp.com` (defined once)
 - **Auth URL**: `https://openid.smartsupp.com`
 - **App URL**: `https://app.smartsupp.com`
@@ -114,54 +98,32 @@ allure serve
 ```
 
 Features:
+
 - Nested `allure.step()` descriptions
 - Detailed test execution flow
 - Screenshots and traces on failure
 - Timeline and trend analysis
 
-## Test Coverage
+## Test Suites
 
-**UI Tests** (`tests/ui/`)
+**02_task01 — Mira AI Agent** ([`tests/02_task01/`](tests/02_task01/README.md))
 
-- **Login Tests** (`login.spec.ts`)
-  - Successful login with valid credentials
-  - Invalid credentials error validation
-  - Keycloak authentication integration
+- Creates a Mira AI agent via the onboarding wizard
+- Edits behavior sliders (tone, talkativeness, confidence, emoji)
+- Toggles handover-to-operator setting
+- Changes welcome message language
+- Deletes the agent and verifies removal
 
-- **Dashboard Tests** (`dashboard.spec.ts`)
-  - Dashboard page load verification
-  - Navigation sidebar validation
-  - Settings page navigation
-  - Customers page navigation
+**03_task02 — Live Chat** ([`tests/03_task02/`](tests/03_task02/README.md))
 
-**Page Object Models** (`interface/ui/`)
+- Visitor sends a text message; operator receives it in the inbox
+- Visitor sends a file attachment; operator verifies it in the conversation
+- Operator replies to a visitor; visitor receives the response in the chat widget
 
-- **LoginPage** - Keycloak authentication page
-  - Username/password input
-  - Sign in action
-  - Error message validation
-  
-- **DashboardPage** - Main dashboard navigation
-  - Home, Inbox, AI Automations, Automations
-  - Customers, Statistics, Settings
-  - Trial banner elements
-  
-- **AiChatbotsPage** - AI assistants management
-  - Task completion tracking
-  - Summary statistics
-  - AI assistants table (CRUD operations)
-  
-- **AiOnboardingPage** - Educational tutorials
-  - Navigation tabs (AI Assistants, Sources, Satisfaction, Training)
-  - Video tutorial sections
+Manual test cases:
 
-**Test Design Patterns**
-
-- Clean Page Object Model architecture
-- Integrated `navigate()` methods with verification
-- Verbose Allure reporting with nested steps
-- Environment-based configuration
-- Reusable locators with type safety
+- [`tests/03_task02/testCases/visitor-test-cases.md`](tests/03_task02/testCases/visitor-test-cases.md)
+- [`tests/03_task02/testCases/operator-test-cases.md`](tests/03_task02/testCases/operator-test-cases.md)
 
 ## Development
 
