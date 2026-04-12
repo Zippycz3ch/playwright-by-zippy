@@ -4,28 +4,38 @@
 
 ```
 playwright-by-zippy/
-├── docs/                          # Documentation files
-├── tests/                         # Test suites organized by task
-│   ├── 01_smoke/                  # Smoke tests
-│   ├── 02_task01/                 # Mira AI agent tests
-│   ├── 03_task02/                 # Live Chat tests
-│   └── seed.spec.ts               # Test data setup
-├── interface/                     # Page objects and API abstractions
-│   └── ui/                        # Page Object Models
-│       ├── loginPage.ts           # Login page interactions
-│       ├── dashboardPage.ts       # Dashboard page interactions
-│       ├── aiChatbotsPage.ts      # AI Chatbots page interactions
-│       ├── aiAutomationsPage.ts   # AI Automations page interactions
-│       ├── chatWidgetPage.ts      # Chat widget interactions
-│       └── helpers/               # Shared helper functions
-├── allure-results/                # Raw test result data
-├── allure-report/                 # Generated HTML reports
-├── playwright-report/             # Playwright HTML reports
-├── test-results/                  # Screenshots, videos, traces
-├── config.ts                      # Centralized configuration
-├── playwright.config.ts           # Playwright configuration
-├── .env                           # Environment variables (not in git)
-└── package.json                   # Dependencies and scripts
+├── docs/                               # Documentation files
+├── tests/                              # Test suites organized by task
+│   ├── 00_onboarding/                  # User onboarding to Smartsupp
+│   ├── 01_smoke/                       # Smoke tests
+│   ├── 02_task01/                      # Mira AI agent tests
+│   │   ├── 00_mira-ai-onboarding.spec.ts
+│   │   ├── 01_mira-ai-behavior.spec.ts
+│   │   ├── 02_mira-ai-handover.spec.ts
+│   │   ├── 03_mira-ai-language.spec.ts
+│   │   ├── 04_mira-ai-on-and-of-dashboard.spec.ts
+│   │   ├── 05_mira-ai-delete.spec.ts
+│   │   ├── 06_mira-ai-E2E.spec.ts
+│   │   └── E2Eresults/                 # Saved passing E2E run (video, trace, result)
+│   └── 03_task02/                      # Live Chat tests
+├── interface/                          # Page objects and API abstractions
+│   └── ui/                             # Page Object Models
+│       ├── loginPage.ts
+│       ├── dashboardPage.ts
+│       ├── aiChatbotsPage.ts
+│       ├── aiAutomationsPage.ts
+│       ├── chatWidgetPage.ts
+│       ├── conversationPage.ts
+│       ├── multichannelOnboardingPage.ts
+│       └── helpers/                    # Shared helper functions
+├── allure-results/                     # Raw test result data
+├── allure-report/                      # Generated HTML reports
+├── playwright-report/                  # Playwright HTML reports
+├── test-results/                       # Screenshots, videos, traces
+├── config.ts                           # Centralized configuration
+├── playwright.config.ts                # Playwright configuration
+├── .env                                # Environment variables (not in git)
+└── package.json                        # Dependencies and scripts
 ```
 
 ## Configuration Files

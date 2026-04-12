@@ -4,8 +4,6 @@
 
 > **⚠️ Important:** Each test suite has unique setup requirements, environment configurations, or test data prerequisites that must be met before execution. Always review the README.md file in the specific test suite folder for detailed instructions on prerequisites and setup steps.
 
-Before running tests from specific test suites, make sure to read the README.md file in each test folder for specific prerequisites and setup requirements:
-
 - **Onboarding Tests**: Check [tests/00_onboarding/README.md](../tests/00_onboarding/README.md)
 - **Smoke Tests**: Check [tests/01_smoke/README.md](../tests/01_smoke/README.md)
 - **Task 01 Tests**: Check [tests/02_task01/README.md](../tests/02_task01/README.md)

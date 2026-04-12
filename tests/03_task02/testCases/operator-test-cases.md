@@ -118,12 +118,12 @@
 
 **Tags:** `@chat`
 
-| #   | Step                                                | Expected result                              |
-| --- | --------------------------------------------------- | -------------------------------------------- |
+| #   | Step                                                          | Expected result                              |
+| --- | ------------------------------------------------------------- | -------------------------------------------- |
 | 1   | Navigate to Inbox → All conversations and open a conversation | Conversation detail panel is visible         |
-| 2   | Click **+ Add tag** in the **Contact tags** section | Tag input or dropdown appears                |
-| 3   | Add a tag (e.g. `Customer care`)                    | Tag is displayed in the Contact tags section |
-| 4   | Remove the tag                                      | Tag is removed from the Contact tags section |
+| 2   | Click **+ Add tag** in the **Contact tags** section           | Tag input or dropdown appears                |
+| 3   | Add a tag (e.g. `Customer care`)                              | Tag is displayed in the Contact tags section |
+| 4   | Remove the tag                                                | Tag is removed from the Contact tags section |
 
 ---
 

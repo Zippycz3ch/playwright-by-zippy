@@ -21,7 +21,6 @@ npm install
 
 ```bash
 sudo npx playwright install-deps
-npx playwright install
 ```
 
 ### 3. Install Java 17 for Allure Reports
@@ -45,13 +44,6 @@ Create a `.env` file in the root directory with your credentials:
 cp .env.example .env
 # Edit .env with your actual credentials
 ```
-
-## Technologies Used
-
-- **Playwright** - Browser automation and testing
-- **TypeScript** - Type-safe test development
-- **Allure** - Test reporting with hierarchical steps
-- **Dotenv** - Environment configuration
 
 ## Next Steps
 
