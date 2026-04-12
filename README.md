@@ -19,6 +19,13 @@ A test automation suite for Smartsupp platform using Playwright, TypeScript, and
 - **[Mira AI Agent Tests](tests/02_task01/)** - AI chatbot creation, configuration, and management
 - **[Live Chat Tests](tests/03_task02/)** - Visitor-operator communication flows
 
+## Manual Test Cases
+
+For manual testers, step-by-step test case documentation is available:
+
+- **[Visitor Test Cases](tests/03_task02/testCases/visitor-test-cases.md)** - Manual testing from visitor perspective
+- **[Operator Test Cases](tests/03_task02/testCases/operator-test-cases.md)** - Manual testing from operator perspective
+
 ## Technologies
 
 - **[Playwright](https://playwright.dev/)** - Cross-browser testing framework

@@ -45,6 +45,11 @@ Welcome to the Playwright Test Automation Framework documentation. This guide wi
 
 - [Understanding Allure reports](reports.md#report-features)
 
+**For Manual Testers:**
+
+- [Visitor test cases](../tests/03_task02/testCases/visitor-test-cases.md)
+- [Operator test cases](../tests/03_task02/testCases/operator-test-cases.md)
+
 ## 📞 Getting Help
 
 If you can't find what you're looking for:
