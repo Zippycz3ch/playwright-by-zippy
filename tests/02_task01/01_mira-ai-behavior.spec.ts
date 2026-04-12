@@ -7,9 +7,12 @@ import { Severity } from 'allure-js-commons';
 import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 
-// This tests expect already existing Mira AI
+// This test expects an existing Mira AI agent to be present with default
+// setting of the behavior sliders from onboarding
+// This will only work once, if you dont change the static slider values
 
-test.describe('Smartsupp | Mira AI - Agent Behavior Configuration', { tag: ['@scenario', '@mira-ai', '@settings'] }, () => {
+
+test.describe('Smartsupp | Mira AI - Agent Behavior Configuration', { tag: ['@scenario', '@mira-ai', '@settings', '@behavior'] }, () => {
     let loginPage: LoginPage;
     let dashboardPage: DashboardPage;
     let aiPage: AIAutomationsPage;
@@ -30,17 +33,32 @@ test.describe('Smartsupp | Mira AI - Agent Behavior Configuration', { tag: ['@sc
         test.setTimeout(120_000);
         await allure.severity(Severity.CRITICAL);
 
+        // Slider values — update here to change the test configuration
+        const tone = 2;
+        const talkativeness = 1;
+        const confidence = 0;
+        const emoji = 1;
 
         await allure.step('Adjust behavior sliders: tone, talkativeness, confidence and emoji', async () => {
             await chatBotPage.navigate();
             await chatBotPage.openBotEditor();
             await chatBotPage.behaviorTab.click();
-            await chatBotPage.editBehaviorSlider('tone', 2);
-            await chatBotPage.editBehaviorSlider('talkativeness', 1);
-            await chatBotPage.editBehaviorSlider('confidence', 0);
-            await chatBotPage.editBehaviorSlider('emoji', 1);
+            await chatBotPage.editBehaviorSlider('tone', tone);
+            await chatBotPage.editBehaviorSlider('talkativeness', talkativeness);
+            await chatBotPage.editBehaviorSlider('confidence', confidence);
+            await chatBotPage.editBehaviorSlider('emoji', emoji);
 
             await chatBotPage.saveAndPublish();
+        });
+
+        await allure.step('Re-open editor and verify behavior slider values are persisted', async () => {
+            await chatBotPage.navigate();
+            await chatBotPage.openBotEditor();
+            await chatBotPage.behaviorTab.click();
+            await chatBotPage.verifyBehaviorSlider('tone', tone);
+            await chatBotPage.verifyBehaviorSlider('talkativeness', talkativeness);
+            await chatBotPage.verifyBehaviorSlider('confidence', confidence);
+            await chatBotPage.verifyBehaviorSlider('emoji', emoji);
         });
     });
 });

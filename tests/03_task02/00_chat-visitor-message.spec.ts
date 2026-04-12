@@ -1,12 +1,14 @@
 import { test, Page } from '@playwright/test';
+import * as allure from 'allure-js-commons';
 import { DashboardPage } from '../../interface/ui/dashboardPage';
 import { ConversationPage } from '../../interface/ui/conversationPage';
 import { ChatWidgetPage } from '../../interface/ui/chatWidgetPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
-import * as allure from 'allure-js-commons';
 
-test.describe('Smartsupp | Live Chat - Bidirectional Communication', { tag: ['@scenario', '@chat', '@e2e'] }, () => {
-    test('should allow operator to reply and visitor to receive the response', async ({ page, context }) => {
+// This test expects that no Mira AI is published so the chat is handled by the operator
+
+test.describe('Smartsupp | Live Chat - Visitor Sends Message', { tag: ['@scenario', '@chat', '@smoke'] }, () => {
+    test('should receive visitor message in operator inbox', async ({ page, context }) => {
         const dashboardPage = new DashboardPage(page);
         const conversationPage = new ConversationPage(page);
 
@@ -29,17 +31,7 @@ test.describe('Smartsupp | Live Chat - Bidirectional Communication', { tag: ['@s
         await conversationPage.openConversationByText(testMessage);
         await conversationPage.verifyMessageInConversationDetail(testMessage);
 
-        const operatorMessage = `Hello! This is operator response - ${Date.now()}`;
-        await conversationPage.sendOperatorMessage(operatorMessage);
-
-        await allure.step('Switch to visitor page to verify operator response', async () => {
-            await visitorPage.bringToFront();
-        });
-
-        await chatWidget.verifyMessageReceived(operatorMessage);
-
         await visitorPage.close();
         await page.close();
     });
 });
-

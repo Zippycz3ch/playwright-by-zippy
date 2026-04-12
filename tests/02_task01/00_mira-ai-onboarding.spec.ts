@@ -7,7 +7,10 @@ import { Severity } from 'allure-js-commons';
 import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 
-test.describe('Smartsupp | Mira AI - Onboarding & Agent Creation', { tag: ['@scenario', '@mira-ai', '@onboarding', '@e2e'] }, () => {
+// This test expects that no Mira AI or source is added, so the onboarding page is presented after login
+// and that the user is already onboarded to Smartsupp
+
+test.describe('Smartsupp | Mira AI - Onboarding & Agent Creation', { tag: ['@scenario', '@mira-ai', '@onboarding'] }, () => {
     let loginPage: LoginPage;
     let dashboardPage: DashboardPage;
     let aiPage: AIAutomationsPage;

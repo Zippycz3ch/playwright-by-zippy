@@ -6,6 +6,8 @@ import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper'
 import * as allure from 'allure-js-commons';
 import path from 'path';
 
+// This test expects that no Mira AI is published so the chat is handled by the operator
+
 test.describe('Smartsupp | Live Chat - File Attachment', { tag: ['@scenario', '@chat', '@file-upload'] }, () => {
     test('should allow visitor to send a file attachment and operator should see it', async ({ page, context }) => {
         test.setTimeout(90000);
@@ -23,7 +25,7 @@ test.describe('Smartsupp | Live Chat - File Attachment', { tag: ['@scenario', '@
 
         await chatWidget.sendMessage(testMessage);
 
-        const filePath = path.join(__dirname, 'file.txt');
+        const filePath = path.join(__dirname, 'files', 'file.txt');
         await chatWidget.uploadFile(filePath);
         await chatWidget.expectFilePreviewVisible();
         await chatWidget.sendPendingAttachment();
@@ -31,6 +33,8 @@ test.describe('Smartsupp | Live Chat - File Attachment', { tag: ['@scenario', '@
         await allure.step('Switch to operator page to handle incoming conversation', async () => {
             await page.bringToFront();
         });
+
+        /// Fix path
 
         await conversationPage.switchToNewConversations();
         await conversationPage.verifyFileConversationInInbox('file.txt');

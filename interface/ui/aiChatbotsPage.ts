@@ -25,6 +25,14 @@ export class AiChatbotsPage {
         return this.page.getByTestId('chatbot-card-dropdown-edit');
     }
 
+    get deleteButton() {
+        return this.page.getByTestId('chatbot-card-dropdown-remove');
+    }
+
+    get confirmDeleteButton() {
+        return this.page.getByTestId('delete-modal-confirm');
+    }
+
     // Bot Workflow (Editor) Page Elements
     get botDisplayName() {
         return this.page.locator('p.chakra-text.css-9ztjch');
@@ -104,10 +112,20 @@ export class AiChatbotsPage {
         return this.page.locator('[class*="indicatorContainer"][aria-hidden="true"]').first();
     }
 
+    get welcomeMessageSelectedValue() {
+        return this.page.locator('[class*="singleValue"]').first();
+    }
+
     async clickWelcomeMessageDropdownIndicator() {
         await allure.step('Click Welcome Message dropdown indicator', async () => {
             await this.welcomeMessageDropdownIndicator.waitFor({ state: 'visible' });
             await this.welcomeMessageDropdownIndicator.click();
+        });
+    }
+
+    async verifyWelcomeMessageLanguage(expectedLanguage: string) {
+        await allure.step(`Verify welcome message language is set to "${expectedLanguage}"`, async () => {
+            await expect(this.welcomeMessageSelectedValue).toHaveText(expectedLanguage);
         });
     }
 
@@ -186,6 +204,20 @@ export class AiChatbotsPage {
         });
     }
 
+    async deleteBot(index: number = 0) {
+        await allure.step(`Delete Mira AI agent at index ${index}`, async () => {
+            await this.openBotOptions(index);
+            await this.deleteButton.click();
+            await this.confirmDeleteButton.click();
+        });
+    }
+
+    async verifyNoAgents() {
+        await allure.step('Verify no AI agents are present', async () => {
+            await expect(this.page.getByTestId('chatbot-card')).toHaveCount(0, { timeout: 10_000 });
+        });
+    }
+
     async saveBotChanges() {
         await allure.step('Save bot changes', async () => {
             const isEnabled = await this.saveBotButton.isEnabled();
@@ -222,6 +254,19 @@ export class AiChatbotsPage {
             for (let i = 0; i < value; i++) {
                 await this.page.keyboard.press('ArrowRight');
             }
+        });
+    }
+
+    async verifyBehaviorSlider(slider: 'tone' | 'talkativeness' | 'confidence' | 'emoji', expectedValue: number) {
+        await allure.step(`Verify ${slider} is set to ${expectedValue}`, async () => {
+            const sliderMap = {
+                tone: this.toneInput,
+                talkativeness: this.talkativenessInput,
+                confidence: this.confidenceInput,
+                emoji: this.emojiInput,
+            };
+            const thumb = sliderMap[slider].locator('[role="slider"]');
+            await expect(thumb).toHaveAttribute('aria-valuenow', String(expectedValue));
         });
     }
 }

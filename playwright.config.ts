@@ -42,23 +42,23 @@ export default defineConfig({
   projects: [
     // Setup project for API authentication
     {
-      name: "UI",
-      testDir: "./tests/ui",
+      name: "Smartsupp UI",
+      testDir: "./tests/01_smoke",
       use: { ...devices["Desktop Chrome"] },
     },
     {
-      name: "onboarding",
-      testDir: "./tests/onboarding",
+      name: "Smartsupp Onboarding",
+      testDir: "./tests/00_onboarding",
       use: { ...devices["Desktop Chrome"] },
     },
     {
-      name: "Task 01",
-      testDir: "./tests/task01",
+      name: "Smartsupp Mira AI",
+      testDir: "./tests/02_task01",
       use: { ...devices["Desktop Chrome"] },
     },
     {
-      name: "Task 02",
-      testDir: "./tests/task02",
+      name: "Smartsupp Live Chat",
+      testDir: "./tests/03_task02",
       use: { ...devices["Desktop Chrome"] },
     },
 

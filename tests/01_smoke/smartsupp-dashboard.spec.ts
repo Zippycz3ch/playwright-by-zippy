@@ -1,9 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { LoginPage } from '../../interface/ui/loginPage';
 import { DashboardPage } from '../../interface/ui/dashboardPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 
-test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
+test.describe('Smartsupp | Dashboard - Navigation', { tag: ['@smoke', '@dashboard'] }, () => {
     let loginPage: LoginPage;
     let dashboardPage: DashboardPage;
 
@@ -14,21 +14,17 @@ test.describe('Smartsupp Dashboard', { tag: ['@ui'] }, () => {
         await loginAndVerifyDashboard(page);
     });
 
-    test.afterEach(async ({ page }) => {
-        await page.close();
-    });
-
-    test('dashboard loads after login @UI', async ({ page }) => {
+    test('should load the dashboard after login', async ({ page }) => {
         await dashboardPage.verifyDashboardPageLoaded();
     });
 
-    test('navigate to settings @UI', async ({ page }) => {
+    test('should navigate to settings section', async ({ page }) => {
         await dashboardPage.verifyDashboardPageLoaded();
         await dashboardPage.navigateToSection('settings');
         await dashboardPage.verifySectionPageLoaded('settings');
     });
 
-    test('navigate to customers @UI', async ({ page }) => {
+    test('should navigate to customers section', async ({ page }) => {
         await dashboardPage.verifyDashboardPageLoaded();
         await dashboardPage.navigateToSection('customers');
         await dashboardPage.verifySectionPageLoaded('customers');

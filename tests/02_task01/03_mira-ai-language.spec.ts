@@ -6,9 +6,9 @@ import { Severity } from 'allure-js-commons';
 import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 
-// This tests expect already existing Mira AI
+// This test expects an existing Mira AI agent to be present
 
-test.describe('Smartsupp | Mira AI - Agent Welcome Message Language', { tag: ['@scenario', '@mira-ai', '@settings'] }, () => {
+test.describe('Smartsupp | Mira AI - Agent Welcome Message Language', { tag: ['@scenario', '@mira-ai', '@settings', '@language'] }, () => {
     let loginPage: LoginPage;
     let dashboardPage: DashboardPage;
     let chatBotPage: AiChatbotsPage;
@@ -25,6 +25,8 @@ test.describe('Smartsupp | Mira AI - Agent Welcome Message Language', { tag: ['@
         test.setTimeout(120_000);
         await allure.severity(Severity.CRITICAL);
 
+        const expectedLanguage = 'CS - Čeština';
+
         await allure.step('Select Czech language from welcome message dropdown and publish', async () => {
             await chatBotPage.navigate();
             await chatBotPage.openBotEditor(0);
@@ -32,6 +34,13 @@ test.describe('Smartsupp | Mira AI - Agent Welcome Message Language', { tag: ['@
             await chatBotPage.clickWelcomeMessageDropdownIndicator();
             await page.locator('#react-select-2-option-1').click();
             await chatBotPage.saveAndPublish();
+        });
+
+        await allure.step('Re-open editor and verify welcome message language is persisted', async () => {
+            await chatBotPage.navigate();
+            await chatBotPage.openBotEditor(0);
+            await chatBotPage.clickWelcomeMessageTab();
+            await chatBotPage.verifyWelcomeMessageLanguage(expectedLanguage);
         });
     });
 });

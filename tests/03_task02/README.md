@@ -1,8 +1,6 @@
-# Chat Communication Test Suite
+# 03_task02 — Smartsupp Live Chat Tests
 
-## Overview
-
-Automated test suite for validating Operator ↔ Visitor communication in the Smartsupp chat system. These tests cover the highest business value scenarios to ensure core chat functionality works correctly.
+End-to-end tests for **Operator ↔ Visitor** chat communication in Smartsupp.
 
 ## Test Files Created
 

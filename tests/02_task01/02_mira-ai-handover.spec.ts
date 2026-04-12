@@ -3,6 +3,10 @@ import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 import * as allure from 'allure-js-commons';
 
+// This test expects an existing Mira AI agent to be present
+// and the default handover option to be "Never handover to an operator"
+
+
 test.describe('Smartsupp | Mira AI - Agent Handover Settings', { tag: ['@scenario', '@mira-ai', '@handover'] }, () => {
     test('should toggle Mira AI agent handover option and verify change persists after publish', async ({ page }) => {
         test.setTimeout(120_000);
