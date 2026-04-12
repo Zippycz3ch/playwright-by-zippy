@@ -39,21 +39,7 @@
 
 ---
 
-## TC-V-03 · Chat Widget — Keyboard Navigation and Send
-
-**Tags:** `@chat`, `@accessibility`
-
-| #   | Step                                                    | Expected result                                                                                                       |
-| --- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| 1   | Open the chat widget as a visitor                       | Widget is open and focused                                                                                            |
-| 2   | Press **Tab** to move focus through the widget elements | Focus moves sequentially to each interactive element (e.g. close button, input field, send button, attachment button) |
-| 3   | Tab to the message input field                          | Input field receives focus                                                                                            |
-| 4   | Type a message using the keyboard                       | Text appears in the input field                                                                                       |
-| 5   | Press **Enter**                                         | Message is sent without clicking the send button                                                                      |
-
----
-
-## TC-V-04 · Visitor Rates Chat After Resolution
+## TC-V-03 · Visitor Rates Chat After Resolution
 
 **Tags:** `@chat`, `@rating`
 
@@ -71,31 +57,35 @@
 
 ---
 
+## TC-V-04 · Chat Widget — Keyboard Navigation and Send
+
+**Tags:** `@chat`, `@accessibility`
+
+| #   | Step                                                    | Expected result                                                                                                       |
+| --- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| 1   | Open the chat widget as a visitor                       | Widget is open and focused                                                                                            |
+| 2   | Press **Tab** to move focus through the widget elements | Focus moves sequentially to each interactive element (e.g. close button, input field, send button, attachment button) |
+| 3   | Tab to the message input field                          | Input field receives focus                                                                                            |
+| 4   | Type a message using the keyboard                       | Text appears in the input field                                                                                       |
+| 5   | Press **Enter**                                         | Message is sent without clicking the send button                                                                      |
+
+---
+
 ## TC-V-05 · Visitor Message After Page Reload
 
 **Tags:** `@chat`
 
-| #   | Step                                                 | Expected result                                              |
-| --- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| 1   | Open the chat widget as a visitor and send a message | Message is sent                                              |
-| 2   | Reload the visitor page                              | Page reloads                                                 |
-| 3   | Re-open the chat widget                              | Previous conversation history is preserved and visible       |
-| 4   | Switch to the operator tab                           | Original message is still in the conversation; no duplicates |
+| #   | Step                                                 | Expected result                                        |
+| --- | ---------------------------------------------------- | ------------------------------------------------------ |
+| 1   | Open the chat widget as a visitor and send a message | Message is sent                                        |
+| 2   | Reload the visitor page                              | Page reloads                                           |
+| 3   | Re-open the chat widget                              | Previous conversation history is preserved and visible |
+| 4   | Send a new message in the chat widget                | Message is sent successfully                           |
+| 5   | Switch to the operator tab                           | Both the original and new message are visible          |
 
 ---
 
-## TC-V-06 · Visitor Sends Large File Attachment
-
-**Tags:** `@chat`, `@file-upload`, `@negative`
-
-| #   | Step                                                         | Expected result                                                           |
-| --- | ------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| 1   | Open the chat widget as a visitor                            | Widget is open                                                            |
-| 2   | Attempt to attach a file that exceeds the allowed size limit | An error message is shown explaining the size limit; file is not uploaded |
-
----
-
-## TC-V-07 · Visitor Sends Unsupported File Type
+## TC-V-06 · Visitor Sends Unsupported File Type
 
 **Tags:** `@chat`, `@file-upload`, `@negative`
 
@@ -106,7 +96,7 @@
 
 ---
 
-## TC-V-08 · Visitor Toggles Sound Notifications
+## TC-V-07 · Visitor Toggles Sound Notifications
 
 **Tags:** `@chat`, `@ui`
 
@@ -121,7 +111,7 @@
 
 ---
 
-## TC-V-09 · Visitor Downloads Chat Transcript
+## TC-V-08 · Visitor Downloads Chat Transcript
 
 **Tags:** `@chat`, `@ui`
 
