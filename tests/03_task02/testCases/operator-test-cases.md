@@ -10,7 +10,7 @@
 
 | #   | Step                                             | Expected result                                                              |
 | --- | ------------------------------------------------ | ---------------------------------------------------------------------------- |
-| 1   | Log in to operator chat                          | Operator chat is visible                                                     |
+| 1   | Navigate to Inbox → All conversations            | All conversations list is visible                                            |
 | 2   | Open **Inbox**                                   | Inbox section loads with conversation tabs visible                           |
 | 3   | Click the **New** tab                            | List of new/unassigned conversations is shown                                |
 | 4   | Click the **All** tab                            | List of all conversations is shown                                           |
@@ -26,7 +26,7 @@
 
 | #   | Step                                                        | Expected result                                    |
 | --- | ----------------------------------------------------------- | -------------------------------------------------- |
-| 1   | Log in to operator chat                                     | Operator chat is visible                           |
+| 1   | Navigate to Inbox → All conversations                       | All conversations list is visible                  |
 | 2   | Open Inbox and open the "Discover Live Chat" article        | Test page opens in a new tab                       |
 | 3   | In the visitor tab, send a text message                     | Message is sent                                    |
 | 4   | Switch back to the operator tab                             | —                                                  |
@@ -72,7 +72,7 @@
 
 | #   | Step                                            | Expected result                                                  |
 | --- | ----------------------------------------------- | ---------------------------------------------------------------- |
-| 1   | Log in to operator chat                         | Operator chat is visible                                         |
+| 1   | Navigate to Inbox → All conversations           | All conversations list is visible                                |
 | 2   | Go to **Inbox** and open **Resolved by agents** | List of resolved conversations is shown                          |
 | 3   | Click the **Search** button                     | Search bar appears                                               |
 | 4   | Type a keyword in the search field              | Conversations matching the keyword are filtered                  |
@@ -89,7 +89,7 @@
 
 | #   | Step                                                              | Expected result                                                 |
 | --- | ----------------------------------------------------------------- | --------------------------------------------------------------- |
-| 1   | Open a conversation in the operator chat                          | Conversation detail panel is visible                            |
+| 1   | Navigate to Inbox → All conversations and open a conversation     | Conversation detail panel is visible                            |
 | 2   | Click **Fill in visitor's email** and enter a valid email address | Email is saved and displayed in the contact detail panel        |
 | 3   | Click **Fill in visitor's phone number** and enter a valid number | Phone number is saved and displayed in the contact detail panel |
 | 4   | Reload the page and reopen the conversation                       | Email and phone number are still present and unchanged          |
@@ -103,14 +103,14 @@
 
 **Tags:** `@chat`
 
-| #   | Step                                        | Expected result                                      |
-| --- | ------------------------------------------- | ---------------------------------------------------- |
-| 1   | Open a conversation in the operator chat    | Conversation detail panel is visible                 |
-| 2   | Click the **Note** field                    | Note input becomes editable                          |
-| 3   | Type a note and save it                     | Note is saved and visible in the conversation detail |
-| 4   | Reload the page and reopen the conversation | Note is still present and unchanged                  |
-| 5   | Delete the note                             | Note is removed from the conversation detail         |
-| 6   | Reload the page and reopen the conversation | Note field is empty                                  |
+| #   | Step                                                          | Expected result                                      |
+| --- | ------------------------------------------------------------- | ---------------------------------------------------- |
+| 1   | Navigate to Inbox → All conversations and open a conversation | Conversation detail panel is visible                 |
+| 2   | Click the **Note** field                                      | Note input becomes editable                          |
+| 3   | Type a note and save it                                       | Note is saved and visible in the conversation detail |
+| 4   | Reload the page and reopen the conversation                   | Note is still present and unchanged                  |
+| 5   | Delete the note                                               | Note is removed from the conversation detail         |
+| 6   | Reload the page and reopen the conversation                   | Note field is empty                                  |
 
 ---
 
@@ -120,7 +120,7 @@
 
 | #   | Step                                                | Expected result                              |
 | --- | --------------------------------------------------- | -------------------------------------------- |
-| 1   | Open a conversation in the operator chat            | Conversation detail panel is visible         |
+| 1   | Navigate to Inbox → All conversations and open a conversation | Conversation detail panel is visible         |
 | 2   | Click **+ Add tag** in the **Contact tags** section | Tag input or dropdown appears                |
 | 3   | Add a tag (e.g. `Customer care`)                    | Tag is displayed in the Contact tags section |
 | 4   | Remove the tag                                      | Tag is removed from the Contact tags section |
@@ -133,7 +133,7 @@
 
 | #   | Step                                                                    | Expected result                                                                      |
 | --- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| 1   | Open a conversation in the operator chat                                | Conversation detail panel is visible                                                 |
+| 1   | Navigate to Inbox → All conversations and open a conversation           | Conversation detail panel is visible                                                 |
 | 2   | Click **+ Add contact property** in the **Contact information** section | "Create contact property" dialog appears                                             |
 | 3   | Fill in the **Property name**                                           | Name is entered; it will be shown in the contact list and conversation detail        |
 | 4   | Fill in the **Property key**                                            | Key is entered; it will appear in CSV exports and cannot be changed after saving     |
@@ -151,7 +151,7 @@
 
 | #   | Step                                                                | Expected result                                                         |
 | --- | ------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| 1   | Open a conversation in the operator chat                            | Conversation detail is visible                                          |
+| 1   | Navigate to Inbox → All conversations and open a conversation       | Conversation detail is visible                                          |
 | 2   | Click the **...** (more options) menu in the conversation header    | Dropdown menu appears with export options                               |
 | 3   | Select **Export to PDF**                                            | A PDF file of the conversation is downloaded                            |
 | 4   | Open the PDF and verify it contains the conversation messages       | All messages and senders are present in the exported PDF                |
@@ -166,7 +166,7 @@
 
 | #   | Step                                                             | Expected result                                            |
 | --- | ---------------------------------------------------------------- | ---------------------------------------------------------- |
-| 1   | Open a conversation in the operator chat                         | Conversation detail is visible                             |
+| 1   | Navigate to Inbox → All conversations and open a conversation    | Conversation detail is visible                             |
 | 2   | Click the **...** (more options) menu in the conversation header | Dropdown menu appears                                      |
 | 3   | Select **Delete conversation**                                   | Confirmation dialog appears                                |
 | 4   | Confirm the deletion                                             | Conversation is deleted and no longer visible in the inbox |

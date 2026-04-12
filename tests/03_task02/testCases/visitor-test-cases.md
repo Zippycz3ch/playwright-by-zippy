@@ -10,7 +10,7 @@
 
 | #   | Step                                                 | Expected result                                            |
 | --- | ---------------------------------------------------- | ---------------------------------------------------------- |
-| 1   | Log in to operator chat                              | Operator chat is visible                                   |
+| 1   | Navigate to Inbox → All conversations                | All conversations list is visible                          |
 | 2   | Open Inbox and open the "Discover Live Chat" article | Test page opens in a new tab                               |
 | 3   | In the visitor tab, send a text message              | Message is sent                                            |
 | 4   | Switch back to the operator tab                      | —                                                          |
@@ -26,7 +26,7 @@
 
 | #   | Step                                                 | Expected result                                                       |
 | --- | ---------------------------------------------------- | --------------------------------------------------------------------- |
-| 1   | Log in to operator chat                              | Operator chat is visible                                              |
+| 1   | Navigate to Inbox → All conversations                | All conversations list is visible                                     |
 | 2   | Open Inbox and open the "Discover Live Chat" article | Test page opens in a new tab                                          |
 | 3   | In the visitor tab, send a text message              | Message is sent                                                       |
 | 4   | Attach `file.txt` using the file upload button       | File preview is shown before sending                                  |
