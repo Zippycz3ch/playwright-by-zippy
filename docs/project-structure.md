@@ -16,7 +16,7 @@ playwright-by-zippy/
 │   │   ├── 04_mira-ai-on-and-of-dashboard.spec.ts
 │   │   ├── 05_mira-ai-delete.spec.ts
 │   │   ├── 06_mira-ai-E2E.spec.ts
-│   │   └── E2Eresults/                 # Saved passing E2E run
+│   │   └── E2Eresults/                 # Saved historic passing E2E run
 │   │       ├── *.webm                  # Video recording
 │   │       ├── *.zip                   # Playwright trace
 │   │       └── *-result.json           # Raw Allure result data
@@ -67,6 +67,6 @@ SMARTSUPP_PASSWORD=your-password
 
 The `config.ts` file provides clean URL building:
 
-- **Domain**: `smartsupp.com` (defined once)
+- **Domain**: `smartsupp.com`
 - **Auth URL**: `https://openid.smartsupp.com`
 - **App URL**: `https://app.smartsupp.com`
