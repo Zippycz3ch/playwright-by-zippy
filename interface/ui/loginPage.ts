@@ -28,7 +28,6 @@ export class LoginPage {
     async navigate() {
         await allure.step('Navigate to Smartsupp login page', async () => {
             await this.page.goto(`https://${CONFIG.AUTH_SUBDOMAIN}.${CONFIG.DOMAIN}`);
-            await this.page.waitForLoadState('networkidle');
             await expect(this.smartsuppLogo).toBeVisible();
             await expect(this.usernameInput).toBeVisible();
             await expect(this.passwordInput).toBeVisible();

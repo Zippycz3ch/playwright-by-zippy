@@ -79,7 +79,6 @@ export class DashboardPage {
     async navigateToSection(section: DashboardSection) {
         await allure.step(`Navigate to ${section}`, async () => {
             await this.getSectionNav(section).click();
-            await this.page.waitForLoadState('networkidle');
         });
     }
 
@@ -157,7 +156,6 @@ export class DashboardPage {
     async openInbox() {
         await allure.step('Open Inbox', async () => {
             await this.inboxNav.click();
-            await this.page.waitForLoadState('networkidle');
             await this.page.waitForTimeout(2000);
         });
     }
@@ -179,7 +177,6 @@ export class DashboardPage {
             const pagePromise = context.waitForEvent('page');
             await this.page.getByRole('button', { name: 'Try a Test Conversation' }).click();
             visitorPage = await pagePromise;
-            await visitorPage.waitForLoadState('networkidle');
             await visitorPage.waitForTimeout(2000);
         });
         return visitorPage;

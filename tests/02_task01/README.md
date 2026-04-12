@@ -54,3 +54,13 @@ npx playwright test tests/02_task01/05_mira-ai-delete.spec.ts --headed
 npx playwright test tests/02_task01/06_mira-ai-E2E.spec.ts --headed
 
 ```
+
+## E2E Test Results
+
+A passing run of `06_mira-ai-E2E.spec.ts` has been recorded in [`E2Eresults/`](./E2Eresults/):
+
+| File            | Description                                                     |
+| --------------- | --------------------------------------------------------------- |
+| `*.webm`        | Video recording of the full E2E run                             |
+| `*.zip`         | Playwright trace (open with `npx playwright show-trace <file>`) |
+| `*-result.json` | Raw Allure result data                                          |
