@@ -12,7 +12,7 @@ playwright-by-zippy/
 │   └── seed.spec.ts               # Test data setup
 ├── interface/                     # Page objects and API abstractions
 │   └── ui/                        # Page Object Models
-│       ├── loginpage.ts           # Login page interactions
+│       ├── loginPage.ts           # Login page interactions
 │       ├── dashboardPage.ts       # Dashboard page interactions
 │       ├── aiChatbotsPage.ts      # AI Chatbots page interactions
 │       ├── aiAutomationsPage.ts   # AI Automations page interactions
