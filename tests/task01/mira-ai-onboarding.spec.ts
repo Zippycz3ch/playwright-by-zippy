@@ -7,7 +7,7 @@ import { Severity } from 'allure-js-commons';
 import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 
-test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot'] }, () => {
+test.describe('Smartsupp | Mira AI - Onboarding & Agent Creation', { tag: ['@scenario', '@mira-ai', '@onboarding', '@e2e'] }, () => {
     let loginPage: LoginPage;
     let dashboardPage: DashboardPage;
     let aiPage: AIAutomationsPage;
@@ -22,22 +22,22 @@ test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot
         await loginAndVerifyDashboard(page);
     });
 
-    test('Create and Publish AI Bot', async ({ page }) => {
+    test('should create and publish a new Mira AI agent via onboarding', async ({ page }) => {
         test.setTimeout(120_000);
         await allure.severity(Severity.CRITICAL);
-        let createdBotName = '';
+        let createdAgentName = '';
 
-        await allure.step('Step 1: Create AI Bot via Onboarding', async () => {
+        await allure.step('Create Mira AI agent via onboarding flow', async () => {
             await aiPage.navigateToOnboarding();
-            createdBotName = await aiPage.completeOnboarding('example.com');
+            createdAgentName = await aiPage.completeOnboarding('example.com');
             await chatBotPage.publishNewBot();
         });
 
-        await allure.step('Step 2: Verify bot exists in list and name matches in editor', async () => {
+        await allure.step('Verify created Mira AI agent is visible in the list and name matches', async () => {
             await chatBotPage.navigate();
             await expect(page.getByTestId('chatbot-card')).toHaveCount(1, { timeout: 15_000 });
             await chatBotPage.openBotEditor(0);
-            await expect(chatBotPage.botDisplayName).toHaveText(createdBotName);
+            await expect(chatBotPage.botDisplayName).toHaveText(createdAgentName);
         });
     });
 });

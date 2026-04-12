@@ -5,8 +5,8 @@ import { ConversationPage } from '../../interface/ui/conversationPage';
 import { ChatWidgetPage } from '../../interface/ui/chatWidgetPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 
-test.describe('Basic Chat Communication', () => {
-    test('Send test message using Smartsupp Test Conversation', async ({ page, context }) => {
+test.describe('Smartsupp | Live Chat - Visitor Sends Message', { tag: ['@scenario', '@chat', '@smoke'] }, () => {
+    test('should receive visitor message in operator inbox', async ({ page, context }) => {
         const dashboardPage = new DashboardPage(page);
         const conversationPage = new ConversationPage(page);
 

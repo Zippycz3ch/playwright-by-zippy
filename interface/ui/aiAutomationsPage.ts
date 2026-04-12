@@ -21,6 +21,14 @@ export class AIAutomationsPage {
         return this.page.getByTestId('chatbot-identity-modal-name-input');
     }
 
+    get avatarUploadSection() {
+        return this.page.getByTestId('chatbot-identity-avatar-upload');
+    }
+
+    getAvatarOption(index: 1 | 2 | 3 | 4 | 5 | 6) {
+        return this.page.locator(`div[role="button"]:has(img[src*="/chatbots/avatars/${index}.webp"])`);
+    }
+
     get continueButton() {
         return this.page.getByTestId('ai-onboarding-primary-button').first();
     }
@@ -45,14 +53,21 @@ export class AIAutomationsPage {
         });
     }
 
+    async selectAvatar(index: 1 | 2 | 3 | 4 | 5 | 6) {
+        await allure.step(`Select avatar ${index}`, async () => {
+            await this.getAvatarOption(index).click();
+        });
+    }
+
     async clickContinue() {
         await allure.step('Click Continue button', async () => {
+            await this.continueButton.waitFor({ state: 'visible' });
             await this.continueButton.click();
             await this.page.waitForLoadState('networkidle');
         });
     }
 
-    async completeOnboarding(websiteUrl: string = 'example.com'): Promise<string> {
+    async completeOnboarding(websiteUrl: string = 'example.com', avatarIndex: 1 | 2 | 3 | 4 | 5 | 6 = 4): Promise<string> {
         let botName = '';
         await allure.step('Complete AI Bot onboarding', async () => {
             await this.continueButton.waitFor({ state: 'visible' });
@@ -67,6 +82,8 @@ export class AIAutomationsPage {
             botName = `My AI Assistant ${suffix}`;
             await this.botCreationNameInput.fill(botName);
             botName = await this.botCreationNameInput.inputValue();
+            // await this.selectAvatar(avatarIndex);    
+
             await this.clickContinue();
             await this.clickContinue();
         });

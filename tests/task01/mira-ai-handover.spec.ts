@@ -3,8 +3,8 @@ import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 import * as allure from 'allure-js-commons';
 
-test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot'] }, () => {
-    test('Set handover option to second choice', async ({ page }) => {
+test.describe('Smartsupp | Mira AI - Agent Handover Settings', { tag: ['@scenario', '@mira-ai', '@handover'] }, () => {
+    test('should toggle Mira AI agent handover option and verify change persists after publish', async ({ page }) => {
         test.setTimeout(120_000);
 
         const chatBotPage = new AiChatbotsPage(page);

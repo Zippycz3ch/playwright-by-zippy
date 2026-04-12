@@ -5,8 +5,8 @@ import { ChatWidgetPage } from '../../interface/ui/chatWidgetPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 import * as allure from 'allure-js-commons';
 
-test.describe('Bidirectional Chat Communication', () => {
-    test('Visitor sends message, Operator responds', async ({ page, context }) => {
+test.describe('Smartsupp | Live Chat - Bidirectional Communication', { tag: ['@scenario', '@chat', '@e2e'] }, () => {
+    test('should allow operator to reply and visitor to receive the response', async ({ page, context }) => {
         const dashboardPage = new DashboardPage(page);
         const conversationPage = new ConversationPage(page);
 

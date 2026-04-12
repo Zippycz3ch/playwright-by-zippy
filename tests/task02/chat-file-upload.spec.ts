@@ -6,8 +6,8 @@ import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper'
 import * as allure from 'allure-js-commons';
 import path from 'path';
 
-test.describe('File Upload in Chat', () => {
-    test('Visitor sends file attachment to Operator', async ({ page, context }) => {
+test.describe('Smartsupp | Live Chat - File Attachment', { tag: ['@scenario', '@chat', '@file-upload'] }, () => {
+    test('should allow visitor to send a file attachment and operator should see it', async ({ page, context }) => {
         test.setTimeout(90000);
 
         const dashboardPage = new DashboardPage(page);
