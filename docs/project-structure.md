@@ -16,8 +16,18 @@ playwright-by-zippy/
 │   │   ├── 04_mira-ai-on-and-of-dashboard.spec.ts
 │   │   ├── 05_mira-ai-delete.spec.ts
 │   │   ├── 06_mira-ai-E2E.spec.ts
-│   │   └── E2Eresults/                 # Saved passing E2E run (video, trace, result)
+│   │   └── E2Eresults/                 # Saved passing E2E run
+│   │       ├── *.webm                  # Video recording
+│   │       ├── *.zip                   # Playwright trace
+│   │       └── *-result.json           # Raw Allure result data
 │   └── 03_task02/                      # Live Chat tests
+│       ├── 00_chat-visitor-message.spec.ts
+│       ├── 01_chat-file-upload.spec.ts
+│       ├── 02_chat-operator-reply.spec.ts
+│       ├── files/                      # Test data (file.txt for upload tests)
+│       └── testCases/                  # Manual test case documentation
+│           ├── operator-test-cases.md
+│           └── visitor-test-cases.md
 ├── interface/                          # Page objects and API abstractions
 │   └── ui/                             # Page Object Models
 │       ├── loginPage.ts
