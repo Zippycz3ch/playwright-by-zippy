@@ -163,7 +163,7 @@ export class DashboardPage {
     }
 
     get discoverLiveChatArticle() {
-        return this.page.locator('text=Discover how the live chat works');
+        return this.page.getByTestId('academy-tips-tips-discover');
     }
 
     async openDiscoverLiveChatArticle() {

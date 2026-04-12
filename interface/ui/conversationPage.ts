@@ -43,4 +43,31 @@ export class ConversationPage {
             await this.page.waitForTimeout(2000);
         });
     }
+
+    async verifyMessageInConversationDetail(messageText: string) {
+        await allure.step(`Verify received message content matches sent message: "${messageText}"`, async () => {
+            const messageLocator = this.page.getByText(messageText).last();
+            await messageLocator.waitFor({ timeout: 10000 });
+            await expect(messageLocator).toContainText(messageText);
+        });
+    }
+
+    async verifyFileConversationInInbox(fileName: string) {
+        await allure.step(`Verify file conversation "${fileName}" appears in inbox`, async () => {
+            await expect(this.page.getByRole('button', { name: new RegExp(fileName, 'i') }).first()).toBeVisible({ timeout: 10000 });
+        });
+    }
+
+    async openConversationByFile(fileName: string) {
+        await allure.step(`Open conversation with file "${fileName}"`, async () => {
+            await this.page.getByRole('button', { name: new RegExp(fileName, 'i') }).first().click();
+            await this.page.waitForTimeout(2000);
+        });
+    }
+
+    async verifyFileAttachmentVisible(fileName: string) {
+        await allure.step(`Verify file attachment "${fileName}" is visible`, async () => {
+            await expect(this.page.getByRole('link', { name: new RegExp(fileName, 'i') }).first()).toBeVisible({ timeout: 10000 });
+        });
+    }
 }

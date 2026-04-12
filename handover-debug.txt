@@ -1,0 +1,81 @@
+﻿[dotenv@17.3.1] injecting env (5) from .env -- tip: ­ƒöÉ prevent building .env in docker: https://dotenvx.com/prebuild
+
+Running 1 test using 1 worker
+
+[1A[2K[dotenv@17.3.1] injecting env (0) from .env -- tip: ÔÜÖ´©Å  enable debug logging with { debug: true }
+
+[1A[2K[1/1] [Task 01] ÔÇ║ tests\task01\handoverToOperator.spec.ts:7:9 ÔÇ║ AI Bot Management - Complete Flow ÔÇ║ Set handover option to second choice @scenario @ai-bot
+[1A[2K  1) [Task 01] ÔÇ║ tests\task01\handoverToOperator.spec.ts:7:9 ÔÇ║ AI Bot Management - Complete Flow ÔÇ║ Set handover option to second choice @scenario @ai-bot ÔÇ║ Save and publish bot ÔÇ║ Save bot changes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeEnabled[2m([22m[2m)[22m failed
+
+    Locator:  getByTestId('chatbot-builder-preview')
+    Expected: enabled
+    Received: disabled
+    Timeout:  15000ms
+
+    Call log:
+    [2m  - Expect "toBeEnabled" with timeout 15000ms[22m
+    [2m  - waiting for getByTestId('chatbot-builder-preview')[22m
+    [2m    18 ├ù locator resolved to <button disabled type="submit" form="chatbot-workflow-form" class="chakra-button css-dw0qgz" data-testid="chatbot-builder-preview">ÔÇª</button>[22m
+    [2m       - unexpected value "disabled"[22m
+
+
+       at ..\interface\ui\aiChatbotsPage.ts:178
+
+      176 |     async saveBotChanges() {
+      177 |         await allure.step('Save bot changes', async () => {
+    > 178 |             await expect(this.saveBotButton).toBeEnabled({ timeout: 15_000 });
+          |                                              ^
+      179 |             await this.saveBotButton.click();
+      180 |             await expect(this.page.getByText('Changes have been saved successfully.').first()).toBeVisible({ timeout: 10_000 });
+      181 |         });
+        at body (C:\Users\konta\Documents\GitHub\playwrightByZippy\interface\ui\aiChatbotsPage.ts:178:46)
+        at body (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-js-commons\src\facade.ts:135:48)
+        at call (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:13:56)
+        at Generator._invoke (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at Generator.next (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at asyncGeneratorStep (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at _next (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1
+        at C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1
+        at call (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:13:23)
+        at Generator._invoke (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at Generator.next (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at asyncGeneratorStep (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at _next (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1
+        at AllurePlaywrightTestRuntime.apply (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at AllurePlaywrightTestRuntime.step (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:12:13)
+        at callRuntimeMethod (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-js-commons\src\facade.ts:21:27)
+        at Object.step (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-js-commons\src\facade.ts:135:10)
+        at AiChatbotsPage.saveBotChanges (C:\Users\konta\Documents\GitHub\playwrightByZippy\interface\ui\aiChatbotsPage.ts:177:22)
+        at body (C:\Users\konta\Documents\GitHub\playwrightByZippy\interface\ui\aiChatbotsPage.ts:186:24)
+        at body (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-js-commons\src\facade.ts:135:48)
+        at call (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:13:56)
+        at Generator._invoke (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at Generator.next (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at asyncGeneratorStep (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at _next (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+        at C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1
+        at C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1
+        at call (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:13:23)
+        at Generator.<anonymous> (C:\Users\konta\Documents\GitHub\playwrightByZippy\node_modules\allure-playwright\src\runtime.ts:2:1)
+
+    attachment #1: video (video/webm) ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+    test-results\handoverToOperator-AI-Bot--db92c-ver-option-to-second-choice-Task-01\video.webm
+    ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+
+    Error Context: test-results\handoverToOperator-AI-Bot--db92c-ver-option-to-second-choice-Task-01\error-context.md
+
+    attachment #3: trace (application/zip) ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+    test-results\handoverToOperator-AI-Bot--db92c-ver-option-to-second-choice-Task-01\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\handoverToOperator-AI-Bot--db92c-ver-option-to-second-choice-Task-01\trace.zip
+
+    ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+
+
+[1A[2K  1 failed
+    [Task 01] ÔÇ║ tests\task01\handoverToOperator.spec.ts:7:9 ÔÇ║ AI Bot Management - Complete Flow ÔÇ║ Set handover option to second choice @scenario @ai-bot 

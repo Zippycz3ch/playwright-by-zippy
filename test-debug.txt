@@ -1,8 +1,0 @@
-﻿[dotenv@17.3.1] injecting env (5) from .env -- tip: ­ƒöÉ prevent committing .env to code: https://dotenvx.com/precommit
-
-Running 1 test using 1 worker
-
-[1A[2K[dotenv@17.3.1] injecting env (0) from .env -- tip: ­ƒøí´©Å auth for agents: https://vestauth.com
-
-[1A[2K[1/1] [Task 01] ÔÇ║ tests\task01\handoverToOperator.spec.ts:27:9 ÔÇ║ AI Bot Management - Complete Flow ÔÇ║ Create and Publish AI Bot @scenario @ai-bot
-[1A[2K  1 passed (11.7s)

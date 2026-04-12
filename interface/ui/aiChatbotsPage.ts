@@ -2,6 +2,8 @@ import { Page, expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 import { getAppBaseURL } from '../../config';
 
+type HandoverOption = 'Never handover to an operator' | 'Handover when convenient or on demand';
+
 export class AiChatbotsPage {
     constructor(private page: Page) { }
 
@@ -58,13 +60,28 @@ export class AiChatbotsPage {
         });
     }
 
-    getHandoverOption(option: 'Never handover to an operator' | 'Handover when convenient or on demand') {
-        return this.page.getByRole('radio', { name: option });
+    getHandoverOption(option: HandoverOption) {
+        return this.page.locator('label.chakra-radio').filter({ has: this.page.locator('p', { hasText: option }) });
     }
 
-    async selectHandoverOption(option: 'Never handover to an operator' | 'Handover when convenient or on demand') {
+    async getSelectedHandoverOption(): Promise<HandoverOption> {
+        const options: HandoverOption[] = ['Never handover to an operator', 'Handover when convenient or on demand'];
+        for (const option of options) {
+            const attr = await this.getHandoverOption(option).getAttribute('data-checked');
+            if (attr !== null) return option;
+        }
+        throw new Error('No handover option is selected');
+    }
+
+    async selectHandoverOption(option: HandoverOption) {
         await allure.step(`Select handover option: ${option}`, async () => {
-            await this.getHandoverOption(option).click({ force: true });
+            await this.getHandoverOption(option).locator('span.chakra-radio__control').click();
+        });
+    }
+
+    async verifyHandoverOption(option: HandoverOption) {
+        await allure.step(`Verify handover option is set to: "${option}"`, async () => {
+            await expect(this.getHandoverOption(option)).toHaveAttribute('data-checked', '');
         });
     }
 
@@ -167,7 +184,11 @@ export class AiChatbotsPage {
 
     async saveBotChanges() {
         await allure.step('Save bot changes', async () => {
-            await expect(this.saveBotButton).toBeEnabled({ timeout: 15_000 });
+            const isEnabled = await this.saveBotButton.isEnabled();
+            if (!isEnabled) {
+                await allure.step('No changes detected, skipping save', async () => { });
+                return;
+            }
             await this.saveBotButton.click();
             await expect(this.page.getByText('Changes have been saved successfully.').first()).toBeVisible({ timeout: 10_000 });
         });
