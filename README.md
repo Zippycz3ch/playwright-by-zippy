@@ -16,7 +16,7 @@ A test automation suite for Smartsupp platform using Playwright, TypeScript, and
 
 - **[Onboarding Tests](tests/00_onboarding/)** - New user account setup flow
 - **[Smoke Tests](tests/01_smoke/)** - Critical path validation
-- **[Mira AI Agent Tests](tests/02_task01/)** - AI chatbot creation, configuration, and management
+- **[Mira AI Agent Tests](tests/02_task01/)** - AI chatbot creation, configuration, and management (includes full E2E lifecycle test)
 - **[Live Chat Tests](tests/03_task02/)** - Visitor-operator communication flows
 
 ## Manual Test Cases

@@ -42,5 +42,69 @@ test.describe('Smartsupp | Mira AI - Onboarding & Agent Creation', { tag: ['@sce
             await chatBotPage.openBotEditor(0);
             await expect(chatBotPage.botDisplayName).toHaveText(createdAgentName);
         });
+
+        await allure.step('Configure behavior sliders: tone, talkativeness, confidence and emoji', async () => {
+            await chatBotPage.behaviorTab.click();
+            await chatBotPage.editBehaviorSlider('tone', 2);
+            await chatBotPage.editBehaviorSlider('talkativeness', 1);
+            await chatBotPage.editBehaviorSlider('confidence', 0);
+            await chatBotPage.editBehaviorSlider('emoji', 1);
+            await chatBotPage.saveAndPublish();
+        });
+
+        await allure.step('Re-open editor and verify behavior slider values are persisted', async () => {
+            await chatBotPage.navigate();
+            await chatBotPage.openBotEditor(0);
+            await chatBotPage.behaviorTab.click();
+            await chatBotPage.verifyBehaviorSlider('tone', 2);
+            await chatBotPage.verifyBehaviorSlider('talkativeness', 1);
+            await chatBotPage.verifyBehaviorSlider('confidence', 0);
+            await chatBotPage.verifyBehaviorSlider('emoji', 1);
+        });
+
+        await allure.step('Configure handover: set to "Never handover to an operator" and publish', async () => {
+            await chatBotPage.navigate();
+            await chatBotPage.openBotEditor(0);
+            await chatBotPage.skillsTabButton.click();
+            await chatBotPage.openSkill('Handover to an operator');
+            await chatBotPage.selectHandoverOption('Never handover to an operator');
+            await chatBotPage.saveAndPublish();
+        });
+
+        await allure.step('Verify handover option is persisted', async () => {
+            await chatBotPage.navigate();
+            await chatBotPage.openBotEditor(0);
+            await chatBotPage.skillsTabButton.click();
+            await chatBotPage.openSkill('Handover to an operator');
+            await chatBotPage.verifyHandoverOption('Never handover to an operator');
+        });
+
+        await allure.step('Change welcome message language to Czech and publish', async () => {
+            await chatBotPage.navigate();
+            await chatBotPage.openBotEditor(0);
+            await chatBotPage.clickWelcomeMessageTab();
+            await chatBotPage.clickWelcomeMessageDropdownIndicator();
+            await page.locator('#react-select-2-option-1').click();
+            await chatBotPage.saveAndPublish();
+        });
+
+        await allure.step('Re-open editor and verify welcome message language is persisted', async () => {
+            await chatBotPage.navigate();
+            await chatBotPage.openBotEditor(0);
+            await chatBotPage.clickWelcomeMessageTab();
+            await chatBotPage.verifyWelcomeMessageLanguage('CS - Čeština');
+        });
+
+        await allure.step('Delete the Mira AI agent', async () => {
+            await chatBotPage.navigate();
+            await chatBotPage.deleteBot(0);
+        });
+
+        await allure.step('Verify no agents remain', async () => {
+            await chatBotPage.verifyNoAgents();
+        });
+
+
+
     });
 });

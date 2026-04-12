@@ -11,6 +11,7 @@ Tests are prefixed with a number indicating the intended run order.
 | `02_mira-ai-handover.spec.ts`   | Toggles the handover-to-operator setting both ways and verifies the change persists after publish       |
 | `03_mira-ai-language.spec.ts`   | Changes the welcome message language to Czech, publishes, and verifies the selected language persists   |
 | `04_mira-ai-delete.spec.ts`     | Deletes the existing Mira AI agent and verifies no agents remain                                        |
+| `05_mira-ai-E2E.spec.ts`        | Full lifecycle E2E: create → behavior → handover → language → delete                                    |
 
 ## Tags
 
@@ -28,12 +29,14 @@ Tests are prefixed with a number indicating the intended run order.
 
 - A valid Smartsupp account with credentials set in `.env` (`SMARTSUPP_USERNAME`, `SMARTSUPP_PASSWORD`)
 - Tests `01`–`04` expect an existing Mira AI agent to be present (run `00` first)
+- `05_mira-ai-E2E.spec.ts` expects a clean state with no existing agent (same as `00`)
 
 ## Running These Tests
 
 ```bash
-# Run all task01 tests in series (Should be ok if the prerequisites are met)
-npx playwright test tests/02_task01/ --headed --workers=1
+
+# Run all task01 tests except the E2E test (requires existing agent from run 00)
+npx playwright test "tests/02_task01/0[0-4]_*"
 
 # Run specific tests (in order)
 npx playwright test tests/02_task01/00_mira-ai-onboarding.spec.ts --headed
@@ -41,6 +44,9 @@ npx playwright test tests/02_task01/01_mira-ai-behavior.spec.ts --headed
 npx playwright test tests/02_task01/02_mira-ai-handover.spec.ts --headed
 npx playwright test tests/02_task01/03_mira-ai-language.spec.ts --headed
 npx playwright test tests/02_task01/04_mira-ai-delete.spec.ts --headed
+
+# Run full lifecycle E2E test (standalone, no prerequisites)
+npx playwright test tests/02_task01/05_mira-ai-E2E.spec.ts --headed
 
 # Run by tag
 npx playwright test --grep "@mira-ai" --headed
