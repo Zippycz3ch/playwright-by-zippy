@@ -34,8 +34,12 @@ export class AiChatbotsPage {
         return this.page.getByTestId('chatbot-builder-preview');
     }
 
-    get publishBotButton() {
-        return this.page.getByTestId('chatbot-workflow-form-publish-btn');
+    get publishButton() {
+        return this.page.getByTestId('chatbot-workflow-form-publish-btn').filter({ hasText: /^Publish( changes)?$/ });
+    }
+
+    get unpublishButton() {
+        return this.page.getByTestId('chatbot-workflow-form-publish-btn').filter({ hasText: /^Unpublish$/ });
     }
 
     get publishAnywayButton() {
@@ -148,7 +152,7 @@ export class AiChatbotsPage {
             await this.continueButton.click();
             await this.continueButton.click();
             await this.continueButton.click();
-            const publishBtn = this.page.locator('#chatbot-workflow-form').getByTestId('chatbot-workflow-form-publish-btn');
+            const publishBtn = this.page.locator('#chatbot-workflow-form').getByTestId('chatbot-workflow-form-publish-btn').filter({ hasText: /^Publish( changes)?$/ });
             await publishBtn.waitFor({ state: 'visible' });
             await publishBtn.click();
             await this.publishAnywayButton.click();
@@ -197,8 +201,8 @@ export class AiChatbotsPage {
     async saveAndPublish() {
         await allure.step('Save and publish bot', async () => {
             await this.saveBotChanges();
-            await this.publishBotButton.waitFor({ state: 'visible' });
-            await this.publishBotButton.click();
+            await this.publishButton.waitFor({ state: 'visible' });
+            await this.publishButton.click();
             await this.publishAnywayButton.click();
             await expect(this.page.getByText('Changes saved successfully and chatbot has been published.').first()).toBeVisible({ timeout: 10_000 });
         });
