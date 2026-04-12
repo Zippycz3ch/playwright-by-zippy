@@ -203,7 +203,8 @@ export class ConversationPage {
     async sendOperatorMessage(messageText: string) {
         await allure.step(`Operator sends response: "${messageText}"`, async () => {
             await this.operatorInput.waitFor({ timeout: 10000 });
-            await this.operatorInput.fill(messageText);
+            await this.operatorInput.click();
+            await this.operatorInput.pressSequentially(messageText);
             await this.operatorInput.press('Enter');
             await this.page.waitForTimeout(2000);
         });

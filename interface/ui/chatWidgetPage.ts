@@ -214,7 +214,7 @@ export class ChatWidgetPage {
         await allure.step(`Navigate to ${url} with chat widget`, async () => {
             await this.page.goto(url);
             await this.page.waitForLoadState('networkidle');
-            await this.page.waitForTimeout(2000); // Wait for chat widget to load
+            await this.page.waitForTimeout(2000);
         });
     }
 }

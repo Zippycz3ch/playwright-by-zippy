@@ -8,7 +8,10 @@ import path from 'path';
 
 /**
  * File Upload test: Visitor sends a file attachment, Operator receives it
+ * This requires no Mira AI agents to be enabled,
+ * as it uses a direct visitor-to-operator communication
  */
+
 test.describe('File Upload in Chat', () => {
     test('Visitor sends file attachment to Operator', async ({ page: operatorPage, context }) => {
         test.setTimeout(90000);

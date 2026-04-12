@@ -3,6 +3,7 @@ import { LoginPage } from '../../interface/ui/loginPage';
 import { DashboardPage } from '../../interface/ui/dashboardPage';
 import { AIAutomationsPage } from '../../interface/ui/aiAutomationsPage';
 import * as allure from 'allure-js-commons';
+import { Severity } from 'allure-js-commons';
 import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
 
 test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot'] }, () => {
@@ -26,18 +27,20 @@ test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot
 
     test('Create and Publish AI Bot', async ({ page }) => {
         test.setTimeout(120_000);
+        await allure.severity(Severity.CRITICAL);
+        let createdBotName = '';
 
+        await allure.step('Step 1: Create AI Bot via Onboarding', async () => {
+            await aiPage.navigateToOnboarding();
+            createdBotName = await aiPage.completeOnboarding('example.com');
+            await chatBotPage.publishNewBot();
+        });
 
-        await allure.step('Step 3: Edit bot', async () => {
+        await allure.step('Step 2: Verify bot exists in list and name matches in editor', async () => {
             await chatBotPage.navigate();
-            await chatBotPage.openBotEditor();
-            await chatBotPage.behaviorTab.click();
-            await chatBotPage.editBehaviorSlider('tone', 2);
-            await chatBotPage.editBehaviorSlider('talkativeness', 1);
-            await chatBotPage.editBehaviorSlider('confidence', 0);
-            await chatBotPage.editBehaviorSlider('emoji', 1);
-
-            await chatBotPage.saveAndPublish();
+            await expect(page.getByTestId('chatbot-card')).toHaveCount(1, { timeout: 15_000 });
+            await chatBotPage.openBotEditor(0);
+            await expect(chatBotPage.botDisplayName).toHaveText(createdBotName);
         });
     });
 });

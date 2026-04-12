@@ -7,7 +7,7 @@ export class MultichannelOnboardingPage {
 
     async navigate() {
         await allure.step('Navigate to Multichannel Onboarding page', async () => {
-            await this.page.goto(`${getAppBaseURL()}/dashboard/onboarding/multichannel`);
+            await this.page.goto(`${getAppBaseURL()}/app/dashboard/onboarding/multichannel`);
             await this.page.waitForLoadState('networkidle');
         });
     }

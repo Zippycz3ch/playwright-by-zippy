@@ -7,6 +7,8 @@ import * as allure from 'allure-js-commons';
 
 /**
  * Simple test: Using Smartsupp's Test Conversation feature
+ * This requires no Mira AI agents to be enabled,
+ * as it uses a direct visitor-to-operator communication
  */
 test.describe('Basic Chat Communication', () => {
     test('Send test message using Smartsupp Test Conversation', async ({ page, context }) => {

@@ -81,6 +81,10 @@ export class AiChatbotsPage {
         return this.page.getByTestId('chatbot-card-dropdown-edit');
     }
 
+    get editProfileButton() {
+        return this.page.getByRole('button', { name: 'ariaLabel.edit' });
+    }
+
     get seeConversationsButton() {
         return this.page.locator('button:has-text("See conversations")');
     }
@@ -152,20 +156,91 @@ export class AiChatbotsPage {
         return this.page.getByTestId('chatbot-workflow-tab-customResponses');
     }
 
+    get skillsTabButton() {
+        return this.page.getByTestId('chatbot-workflow-tab-skills');
+    }
+
+    getSkillButton(name: 'Handover to an operator' | 'Product recommendation') {
+        return this.page.getByTestId('chatbot-workflow-skills-item-button').filter({ hasText: name });
+    }
+
+    async openSkill(name: 'Handover to an operator' | 'Product recommendation') {
+        await allure.step(`Open skill: ${name}`, async () => {
+            await this.getSkillButton(name).click();
+        });
+    }
+
+    getHandoverOption(option: 'Never handover to an operator' | 'Handover when convenient or on demand') {
+        return this.page.getByRole('radio', { name: option });
+    }
+
+    async selectHandoverOption(option: 'Never handover to an operator' | 'Handover when convenient or on demand') {
+        await allure.step(`Select handover option: ${option}`, async () => {
+            await this.getHandoverOption(option).click({ force: true });
+        });
+    }
+
     get welcomeMessageTab() {
         return this.page.getByTestId('chatbot-workflow-tab-welcomeMessage');
+    }
+
+    async clickWelcomeMessageTab() {
+        await allure.step('Click Welcome Message tab', async () => {
+            await expect(this.welcomeMessageTab).toBeVisible({ timeout: 15_000 });
+            await this.welcomeMessageTab.dispatchEvent('click');
+        });
     }
 
     get welcomeMessageDropdownIndicator() {
         return this.page.locator('[class*="indicatorContainer"][aria-hidden="true"]').first();
     }
 
+    async clickWelcomeMessageDropdownIndicator() {
+        await allure.step('Click Welcome Message dropdown indicator', async () => {
+            await this.welcomeMessageDropdownIndicator.waitFor({ state: 'visible' });
+            await this.welcomeMessageDropdownIndicator.click();
+        });
+    }
+
     get firstKnowledgeSourceItem() {
         return this.page.locator('div:has(button[aria-label="More"]) label.chakra-switch').first();
     }
 
-    get firstKnowledgeSourceToggle() {
-        return this.page.locator('h2:has-text("Sources")').locator('..').locator('div:has(button[aria-label="More"]):has(.chakra-switch__track)').first().locator('.chakra-switch__input');
+    getKnowledgeSourceToggle(index: number = 0) {
+        return this.page.locator('h2:has-text("Sources")').locator('..').locator('div:has(button[aria-label="More"]):has(.chakra-switch__track)').nth(index).locator('.chakra-switch__input');
+    }
+
+    getKnowledgeSourceMoreButton(index: number = 0) {
+        return this.page.locator('xpath=//h2[contains(.,"Sources")]/../..//button[@aria-label="More"]').nth(index);
+    }
+
+    async openKnowledgeSourceMenu(index: number = 0) {
+        await allure.step(`Open knowledge source menu at index ${index}`, async () => {
+            const moreButton = this.getKnowledgeSourceMoreButton(index);
+            await moreButton.waitFor({ state: 'visible', timeout: 15_000 });
+            await moreButton.click();
+            await expect(this.knowledgeSourceEditMenuItem).toBeVisible({ timeout: 5_000 });
+        });
+    }
+
+    get sourceNameInput() {
+        return this.page.getByTestId('sources-modal-name-input');
+    }
+
+    get knowledgeSourcePreviewMenuItem() {
+        return this.page.getByRole('menuitem', { name: 'Source preview' });
+    }
+
+    get knowledgeSourceEditMenuItem() {
+        return this.page.getByRole('menuitem', { name: 'Edit' });
+    }
+
+    get knowledgeSourceUpdateMenuItem() {
+        return this.page.getByRole('menuitem', { name: 'Update' });
+    }
+
+    get knowledgeSourceDeleteMenuItem() {
+        return this.page.getByRole('menuitem', { name: 'Delete' });
     }
 
     get goBackButton() {
@@ -204,7 +279,6 @@ export class AiChatbotsPage {
     async navigate() {
         await allure.step('Navigate to AI Chatbots page and verify page loaded', async () => {
             await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations/ai-chatbots`);
-            await this.page.waitForLoadState('networkidle');
 
             // Verify URL
             await expect(this.page).toHaveURL(/ai-automations\/ai-chatbots/);
@@ -258,6 +332,12 @@ export class AiChatbotsPage {
         });
     }
 
+    async clickEditProfile() {
+        await allure.step('Click Edit profile button', async () => {
+            await this.editProfileButton.click();
+        });
+    }
+
     async clickSeeConversations() {
         await allure.step('Click See Conversations button', async () => {
             await this.seeConversationsButton.click();
@@ -281,7 +361,6 @@ export class AiChatbotsPage {
         await allure.step('Open bot editor', async () => {
             await this.openBotOptions(index);
             await this.clickEdit();
-            await this.page.waitForLoadState('networkidle');
         });
     }
 

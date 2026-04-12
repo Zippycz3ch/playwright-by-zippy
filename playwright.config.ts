@@ -42,12 +42,13 @@ export default defineConfig({
   projects: [
     // Setup project for API authentication
     {
-      name: "auth-setup",
-      testMatch: /.*\.auth\.setup\.ts/,
-    },
-    {
       name: "UI",
       testDir: "./tests/ui",
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "onboarding",
+      testDir: "./tests/onboarding",
       use: { ...devices["Desktop Chrome"] },
     },
     {
