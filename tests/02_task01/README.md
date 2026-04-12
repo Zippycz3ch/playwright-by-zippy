@@ -28,3 +28,22 @@ Tests are prefixed with a number indicating the intended run order.
 
 - A valid Smartsupp account with credentials set in `.env` (`SMARTSUPP_USERNAME`, `SMARTSUPP_PASSWORD`)
 - Tests `01`–`04` expect an existing Mira AI agent to be present (run `00` first)
+
+## Running These Tests
+
+```bash
+# Run all task01 tests in series (Should be ok if the prerequisites are met)
+npx playwright test tests/02_task01/ --headed --workers=1
+
+# Run specific tests (in order)
+npx playwright test tests/02_task01/00_mira-ai-onboarding.spec.ts --headed
+npx playwright test tests/02_task01/01_mira-ai-behavior.spec.ts --headed
+npx playwright test tests/02_task01/02_mira-ai-handover.spec.ts --headed
+npx playwright test tests/02_task01/03_mira-ai-language.spec.ts --headed
+npx playwright test tests/02_task01/04_mira-ai-delete.spec.ts --headed
+
+# Run by tag
+npx playwright test --grep "@mira-ai" --headed
+```
+
+> **Note:** These tests are numbered and should be run in series (workers=1) to maintain proper test order.

@@ -18,3 +18,17 @@ Quick sanity checks for **core Smartsupp UI** — login and dashboard navigation
 ## Prerequisites
 
 - Valid Smartsupp credentials in `.env` (`SMARTSUPP_USERNAME`, `SMARTSUPP_PASSWORD`)
+
+## Running These Tests
+
+```bash
+# Run all smoke tests
+npx playwright test tests/01_smoke/ --headed
+
+# Run specific tests
+npx playwright test tests/01_smoke/smartsupp-login.spec.ts --headed
+npx playwright test tests/01_smoke/smartsupp-dashboard.spec.ts --headed
+
+# Run smoke tests by tag
+npx playwright test --grep "@smoke" --headed
+```

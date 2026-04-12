@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test --config=playwright.config.ts"
+    "test": "playwright test --config=playwright.config.ts",
+    "test:headed": "playwright test --config=playwright.config.ts --headed",
+    "test:task01": "playwright test tests/02_task01/ --headed",
+    "report": "allure generate allure-results --clean && echo 'Report ready at: http://localhost:8080' && python3 -m http.server 8080 -d allure-report"
   },
   "keywords": [],
   "author": "",

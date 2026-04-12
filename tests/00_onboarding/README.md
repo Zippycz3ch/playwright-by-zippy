@@ -12,3 +12,16 @@ Tests covering the **initial onboarding flow** for a newly created Smartsupp acc
 
 - A freshly created Smartsupp account with credentials in `.env` (`SMARTSUPP_USERNAME`, `SMARTSUPP_PASSWORD`)
 - Account must **not** have completed onboarding previously
+
+## Running These Tests
+
+```bash
+# Run all onboarding tests
+npx playwright test tests/00_onboarding/ --headed
+
+# Run specific test
+npx playwright test tests/00_onboarding/00_userOnboardingToSmartupp.spec.ts --headed
+
+# Run onboarding tests by tag
+npx playwright test --grep "@onboarding" --headed
+```

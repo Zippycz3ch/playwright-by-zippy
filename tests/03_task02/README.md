@@ -26,6 +26,21 @@ Tests are prefixed with a number indicating the intended run order.
 - No Mira AI agent published — chat must be handled by a human operator
 - Each test uses two browser contexts: one for the operator dashboard, one for the visitor chat widget
 
+## Running These Tests
+
+```bash
+# Run all task02 tests in series
+npx playwright test tests/03_task02/ --headed --workers=1
+
+# Run specific tests (in order)
+npx playwright test tests/03_task02/00_chat-visitor-message.spec.ts --headed
+npx playwright test tests/03_task02/01_chat-file-upload.spec.ts --headed
+npx playwright test tests/03_task02/02_chat-operator-reply.spec.ts --headed
+
+# Run by tag
+npx playwright test --grep "@chat" --headed
+```
+
 ## See Also
 
 - [`testCases/visitor-test-cases.md`](testCases/visitor-test-cases.md) — Manual test cases for visitor-side actions
