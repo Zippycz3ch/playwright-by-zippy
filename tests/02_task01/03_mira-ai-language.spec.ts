@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { LoginPage } from '../../interface/ui/loginpage';
+import { LoginPage } from '../../interface/ui/loginPage';
 import { DashboardPage } from '../../interface/ui/dashboardPage';
 import * as allure from 'allure-js-commons';
 import { Severity } from 'allure-js-commons';

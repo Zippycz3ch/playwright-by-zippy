@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { LoginPage } from '../loginpage';
+import { LoginPage } from '../loginPage';
 import { DashboardPage } from '../dashboardPage';
 
 export async function loginAndVerifyDashboard(page: Page): Promise<void> {

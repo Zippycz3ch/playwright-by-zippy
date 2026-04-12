@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../interface/ui/loginpage';
+import { LoginPage } from '../../interface/ui/loginPage';
 import { DashboardPage } from '../../interface/ui/dashboardPage';
 import { AIAutomationsPage } from '../../interface/ui/aiAutomationsPage';
 import * as allure from 'allure-js-commons';

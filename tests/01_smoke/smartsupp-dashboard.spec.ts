@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { LoginPage } from '../../interface/ui/loginpage';
+import { LoginPage } from '../../interface/ui/loginPage';
 import { DashboardPage } from '../../interface/ui/dashboardPage';
 import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 
