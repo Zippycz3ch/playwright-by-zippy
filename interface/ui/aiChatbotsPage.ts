@@ -2,7 +2,8 @@ import { Page, expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 import { getAppBaseURL } from '../../config';
 
-type HandoverOption = 'Never handover to an operator' | 'Handover when convenient or on demand';
+const HANDOVER_OPTIONS = ['Never handover to an operator', 'Handover when convenient or on demand'] as const;
+type HandoverOption = typeof HANDOVER_OPTIONS[number];
 
 export class AiChatbotsPage {
     constructor(private page: Page) { }
@@ -77,8 +78,7 @@ export class AiChatbotsPage {
     }
 
     async getSelectedHandoverOption(): Promise<HandoverOption> {
-        const options: HandoverOption[] = ['Never handover to an operator', 'Handover when convenient or on demand'];
-        for (const option of options) {
+        for (const option of HANDOVER_OPTIONS) {
             const attr = await this.getHandoverOption(option).getAttribute('data-checked');
             if (attr !== null) return option;
         }
