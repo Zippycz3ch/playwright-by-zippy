@@ -238,6 +238,58 @@ export class AiChatbotsPage {
         });
     }
 
+    getBotSwitch(index: number = 0) {
+        return this.page.getByTestId('chatbot-card-switch').nth(index);
+    }
+
+    async toggleBotSwitch(state: 'on' | 'off', index: number = 0) {
+        await allure.step(`Toggle bot switch at index ${index} to ${state.toUpperCase()}`, async () => {
+            const switchEl = this.getBotSwitch(index);
+            const isChecked = await switchEl.getAttribute('data-checked');
+            const isOn = isChecked !== null;
+            if ((state === 'on' && !isOn) || (state === 'off' && isOn)) {
+                await switchEl.click();
+                if (state === 'on') {
+                    await this.handleToggleOnPopup();
+                } else {
+                    await this.handleToggleOffSurvey();
+                }
+            }
+        });
+    }
+
+    async handleToggleOnPopup() {
+        await allure.step('Handle "not installed" popup — click Publish anyway', async () => {
+            const publishBtn = this.page.getByRole('button', { name: 'Publish anyway' });
+            const visible = await publishBtn.waitFor({ state: 'visible', timeout: 8_000 }).then(() => true).catch(() => false);
+            if (visible) {
+                await publishBtn.click();
+            }
+        });
+    }
+
+    async handleToggleOffSurvey() {
+        await allure.step('Close removal survey popup if visible', async () => {
+            const closeBtn = this.page.locator('text=✕').first();
+            const visible = await closeBtn.waitFor({ state: 'visible', timeout: 8_000 }).then(() => true).catch(() => false);
+            if (visible) {
+                await closeBtn.click();
+            }
+        });
+    }
+
+    async verifyBotEnabled(index: number = 0) {
+        await allure.step(`Verify bot at index ${index} is enabled (ON)`, async () => {
+            await expect(this.getBotSwitch(index)).toHaveAttribute('data-checked', '');
+        });
+    }
+
+    async verifyBotDisabled(index: number = 0) {
+        await allure.step(`Verify bot at index ${index} is disabled (OFF)`, async () => {
+            await expect(this.getBotSwitch(index)).not.toHaveAttribute('data-checked');
+        });
+    }
+
     async saveBotChanges() {
         await allure.step('Save bot changes', async () => {
             const isEnabled = await this.saveBotButton.isEnabled();

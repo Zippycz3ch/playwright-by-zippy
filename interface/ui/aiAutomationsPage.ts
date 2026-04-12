@@ -36,7 +36,6 @@ export class AIAutomationsPage {
     async navigateToOnboarding() {
         await allure.step('Navigate to AI Automations onboarding', async () => {
             await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations/onboarding`);
-            await this.page.waitForLoadState('networkidle');
         });
     }
 

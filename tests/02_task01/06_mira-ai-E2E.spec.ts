@@ -10,7 +10,7 @@ import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper'
 // This test expects that no Mira AI or source is added, so the onboarding page is presented after login
 // and that the user is already onboarded to Smartsupp
 
-test.describe('Smartsupp | Mira AI - Onboarding & Agent Creation', { tag: ['@scenario', '@mira-ai', '@onboarding'] }, () => {
+test.describe('Smartsupp | Mira AI - Full Lifecycle E2E', { tag: ['@scenario', '@mira-ai', '@e2e'] }, () => {
     let loginPage: LoginPage;
     let dashboardPage: DashboardPage;
     let aiPage: AIAutomationsPage;
@@ -93,6 +93,17 @@ test.describe('Smartsupp | Mira AI - Onboarding & Agent Creation', { tag: ['@sce
             await chatBotPage.openBotEditor(0);
             await chatBotPage.clickWelcomeMessageTab();
             await chatBotPage.verifyWelcomeMessageLanguage('CS - Čeština');
+        });
+
+        await allure.step('Toggle the agent OFF and verify it is disabled', async () => {
+            await chatBotPage.navigate();
+            await chatBotPage.toggleBotSwitch('off', 0);
+            await chatBotPage.verifyBotDisabled(0);
+        });
+
+        await allure.step('Toggle the agent back ON and verify it is enabled', async () => {
+            await chatBotPage.toggleBotSwitch('on', 0);
+            await chatBotPage.verifyBotEnabled(0);
         });
 
         await allure.step('Delete the Mira AI agent', async () => {

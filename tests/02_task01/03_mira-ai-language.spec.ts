@@ -32,7 +32,7 @@ test.describe('Smartsupp | Mira AI - Agent Welcome Message Language', { tag: ['@
             await chatBotPage.openBotEditor(0);
             await chatBotPage.clickWelcomeMessageTab();
             await chatBotPage.clickWelcomeMessageDropdownIndicator();
-            await page.locator('#react-select-2-option-1').click();
+            await page.locator('#react-select-2-option-1').click(); // Extend with dictionary
             await chatBotPage.saveAndPublish();
         });
 
