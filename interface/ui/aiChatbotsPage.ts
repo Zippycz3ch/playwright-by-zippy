@@ -166,14 +166,34 @@ export class AiChatbotsPage {
 
     async publishNewBot() {
         await allure.step('Complete bot setup and publish', async () => {
-            await this.continueButton.click();
-            await this.continueButton.click();
-            await this.continueButton.click();
-            await this.continueButton.click();
-            const publishBtn = this.page.locator('#chatbot-workflow-form').getByTestId('chatbot-workflow-form-publish-btn').filter({ hasText: /^Publish( changes)?$/ });
-            await publishBtn.waitFor({ state: 'visible' });
-            await publishBtn.click();
-            await this.publishAnywayButton.click();
+            // Step through the workflow with proper waits
+            for (let step = 1; step <= 4; step++) {
+                await allure.step(`Complete workflow step ${step}`, async () => {
+                    await expect(this.continueButton).toBeVisible({ timeout: 15_000 });
+                    await expect(this.continueButton).toBeEnabled({ timeout: 5_000 });
+                    await this.continueButton.click();
+
+                    // Wait for any loading/transition after each step
+                    await this.page.waitForTimeout(1000);
+
+                    // If not the last step, ensure the continue button is still present for next iteration
+                    if (step < 4) {
+                        await expect(this.continueButton).toBeVisible({ timeout: 10_000 });
+                    }
+                });
+            }
+
+            // Final publish step
+            await allure.step('Publish the bot', async () => {
+                const publishBtn = this.page.locator('#chatbot-workflow-form').getByTestId('chatbot-workflow-form-publish-btn').filter({ hasText: /^Publish( changes)?$/ });
+                await publishBtn.waitFor({ state: 'visible', timeout: 15_000 });
+                await expect(publishBtn).toBeEnabled({ timeout: 5_000 });
+                await publishBtn.click();
+
+                // Wait for confirmation modal and click publish anyway
+                await expect(this.publishAnywayButton).toBeVisible({ timeout: 10_000 });
+                await this.publishAnywayButton.click();
+            });
         });
     }
 

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../interface/ui/loginPage';
+import { LoginPage } from '../../interface/ui/loginpage';
 import { DashboardPage } from '../../interface/ui/dashboardPage';
 import { AIAutomationsPage } from '../../interface/ui/aiAutomationsPage';
 import * as allure from 'allure-js-commons';
@@ -26,7 +26,7 @@ test.describe('Smartsupp | Mira AI - Onboarding & Agent Creation', { tag: ['@sce
     });
 
     test('should create and publish a new Mira AI agent via onboarding', async ({ page }) => {
-        test.setTimeout(120_000);
+        test.setTimeout(60_000);
         await allure.severity(Severity.CRITICAL);
         let createdAgentName = '';
 

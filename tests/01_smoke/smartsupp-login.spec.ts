@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { LoginPage } from '../../interface/ui/loginPage';
+import { LoginPage } from '../../interface/ui/loginpage';
 import { DashboardPage } from '../../interface/ui/dashboardPage';
 
 test.describe('Smartsupp | Login - Authentication', { tag: ['@smoke', '@login'] }, () => {

@@ -61,16 +61,14 @@ export class AIAutomationsPage {
 
     async clickContinue() {
         await allure.step('Click Continue button', async () => {
-            await this.continueButton.waitFor({ state: 'visible' });
             await this.continueButton.click();
-            await this.page.waitForLoadState('networkidle');
         });
     }
 
     async completeOnboarding(websiteUrl: string = 'example.com', avatarIndex: 1 | 2 | 3 | 4 | 5 | 6 = 4): Promise<string> {
         let botName = '';
         await allure.step('Complete AI Bot onboarding', async () => {
-            await this.continueButton.waitFor({ state: 'visible' });
+            await this.continueButton.waitFor({ state: 'visible', timeout: 15_000 });
             await this.continueButton.click();
 
             await this.selectBusinessCategory();

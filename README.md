@@ -11,7 +11,7 @@
 
 ```bash
 npm install
-npx playwright install
+sudo npx playwright install-deps
 ```
 
 ## Technologies

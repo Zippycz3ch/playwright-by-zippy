@@ -19,6 +19,17 @@ test.describe('Smartsupp | Mira AI - Agent Handover Settings', { tag: ['@scenari
         await chatBotPage.skillsTabButton.click();
         await chatBotPage.openSkill('Handover to an operator');
 
+        await allure.step('Switch to "Never handover to an operator"', async () => {
+            await chatBotPage.selectHandoverOption('Never handover to an operator');
+            await chatBotPage.saveAndPublish();
+        });
+
+        await chatBotPage.navigate();
+        await chatBotPage.openBotEditor();
+        await chatBotPage.skillsTabButton.click();
+        await chatBotPage.openSkill('Handover to an operator');
+        await chatBotPage.verifyHandoverOption('Never handover to an operator');
+
         await allure.step('Switch to "Handover when convenient or on demand"', async () => {
             await chatBotPage.selectHandoverOption('Handover when convenient or on demand');
             await chatBotPage.saveAndPublish();
@@ -29,17 +40,6 @@ test.describe('Smartsupp | Mira AI - Agent Handover Settings', { tag: ['@scenari
         await chatBotPage.skillsTabButton.click();
         await chatBotPage.openSkill('Handover to an operator');
         await chatBotPage.verifyHandoverOption('Handover when convenient or on demand');
-
-        await allure.step('Switch back to "Never handover to an operator"', async () => {
-            await chatBotPage.selectHandoverOption('Never handover to an operator');
-            await chatBotPage.saveAndPublish();
-        });
-
-        await chatBotPage.navigate();
-        await chatBotPage.openBotEditor();
-        await chatBotPage.skillsTabButton.click();
-        await chatBotPage.openSkill('Handover to an operator');
-        await chatBotPage.verifyHandoverOption('Never handover to an operator');
 
         await page.close();
     });
