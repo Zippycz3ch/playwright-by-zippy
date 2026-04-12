@@ -7,10 +7,10 @@
 If you encounter Java/snap conflicts when trying to use `allure serve`:
 
 ```bash
-# ❌ This might fail due to Java/snap conflicts
+# This might fail due to Java/snap conflicts
 allure serve
 
-# ✅ Use this reliable alternative
+# Use this reliable alternative
 npm run report
 ```
 
@@ -122,15 +122,7 @@ npx playwright codegen smartsupp.com
 
 ## Performance Issues
 
-### Slow Test Execution
-
-```bash
-# Run tests in parallel (adjust worker count)
-npx playwright test --workers=2
-
-# Disable video recording for faster execution
-npx playwright test --project="Smartsupp UI" --reporter=line
-```
+````
 
 ### Memory Issues
 
@@ -142,7 +134,7 @@ rm -rf playwright-report/
 
 # Monitor system resources
 htop
-```
+````
 
 ## Getting Help
 
