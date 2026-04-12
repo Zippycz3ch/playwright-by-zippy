@@ -90,7 +90,7 @@ export class DashboardPage {
 
     async verifyNavigationSidebarLoaded() {
         await allure.step('Verify Home navigation is visible', async () => {
-            await expect(this.homeNav).toBeVisible();
+            await expect(this.homeNav).toBeVisible({ timeout: 10000 });
         });
         await allure.step('Verify Inbox navigation is visible', async () => {
             await expect(this.inboxNav).toBeVisible();

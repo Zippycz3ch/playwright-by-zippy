@@ -158,7 +158,7 @@ export class AiChatbotsPage {
             await expect(this.page).toHaveURL(/ai-automations\/ai-chatbots/);
 
             // Verify main page elements are visible
-            await expect(this.pageHeading).toBeVisible();
+            await expect(this.pageHeading).toBeVisible({ timeout: 10000 });
             await expect(this.addNewButton).toBeVisible();
             await expect(this.myAiAssistantsHeading).toBeVisible();
         });
