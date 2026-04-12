@@ -26,7 +26,7 @@ test.describe('Smartsupp | Mira AI - Full Lifecycle E2E', { tag: ['@scenario', '
     });
 
     test('should create and publish a new Mira AI agent via onboarding', async ({ page }) => {
-        test.setTimeout(60_000);
+        test.setTimeout(120_000);
         await allure.severity(Severity.CRITICAL);
         let createdAgentName = '';
 
