@@ -33,13 +33,13 @@ Tests are prefixed with a number indicating the intended run order.
 
 - A valid Smartsupp account with credentials set in `.env` (`SMARTSUPP_USERNAME`, `SMARTSUPP_PASSWORD`)
 - Tests `01`–`05` expect an existing Mira AI agent to be present (run `00` first)
-- `06_mira-ai-E2E.spec.ts` expects a clean state with no existing agent (same as `00`)
+- `06_mira-ai-E2E.spec.ts` expects a clean state with no existing agent or source (same as `00`)
 
 ## Running These Tests
 
 ```bash
 
-# Run all task01 tests except the E2E test (requires existing agent from run 00)
+# Run all task01 tests in order (00 creates the agent, 01–05 use it) Excludes E2E
 npx playwright test "tests/02_task01/0[0-5]_*" --headed
 
 # Run specific tests (in order)

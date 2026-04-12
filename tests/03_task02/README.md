@@ -24,7 +24,6 @@ Tests are prefixed with a number indicating the intended run order.
 
 - Valid Smartsupp credentials in `.env` (`SMARTSUPP_USERNAME`, `SMARTSUPP_PASSWORD`)
 - No Mira AI agent published — chat must be handled by a human operator
-- Each test uses two browser contexts: one for the operator dashboard, one for the visitor chat widget
 
 ## Running These Tests
 
