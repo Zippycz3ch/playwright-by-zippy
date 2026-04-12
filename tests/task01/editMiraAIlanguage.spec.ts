@@ -4,6 +4,7 @@ import { DashboardPage } from '../../interface/ui/dashboardPage';
 import * as allure from 'allure-js-commons';
 import { Severity } from 'allure-js-commons';
 import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
+import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 
 // This tests expect already existing Mira AI
 
@@ -17,9 +18,7 @@ test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot
         dashboardPage = new DashboardPage(page);
         chatBotPage = new AiChatbotsPage(page);
 
-        await loginPage.navigate();
-        await loginPage.login(process.env.SMARTSUPP_USERNAME!, process.env.SMARTSUPP_PASSWORD!);
-        await dashboardPage.verifyDashboardPageLoaded();
+        await loginAndVerifyDashboard(page);
     });
 
     test('Edit welcome message language', async ({ page }) => {

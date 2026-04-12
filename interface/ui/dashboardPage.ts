@@ -1,7 +1,5 @@
 import { Page, BrowserContext, expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
-import { getAppBaseURL } from '../../config';
-
 type DashboardSection = 'inbox' | 'customers' | 'statistics' | 'settings' | 'automations' | 'ai-automations';
 
 export class DashboardPage {
@@ -36,15 +34,6 @@ export class DashboardPage {
         return this.page.getByTestId('sidebar-settings');
     }
 
-    // Trial Banner & Upgrade
-    get trialBanner() {
-        return this.page.locator('text=You have').first();
-    }
-
-    get choosePlanButton() {
-        return this.page.getByTestId('notification-bar-upsell-button');
-    }
-
     // Main Content
     get dashboardHeading() {
         return this.page.locator('h1.chakra-heading:has-text("Dashboard")');
@@ -56,10 +45,6 @@ export class DashboardPage {
 
     get connectChannelsHeading() {
         return this.page.locator('h2:has-text("Connect additional channels")');
-    }
-
-    get getStartedSection() {
-        return this.page.locator('text=Get started with Smartsupp');
     }
 
     // Connection Cards
@@ -77,22 +62,6 @@ export class DashboardPage {
 
     get connectWhatsAppCard() {
         return this.page.locator('text=Connect WhatsApp');
-    }
-
-    // User Menu
-    get profileLink() {
-        return this.page.getByTestId('profile');
-    }
-
-    get logoutLink() {
-        return this.page.getByTestId('logout');
-    }
-
-    async navigate() {
-        await allure.step('Navigate to Smartsupp dashboard', async () => {
-            await this.page.goto(`${getAppBaseURL()}/app/dashboard/home`);
-            await this.page.waitForLoadState('networkidle');
-        });
     }
 
     private getSectionNav(section: DashboardSection) {
@@ -191,10 +160,6 @@ export class DashboardPage {
             await this.page.waitForLoadState('networkidle');
             await this.page.waitForTimeout(2000);
         });
-    }
-
-    get agentsFilterButton() {
-        return this.page.getByText('Agents').first();
     }
 
     get discoverLiveChatArticle() {

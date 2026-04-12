@@ -5,6 +5,7 @@ import { AIAutomationsPage } from '../../interface/ui/aiAutomationsPage';
 import * as allure from 'allure-js-commons';
 import { Severity } from 'allure-js-commons';
 import { AiChatbotsPage } from '../../interface/ui/aiChatbotsPage';
+import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper';
 
 test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot'] }, () => {
     let loginPage: LoginPage;
@@ -18,11 +19,7 @@ test.describe('AI Bot Management - Complete Flow', { tag: ['@scenario', '@ai-bot
         aiPage = new AIAutomationsPage(page);
         chatBotPage = new AiChatbotsPage(page);
 
-        // Login to Smartsupp
-        await loginPage.navigate();
-        await loginPage.login(process.env.SMARTSUPP_USERNAME!, process.env.SMARTSUPP_PASSWORD!);
-        await dashboardPage.verifyDashboardPageLoaded();
-
+        await loginAndVerifyDashboard(page);
     });
 
     test('Create and Publish AI Bot', async ({ page }) => {

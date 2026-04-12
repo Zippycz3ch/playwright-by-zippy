@@ -14,116 +14,16 @@ export class AiChatbotsPage {
         return this.page.getByTestId('chatbot-garage-new-bot');
     }
 
-    get searchBox() {
-        return this.page.locator('input[type="search"]');
-    }
-
-    // Task Completion Section
-    get taskSectionHeading() {
-        return this.page.locator('h2:has-text("Finish all the tasks")');
-    }
-
-    get collapseTasksButton() {
-        return this.page.locator('button:has-text("Collapse")');
-    }
-
-    get scrapeWebsiteTask() {
-        return this.page.locator('h4:has-text("Scrape more pages from your website")');
-    }
-
-    get addProductFeedTask() {
-        return this.page.locator('h4:has-text("Add your product feed")');
-    }
-
-    get updateKnowledgeTask() {
-        return this.page.locator('h4:has-text("Update and adjust Mira")');
-    }
-
-    get publishAssistantTask() {
-        return this.page.locator('h4:has-text("Publish your AI Assistant")');
-    }
-
-    // Summary Statistics
-    get summaryHeading() {
-        return this.page.locator('h2:has-text("Summary")');
-    }
-
-    get aiConversationsStat() {
-        return this.page.getByTestId('garage-statistics-item-chatbot-chatbotConversations');
-    }
-
-    get resolvedByAiStat() {
-        return this.page.getByTestId('garage-statistics-item-chatbot-resolved');
-    }
-
-    get escalatedToHumanStat() {
-        return this.page.getByTestId('garage-statistics-item-chatbot-escalated');
-    }
-
-    get productsOfferedStat() {
-        return this.page.getByTestId('garage-statistics-item-chatbot-productsSent');
-    }
-
-    get productsOpenedStat() {
-        return this.page.getByTestId('garage-statistics-item-chatbot-productsOpened');
-    }
-
     // My AI Assistants Section
     get myAiAssistantsHeading() {
         return this.page.locator('h2:has-text("My AI Assistants")');
-    }
-
-    get addButton() {
-        return this.page.getByTestId('chatbot-garage-new-bot');
     }
 
     get editButton() {
         return this.page.getByTestId('chatbot-card-dropdown-edit');
     }
 
-    get editProfileButton() {
-        return this.page.getByRole('button', { name: 'ariaLabel.edit' });
-    }
-
-    get seeConversationsButton() {
-        return this.page.locator('button:has-text("See conversations")');
-    }
-
-    get deleteButton() {
-        return this.page.getByTestId('chatbot-card-dropdown-remove');
-    }
-
-    get sortButton() {
-        return this.page.locator('button:has-text("Newest")');
-    }
-
-    // Table Elements
-    get tableHeader() {
-        return this.page.locator('text=Title').locator('..');
-    }
-
-    get firstAssistantRow() {
-        return this.page.getByTestId('chatbot-card').first();
-    }
-
-    get firstAssistantCheckbox() {
-        return this.page.getByTestId('chatbot-card-switch').first();
-    }
-
-    get firstAssistantOptionsButton() {
-        return this.page.getByTestId('chatbot-card-dropdown').first();
-    }
-
-    // Bot Creation Modal Elements
-    get botCreationNameInput() {
-        return this.page.getByTestId('chatbot-identity-modal-name-input');
-    }
-
     // Bot Workflow (Editor) Page Elements
-    get botNameInput() {
-        return this.page.getByTestId('chatbot-builder-title');
-    }
-
     get botDisplayName() {
         return this.page.locator('p.chakra-text.css-9ztjch');
     }
@@ -140,20 +40,8 @@ export class AiChatbotsPage {
         return this.page.getByTestId('confirm-modal-cancel');
     }
 
-    get botOptionsButton() {
-        return this.page.getByTestId('chatbot-builder-dropdown-toggler');
-    }
-
-    get deleteBotFromEditorButton() {
-        return this.page.getByTestId('chatbot-builder-dropdown-remove');
-    }
-
     get behaviorTab() {
         return this.page.getByTestId('chatbot-workflow-tab-basics');
-    }
-
-    get knowledgeTabButton() {
-        return this.page.getByTestId('chatbot-workflow-tab-customResponses');
     }
 
     get skillsTabButton() {
@@ -202,51 +90,6 @@ export class AiChatbotsPage {
         });
     }
 
-    get firstKnowledgeSourceItem() {
-        return this.page.locator('div:has(button[aria-label="More"]) label.chakra-switch').first();
-    }
-
-    getKnowledgeSourceToggle(index: number = 0) {
-        return this.page.locator('h2:has-text("Sources")').locator('..').locator('div:has(button[aria-label="More"]):has(.chakra-switch__track)').nth(index).locator('.chakra-switch__input');
-    }
-
-    getKnowledgeSourceMoreButton(index: number = 0) {
-        return this.page.locator('xpath=//h2[contains(.,"Sources")]/../..//button[@aria-label="More"]').nth(index);
-    }
-
-    async openKnowledgeSourceMenu(index: number = 0) {
-        await allure.step(`Open knowledge source menu at index ${index}`, async () => {
-            const moreButton = this.getKnowledgeSourceMoreButton(index);
-            await moreButton.waitFor({ state: 'visible', timeout: 15_000 });
-            await moreButton.click();
-            await expect(this.knowledgeSourceEditMenuItem).toBeVisible({ timeout: 5_000 });
-        });
-    }
-
-    get sourceNameInput() {
-        return this.page.getByTestId('sources-modal-name-input');
-    }
-
-    get knowledgeSourcePreviewMenuItem() {
-        return this.page.getByRole('menuitem', { name: 'Source preview' });
-    }
-
-    get knowledgeSourceEditMenuItem() {
-        return this.page.getByRole('menuitem', { name: 'Edit' });
-    }
-
-    get knowledgeSourceUpdateMenuItem() {
-        return this.page.getByRole('menuitem', { name: 'Update' });
-    }
-
-    get knowledgeSourceDeleteMenuItem() {
-        return this.page.getByRole('menuitem', { name: 'Delete' });
-    }
-
-    get goBackButton() {
-        return this.page.getByTestId('fullPageLayout-goBackBtn');
-    }
-
     get toneInput() {
         return this.page.getByTestId('chatbot-workflow-profile-input-tone');
     }
@@ -267,14 +110,6 @@ export class AiChatbotsPage {
         return this.page.getByTestId('chatbot-workflow-form-continue-btn');
     }
 
-    get deleteModalConfirmButton() {
-        return this.page.getByTestId('delete-modal-confirm');
-    }
-
-    get deleteModalCancelButton() {
-        return this.page.getByTestId('delete-modal-cancel');
-    }
-
     // Navigation Methods
     async navigate() {
         await allure.step('Navigate to AI Chatbots page and verify page loaded', async () => {
@@ -288,10 +123,6 @@ export class AiChatbotsPage {
             await expect(this.addNewButton).toBeVisible();
             await expect(this.myAiAssistantsHeading).toBeVisible();
         });
-    }
-
-    getBotByName(name: string) {
-        return this.page.getByTestId('chatbot-card-title-text').filter({ hasText: name });
     }
 
     async publishNewBot() {
@@ -314,39 +145,9 @@ export class AiChatbotsPage {
         });
     }
 
-    async searchAssistant(searchTerm: string) {
-        await allure.step(`Search for AI Assistant: ${searchTerm}`, async () => {
-            await this.searchBox.fill(searchTerm);
-        });
-    }
-
-    async selectFirstAssistant() {
-        await allure.step('Select first AI Assistant', async () => {
-            await this.firstAssistantCheckbox.check();
-        });
-    }
-
     async clickEdit() {
         await allure.step('Click Edit button', async () => {
             await this.editButton.click();
-        });
-    }
-
-    async clickEditProfile() {
-        await allure.step('Click Edit profile button', async () => {
-            await this.editProfileButton.click();
-        });
-    }
-
-    async clickSeeConversations() {
-        await allure.step('Click See Conversations button', async () => {
-            await this.seeConversationsButton.click();
-        });
-    }
-
-    async clickDelete() {
-        await allure.step('Click Delete button', async () => {
-            await this.deleteButton.click();
         });
     }
 
@@ -361,20 +162,6 @@ export class AiChatbotsPage {
         await allure.step('Open bot editor', async () => {
             await this.openBotOptions(index);
             await this.clickEdit();
-        });
-    }
-
-    async collapseTaskSection() {
-        await allure.step('Collapse task completion section', async () => {
-            await this.collapseTasksButton.click();
-        });
-    }
-
-    async setBotName(name: string) {
-        await allure.step(`Set bot name to "${name}"`, async () => {
-            await this.page.keyboard.press('Escape');
-            await this.botNameInput.fill(name);
-            await this.page.keyboard.press('Tab');
         });
     }
 
@@ -409,32 +196,6 @@ export class AiChatbotsPage {
             await this.page.keyboard.press('Home');
             for (let i = 0; i < value; i++) {
                 await this.page.keyboard.press('ArrowRight');
-            }
-        });
-    }
-
-    async deleteCurrentBotFromEditor() {
-        await allure.step('Delete current bot from editor', async () => {
-            await this.botOptionsButton.click();
-            await this.deleteBotFromEditorButton.click();
-            await this.deleteModalConfirmButton.waitFor({ state: 'visible' });
-            await this.deleteModalConfirmButton.click();
-            await this.page.waitForURL(/ai-chatbots/);
-        });
-    }
-
-    async deleteAllBots() {
-        await allure.step('Delete all existing AI bots', async () => {
-            await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations/ai-chatbots`);
-            await this.page.waitForLoadState('networkidle');
-
-            const deleteBtn = this.page.getByTestId('chatbot-card-dropdown-remove').first();
-            while (await deleteBtn.isVisible()) {
-                await this.page.getByTestId('chatbot-card-dropdown').first().click();
-                await deleteBtn.click();
-                await this.deleteModalConfirmButton.waitFor({ state: 'visible', timeout: 5000 });
-                await this.deleteModalConfirmButton.click();
-                await this.page.waitForLoadState('networkidle');
             }
         });
     }
