@@ -153,18 +153,13 @@ export class AiChatbotsPage {
     async navigate() {
         await allure.step('Navigate to AI Chatbots page and verify page loaded', async () => {
             await this.page.goto(`${getAppBaseURL()}/app/dashboard/ai-automations/ai-chatbots`);
-
-            // Verify URL
             await expect(this.page).toHaveURL(/ai-automations\/ai-chatbots/);
-
-            // Verify main page elements are visible
             await expect(this.myAiAssistantsHeading).toBeVisible({ timeout: 10000 });
         });
     }
 
     async publishNewBot() {
         await allure.step('Complete bot setup and publish', async () => {
-            // Step through the workflow with proper waits
             for (let step = 1; step <= 4; step++) {
                 await allure.step(`Complete workflow step ${step}`, async () => {
                     await expect(this.continueButton).toBeVisible({ timeout: 15_000 });

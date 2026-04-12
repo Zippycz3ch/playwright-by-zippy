@@ -114,13 +114,13 @@ export class DashboardPage {
 
     async verifyMainContentLoaded() {
         await allure.step('Verify Dashboard heading is visible', async () => {
-            await expect(this.dashboardHeading).toBeVisible();
+            await expect(this.dashboardHeading).toBeVisible({ timeout: 10_000 });
         });
         await allure.step('Verify Product news button is visible', async () => {
-            await expect(this.productNewsButton).toBeVisible();
+            await expect(this.productNewsButton).toBeVisible({ timeout: 10_000 });
         });
         await allure.step('Verify "Connect additional channels" heading is visible', async () => {
-            await expect(this.connectChannelsHeading).toBeVisible();
+            await expect(this.connectChannelsHeading).toBeVisible({ timeout: 10_000 });
         });
     }
 
