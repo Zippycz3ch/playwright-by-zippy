@@ -4,7 +4,7 @@ import { loginAndVerifyDashboard } from '../../interface/ui/helpers/loginHelper'
 import * as allure from 'allure-js-commons';
 
 // This test expects an existing Mira AI agent to be present
-// and the default handover option to be "Never handover to an operator"
+// and the default handover option to be "Handover when convenient or on demand"
 
 
 test.describe('Smartsupp | Mira AI - Agent Handover Settings', { tag: ['@scenario', '@mira-ai', '@handover'] }, () => {
