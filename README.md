@@ -90,7 +90,18 @@ npm run test -- --project=API
 ```
 
 ## Test Reports
+[Install Allure reports](https://allurereport.org/docs/v2/install-for-nodejs/)
 
+```bash
+npm install -g allure-commandline
+```
+
+check version
+```bash
+allure --version
+```
+
+Generate reports
 ```bash
 allure serve
 ```
