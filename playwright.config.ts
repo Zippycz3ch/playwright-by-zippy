@@ -32,17 +32,18 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    /* Collect trace when retrying the failed test. See https://pla ywright.dev/docs/trace-viewer */
     trace: 'on',
     video: 'on',
+    viewport: { width: 1920, height: 1080 },
   },
 
   /* Configure projects for major browsers */
   projects: [
+    // Setup project for API authentication
     {
-      name: "API",
-      testDir: "./tests/api",
-      use: { ...devices["Desktop Chrome"] },
+      name: "auth-setup",
+      testMatch: /.*\.auth\.setup\.ts/,
     },
     {
       name: "UI",
@@ -50,8 +51,13 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
     {
-      name: "Scenarios",
-      testDir: "./tests/scenarios",
+      name: "Task 01",
+      testDir: "./tests/task01",
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "Task 02",
+      testDir: "./tests/task02",
       use: { ...devices["Desktop Chrome"] },
     },
 

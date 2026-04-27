@@ -12,5 +12,12 @@ node_modules/
 /results/data/
 /results/
 .allure/
+.playwright-mcp/
 # TypeScript compiled output
 /tests/dist/
+
+# Environment variables
+.env
+
+# Authentication state
+.auth/

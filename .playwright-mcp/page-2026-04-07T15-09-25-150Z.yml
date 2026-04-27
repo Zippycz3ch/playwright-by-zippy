@@ -1,0 +1,40 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "Smartsupp Logo" [ref=e4] [cursor=pointer]:
+      - /url: https://www.smartsupp.com
+      - img "Smartsupp Logo" [ref=e5]
+    - navigation [ref=e6]:
+      - paragraph [ref=e7]: Not a Smartsupp user yet?
+      - link "Create a free account" [ref=e8] [cursor=pointer]:
+        - /url: https://openid.smartsupp.com/realms/smartsupp/login-actions/registration?client_id=smartsupp-dash&tab_id=i89AF2lyWjY&kc_locale=en
+      - button "English" [ref=e13] [cursor=pointer]:
+        - img "English" [ref=e14]
+  - main [ref=e16]:
+    - generic [ref=e18]:
+      - heading "Log in" [level=1] [ref=e19]
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - textbox "Email" [active] [ref=e23]
+            - generic [ref=e24]: Email
+          - generic [ref=e25]:
+            - textbox "Password" [ref=e26]
+            - generic [ref=e27]: Password
+          - button "Log in" [ref=e29] [cursor=pointer]: Log in
+          - generic [ref=e31]:
+            - generic [ref=e33] [cursor=pointer]:
+              - checkbox "Remember me" [ref=e34]
+              - text: Remember me
+            - link "I forgot my password" [ref=e36] [cursor=pointer]:
+              - /url: /realms/smartsupp/login-actions/reset-credentials?client_id=smartsupp-dash&tab_id=i89AF2lyWjY
+        - paragraph [ref=e37]:
+          - generic [ref=e38]: or
+        - generic [ref=e39]:
+          - link "Google Sign in with Google" [ref=e40] [cursor=pointer]:
+            - /url: /realms/smartsupp/broker/google/login?client_id=smartsupp-dash&tab_id=i89AF2lyWjY&session_code=COkhD4d6h9LQ2DUAbCFmleH54KeL87jWCRVV71ooz6w
+            - img "Google" [ref=e41]
+            - generic [ref=e42]: Sign in with Google
+          - link "Apple Sign in with Apple" [ref=e43] [cursor=pointer]:
+            - /url: /realms/smartsupp/broker/apple/login?client_id=smartsupp-dash&tab_id=i89AF2lyWjY&session_code=COkhD4d6h9LQ2DUAbCFmleH54KeL87jWCRVV71ooz6w
+            - img "Apple" [ref=e44]
+            - generic [ref=e45]: Sign in with Apple

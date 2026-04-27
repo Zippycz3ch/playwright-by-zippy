@@ -1,6 +1,6 @@
 # Playwright by Zippy
 
-Playwright framework with progressive test patterns (basic to advanced). Tests [QuickPizza](https://quickpizza.grafana.com) using API, UI, data-driven patterns, and AI-powered generation with [Playwright Test Agents](https://playwright.dev/docs/test-agents) and [Playwright MCP Server](https://github.com/microsoft/playwright-mcp).
+Playwright test automation framework with TypeScript, featuring Smartsupp application testing with clean Page Object Model architecture.
 
 **New to Playwright?** Start with this official introduction video:
 
@@ -12,10 +12,8 @@ Playwright framework with progressive test patterns (basic to advanced). Tests [
 
 - [Node.js & npm](https://nodejs.org/)
 - [Java](https://ninite.com/adoptjavax17/) (for Allure reports)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (optional, for local QuickPizza)
 - [VS Code](https://code.visualstudio.com/)
 - [Playwright Test for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
-- [GitHub Copilot](https://github.com/features/copilot/plans) (free plan sufficient, required for AI Agents and MCP only)
 
 ## Installation
 
@@ -28,40 +26,50 @@ npx playwright install
 
 - **Playwright** - Browser automation and testing
 - **TypeScript** - Type-safe test development
-- **Allure** - Test reporting
+- **Allure** - Test reporting with hierarchical steps
 - **AJV** - JSON schema validation
-
-## AI Integration (Optional)
-
-**[Playwright Test Agents](https://playwright.dev/docs/test-agents)** - Generate, plan, and execute tests from specifications in `specs/`.
-
-```bash
-npm install -D @playwright/test-agents
-```
-
-**[Playwright MCP Server](https://github.com/microsoft/playwright-mcp)** - Browser automation via Model Context Protocol for AI assistants.
-
-Configuration in [.vscode/mcp.json](.vscode/mcp.json) - enables GitHub Copilot Chat to control browsers directly.
-
-**Learn More:**
-
-- [Playwright Test Agents Demo](https://www.youtube.com/watch?v=_AifxZGxwuk)
-- [Playwright MCP Server Guide](https://www.youtube.com/watch?v=IixdI2bTR1g)
+- **Dotenv** - Environment configuration
 
 ## Project Structure
 
-- `tests/` - Test files organized by type and complexity
-  - `api/postPizza/` - Progressive API test examples (5 levels)
-  - `api/user/` - User management tests
-  - `api/quotes/` - Quotes API tests
-  - `api/doughs/` - Dough API tests
-  - `ui/` - UI automation tests
+- `tests/` - Test files organized by type
+  - `ui/` - UI automation tests with Page Object Model
+    - `login.spec.ts` - Login functionality tests
+    - `dashboard.spec.ts` - Dashboard navigation tests
+  - `api/` - API integration tests
+    - `user/` - User management and authentication
   - `scenarios/` - End-to-end workflow tests
-- `interface/` - Page objects and API helper functions
+- `interface/` - Page objects and API abstractions
+  - `ui/` - Page Object Models
+    - `loginPage.ts` - Login page POM
+    - `dashboardPage.ts` - Dashboard page POM
+    - `aiChatbotsPage.ts` - AI Chatbots management POM
+    - `aiOnboardingPage.ts` - AI Onboarding/tutorials POM
   - `api/` - API endpoints, models, schemas, and helpers
-  - `ui/` - Page Object Models for UI testing
-- `specs/` - Test specifications for AI agentsP
-- `config.ts` - Environment configuration
+- `config.ts` - Centralized configuration with domain/subdomain structure
+- `.env` - Environment variables (credentials, URLs)
+
+## Configuration
+
+### Environment Variables (`.env`)
+
+```bash
+# Smartsupp configuration
+SMARTSUPP_DOMAIN=smartsupp.com
+SMARTSUPP_AUTH_SUBDOMAIN=openid
+SMARTSUPP_APP_SUBDOMAIN=app
+
+# Smartsupp credentials
+SMARTSUPP_USERNAME=your-email@example.com
+SMARTSUPP_PASSWORD=your-password
+```
+
+### Config Structure
+
+The `config.ts` file provides clean URL building:
+- **Domain**: `smartsupp.com` (defined once)
+- **Auth URL**: `https://openid.smartsupp.com`
+- **App URL**: `https://app.smartsupp.com`
 
 ## Running Tests
 
@@ -84,13 +92,23 @@ Configuration in [.vscode/mcp.json](.vscode/mcp.json) - enables GitHub Copilot C
 # All tests
 npm run test
 
-# Specific project
+# UI tests only
 npm run test -- --project=UI
+
+# API tests only
 npm run test -- --project=API
+
+# Specific test file
+npm run test -- tests/ui/login.spec.ts
+
+# With Allure reporter
+npm run test -- --reporter=allure-playwright
 ```
 
 ## Test Reports
 [Install Allure reports](https://allurereport.org/docs/v2/install-for-nodejs/)
+
+View detailed Allure reports with hierarchical step organization:
 
 ```bash
 npm install -g allure-commandline
@@ -106,54 +124,96 @@ Generate reports
 allure serve
 ```
 
-## Environment Configuration
-
-Switch environments via `.env` file:
-
-```bash
-ENV=PROD   # https://quickpizza.grafana.com (default)
-ENV=LOCAL  # http://localhost:3333 (requires Docker)
-```
-
-URLs managed in [config.ts](config.ts).
-
-### Running Local QuickPizza
-
-```bash
-cd docker
-docker compose up -d
-```
-
-Starts QuickPizza on `http://localhost:3333`.
+Features:
+- Nested `allure.step()` descriptions
+- Detailed test execution flow
+- Screenshots and traces on failure
+- Timeline and trend analysis
 
 ## Test Coverage
 
-**API Tests** (`tests/api/`)
-
-**POST /api/pizza** - Progressive test implementation levels:
-
-- `00-standalone/` - Raw Playwright without abstractions
-- `01-basic/` - Helper function usage
-- `02-basic-extended/` - Explicit validation patterns
-- `03-data-driven/` - Parameterized testing
-- `04-negative/` - Error handling & security
-
-**Other API Tests:**
-
-- User creation and authentication
-- Dough API validation
-- Quotes API testing
-
 **UI Tests** (`tests/ui/`)
 
-- Pizza recommendation generation
-- Advanced filtering
-- User authentication
-- Navigation and footer
-- Homepage functionality
+- **Login Tests** (`login.spec.ts`)
+  - Successful login with valid credentials
+  - Invalid credentials error validation
+  - Keycloak authentication integration
 
-**Scenario Tests** (`tests/scenarios/`)
+- **Dashboard Tests** (`dashboard.spec.ts`)
+  - Dashboard page load verification
+  - Navigation sidebar validation
+  - Settings page navigation
+  - Customers page navigation
 
-- User registration and login (API + UI)
-- Login with default and new users
-- Failed login with invalid credentials
+**Page Object Models** (`interface/ui/`)
+
+- **LoginPage** - Keycloak authentication page
+  - Username/password input
+  - Sign in action
+  - Error message validation
+  
+- **DashboardPage** - Main dashboard navigation
+  - Home, Inbox, AI Automations, Automations
+  - Customers, Statistics, Settings
+  - Trial banner elements
+  
+- **AiChatbotsPage** - AI assistants management
+  - Task completion tracking
+  - Summary statistics
+  - AI assistants table (CRUD operations)
+  
+- **AiOnboardingPage** - Educational tutorials
+  - Navigation tabs (AI Assistants, Sources, Satisfaction, Training)
+  - Video tutorial sections
+
+**Test Design Patterns**
+
+- Clean Page Object Model architecture
+- Integrated `navigate()` methods with verification
+- Verbose Allure reporting with nested steps
+- Environment-based configuration
+- Reusable locators with type safety
+
+## Development
+
+### Running Tests
+
+```bash
+# Run all UI tests
+npm run test -- --project=UI
+
+# Run specific test file
+npm run test -- tests/ui/login.spec.ts
+
+# Run tests with UI mode
+npx playwright test --ui
+
+# Run tests in headed mode
+npx playwright test --headed
+```
+
+### Debugging
+
+```bash
+# Debug mode
+npx playwright test --debug
+
+# Generate trace
+npx playwright test --trace on
+
+# View trace
+npx playwright show-trace trace.zip
+```
+
+## Contributing
+
+1. Create feature branch
+2. Write tests with Page Object Model pattern
+3. Add verbose Allure steps for reporting
+4. Ensure all tests pass
+5. Commit and push
+6. Create pull request
+
+## License
+
+ISC
